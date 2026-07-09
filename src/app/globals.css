@@ -653,6 +653,81 @@ body {
   animation: wa-status-enter 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+@keyframes wa-process-sweep {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(240%); }
+}
+
+@keyframes wa-spin-soft {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.wa-process-bubble {
+  border: 1px solid rgb(var(--default-border) / 0.5);
+  background: linear-gradient(180deg, rgb(var(--default-background) / 1), rgb(var(--default-background) / 0.92));
+}
+
+.wa-process-icon {
+  display: inline-flex;
+  height: 1.5rem;
+  width: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgb(var(--brand-green) / 0.1);
+}
+
+.wa-process-icon-done {
+  background: rgb(var(--brand-green) / 0.16);
+}
+
+.wa-process-spinner {
+  animation: wa-spin-soft 1.15s linear infinite;
+}
+
+.wa-process-track {
+  position: relative;
+  overflow: hidden;
+  height: 0.25rem;
+  border-radius: 999px;
+  background: rgb(var(--default-border) / 0.45);
+}
+
+.wa-process-indeterminate {
+  position: absolute;
+  inset: 0;
+}
+
+.wa-process-indeterminate::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 42%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent 0%, rgb(var(--brand-green) / 0.45) 30%, rgb(var(--brand-green)) 60%, transparent 100%);
+  animation: wa-process-sweep 1.25s ease-in-out infinite;
+}
+
+.wa-process-phase {
+  height: 0.2rem;
+  border-radius: 999px;
+  background: rgb(var(--default-border) / 0.5);
+  transition: background-color 220ms ease;
+}
+
+.wa-process-phase-active {
+  background: rgb(var(--brand-green) / 0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wa-process-spinner,
+  .wa-process-indeterminate::after,
+  .wa-thinking-dot {
+    animation: none;
+  }
+}
+
 .wa-workspace-reveal {
   animation: wa-workspace-reveal 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
 }

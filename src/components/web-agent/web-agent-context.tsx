@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -12,8 +13,6 @@ import { useRouter } from "next/navigation";
 import type { WebAgentPageView } from "@/lib/constants";
 import { ROUTES } from "@/lib/constants";
 import {
-  INITIAL_PROJECTS,
-  DEPLOYMENT_HISTORY,
   SAMPLE_CSS,
   SAMPLE_HTML,
   SAMPLE_JS,
@@ -21,6 +20,8 @@ import {
   type WebProject,
   type WebsiteVersion,
 } from "@/lib/web-agent-data";
+import { listBuilderProjects } from "@/lib/builder-api";
+import type { BuilderProject } from "@/lib/builder-types";
 
 type WebAgentContextValue = {
   projects: WebProject[];
@@ -43,6 +44,46 @@ type WebAgentContextValue = {
 };
 
 const WebAgentContext = createContext<WebAgentContextValue | null>(null);
+const STORAGE_KEY = "dharwin:web-agent:state:v1";
+let _cachedPersistedState:
+  | {
+      projects?: WebProject[];
+      deployments?: DeploymentRecord[];
+      activeProjectId?: string | null;
+      pageView?: WebAgentPageView;
+      splitView?: boolean;
+    }
+  | null
+  | undefined;
+
+function secondsToIso(ts: number | null | undefined) {
+  if (!ts) return new Date().toISOString();
+  return new Date(ts * 1000).toISOString();
+}
+
+function mapBuilderProject(project: BuilderProject): WebProject {
+  const hasVersion = Boolean(project.currentVersionId);
+  const prompt = project.initialPrompt ?? "";
+  const status =
+    project.status === "onboarding"
+      ? "draft"
+      : hasVersion || project.status === "editing"
+        ? "generated"
+        : "draft";
+
+  return {
+    id: project.projectId,
+    name: project.projectName,
+    description: prompt ? prompt.slice(0, 120) : "Website project",
+    status,
+    prompt,
+    createdAt: secondsToIso(project.createdAt),
+    updatedAt: secondsToIso(project.updatedAt),
+    versions: [],
+    chatHistory: [],
+    uploadedAssets: [],
+  };
+}
 
 function buildUrl(projectId?: string | null, view?: WebAgentPageView) {
   const params = new URLSearchParams();
@@ -52,13 +93,73 @@ function buildUrl(projectId?: string | null, view?: WebAgentPageView) {
   return qs ? `${ROUTES.webAgent}?${qs}` : ROUTES.webAgent;
 }
 
+function loadPersistedState() {
+  if (_cachedPersistedState !== undefined) return _cachedPersistedState;
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      _cachedPersistedState = null;
+      return null;
+    }
+    const parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") {
+      _cachedPersistedState = null;
+      return null;
+    }
+    _cachedPersistedState = parsed as {
+      projects?: WebProject[];
+      deployments?: DeploymentRecord[];
+      activeProjectId?: string | null;
+      pageView?: WebAgentPageView;
+      splitView?: boolean;
+    };
+    return _cachedPersistedState;
+  } catch {
+    _cachedPersistedState = null;
+    return null;
+  }
+}
+
+function persistState(payload: {
+  projects: WebProject[];
+  deployments: DeploymentRecord[];
+  activeProjectId: string | null;
+  pageView: WebAgentPageView;
+  splitView: boolean;
+}) {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+  } catch {
+    // Best effort only; ignore storage quota/permission errors.
+  }
+}
+
 export function WebAgentProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
-  const [projects, setProjects] = useState<WebProject[]>(INITIAL_PROJECTS);
-  const [deployments, setDeployments] = useState<DeploymentRecord[]>(DEPLOYMENT_HISTORY);
-  const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
-  const [pageView, setPageView] = useState<WebAgentPageView>("new");
-  const [splitView, setSplitView] = useState(false);
+  const persisted = loadPersistedState();
+  const [projects, setProjects] = useState<WebProject[]>(
+    Array.isArray(persisted?.projects) ? persisted.projects : []
+  );
+  const [deployments, setDeployments] = useState<DeploymentRecord[]>(
+    Array.isArray(persisted?.deployments) ? persisted.deployments : []
+  );
+  const [activeProjectId, setActiveProjectId] = useState<string | null>(
+    typeof persisted?.activeProjectId === "string" || persisted?.activeProjectId === null
+      ? (persisted?.activeProjectId ?? null)
+      : null
+  );
+  const [pageView, setPageView] = useState<WebAgentPageView>(
+    persisted?.pageView === "workspace" ||
+      persisted?.pageView === "my-projects" ||
+      persisted?.pageView === "deploy-projects"
+      ? persisted.pageView
+      : "new"
+  );
+  const [splitView, setSplitView] = useState(
+    typeof persisted?.splitView === "boolean" ? persisted.splitView : false
+  );
 
   const activeProject = useMemo(
     () => projects.find((p) => p.id === activeProjectId) ?? null,
@@ -71,6 +172,57 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
     () => projects.filter((p) => p.status === "deployed" || p.deployedUrl),
     [projects]
   );
+
+  useEffect(() => {
+    persistState({
+      projects,
+      deployments,
+      activeProjectId,
+      pageView,
+      splitView,
+    });
+  }, [projects, deployments, activeProjectId, pageView, splitView]);
+
+  useEffect(() => {
+    let cancelled = false;
+    const load = async () => {
+      try {
+        const items = await listBuilderProjects();
+        if (cancelled) return;
+        const mapped = items.map(mapBuilderProject);
+        setProjects((prev) => {
+          const prevById = new Map(prev.map((p) => [p.id, p]));
+          const merged = mapped.map((project) => {
+            const existing = prevById.get(project.id);
+            if (!existing) return project;
+            return {
+              ...project,
+              chatHistory: existing.chatHistory.length
+                ? existing.chatHistory
+                : project.chatHistory,
+              versions: existing.versions.length ? existing.versions : project.versions,
+              uploadedAssets: existing.uploadedAssets.length
+                ? existing.uploadedAssets
+                : project.uploadedAssets,
+              deployedUrl: existing.deployedUrl ?? project.deployedUrl,
+              prompt: existing.prompt || project.prompt,
+              description: existing.description || project.description,
+            };
+          });
+          const seen = new Set(merged.map((p) => p.id));
+          const localOnly = prev.filter((p) => !seen.has(p.id));
+          return [...localOnly, ...merged];
+        });
+      } catch (e) {
+        if (cancelled) return;
+        console.warn("web-agent projects unavailable", e);
+      }
+    };
+    void load();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const startNewProject = useCallback(() => {
     setActiveProjectId(null);
@@ -103,31 +255,25 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
     [router]
   );
 
-  const syncFromUrl = useCallback(
-    (projectId: string | null, view: string | null) => {
-      if (projectId) {
-        const project = projects.find((p) => p.id === projectId);
-        if (project) {
-          setActiveProjectId(projectId);
-          setPageView("workspace");
-          setSplitView(true);
-        }
-        return;
-      }
-      setActiveProjectId(null);
-      if (view === "my-projects") {
-        setPageView("my-projects");
-        setSplitView(false);
-      } else if (view === "deploy-projects") {
-        setPageView("deploy-projects");
-        setSplitView(false);
-      } else {
-        setPageView("new");
-        setSplitView(false);
-      }
-    },
-    [projects]
-  );
+  const syncFromUrl = useCallback((projectId: string | null, view: string | null) => {
+    if (projectId) {
+      setActiveProjectId(projectId);
+      setPageView("workspace");
+      setSplitView(true);
+      return;
+    }
+    setActiveProjectId(null);
+    if (view === "my-projects") {
+      setPageView("my-projects");
+      setSplitView(false);
+    } else if (view === "deploy-projects") {
+      setPageView("deploy-projects");
+      setSplitView(false);
+    } else {
+      setPageView("new");
+      setSplitView(false);
+    }
+  }, []);
 
   const updateProject = useCallback((updated: WebProject) => {
     setProjects((prev) => {

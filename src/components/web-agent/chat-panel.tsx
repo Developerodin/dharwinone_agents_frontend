@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { PROMPT_SUGGESTIONS } from "@/lib/web-agent-data";
 import type {
   ChatAttachment,
@@ -44,6 +44,50 @@ type ChatPanelProps = {
   fullscreen?: boolean;
 };
 
+type ProcessState = {
+  kind: "editing" | "generating" | "pending" | "applied";
+  label: string;
+  hint: string;
+};
+
+function processStateFor(content: string): ProcessState | null {
+  const text = content.trim();
+  if (!text) return null;
+  if (/^applying your update/i.test(text)) {
+    return {
+      kind: "editing",
+      label: "Applying your update...",
+      hint: "Updating sections, content, and preview safely.",
+    };
+  }
+  if (/^great,\s*starting website generation/i.test(text)) {
+    return {
+      kind: "generating",
+      label: "Starting website generation...",
+      hint: "Preparing personalized templates from your profile.",
+    };
+  }
+  if (
+    /generation is still running/i.test(text) ||
+    /generation is taking longer than expected/i.test(text) ||
+    /template is not ready yet/i.test(text)
+  ) {
+    return {
+      kind: "pending",
+      label: "Generation in progress...",
+      hint: "We are still rendering your site. It will load automatically.",
+    };
+  }
+  if (/^applied your update to the current website version/i.test(text)) {
+    return {
+      kind: "applied",
+      label: "Update applied",
+      hint: "Your latest changes are now visible in preview.",
+    };
+  }
+  return null;
+}
+
 export function ChatPanel({
   project,
   generation,
@@ -73,7 +117,7 @@ export function ChatPanel({
     generation.phase === "building" ||
     generation.phase === "generating";
   const isStopped = generation.phase === "stopped";
-  const messages = project?.chatHistory ?? [];
+  const messages = useMemo(() => project?.chatHistory ?? [], [project?.chatHistory]);
   const isEmpty = messages.length === 0;
 
   const isGatheringProcessing =
@@ -143,7 +187,6 @@ export function ChatPanel({
       isDragging={isDragging}
       isGenerating={isFinalGenerating && showFinalGenerationStatus}
       isStopped={isStopped}
-      isTyping={isTyping}
       disabled={composerDisabled}
       project={project}
       textareaRef={textareaRef}
@@ -299,7 +342,6 @@ function Composer({
   isDragging,
   isGenerating,
   isStopped,
-  isTyping,
   disabled,
   project,
   textareaRef,
@@ -324,7 +366,6 @@ function Composer({
   isDragging: boolean;
   isGenerating: boolean;
   isStopped: boolean;
-  isTyping: boolean;
   disabled: boolean;
   project: WebProject | null;
   textareaRef: React.RefObject<HTMLTextAreaElement | null>;
@@ -428,28 +469,73 @@ function Composer({
 }
 
 function GenerationBubble({ generation, centered }: { generation: GenerationState; centered?: boolean }) {
-  const status: "thinking" | "building" =
-    generation.phase === "thinking" ? "thinking" : "building";
-  const label = status === "thinking" ? "Thinking..." : "Building...";
+  const phaseOrder: Array<"thinking" | "building" | "generating"> = [
+    "thinking",
+    "building",
+    "generating",
+  ];
+  const current =
+    generation.phase === "thinking" ||
+    generation.phase === "building" ||
+    generation.phase === "generating"
+      ? generation.phase
+      : "thinking";
+  const label =
+    current === "thinking"
+      ? "Understanding your request..."
+      : current === "building"
+        ? "Designing structure and copy..."
+        : "Finalizing the generated website...";
+  const activeStep = phaseOrder.indexOf(current);
 
   return (
     <div className={`wa-animate-fade-up mt-4 flex ${centered ? "justify-start" : "justify-start"}`}>
       <div className="wa-chat-bubble-ai max-w-[88%] rounded-2xl rounded-bl-md px-4 py-3">
-        <div className="flex items-center gap-3">
-          <span
-            key={status}
-            className="wa-status-enter text-sm font-medium"
-            style={{ animation: "wa-thinking-pulse 1.5s ease-in-out infinite" }}
-          >
-            {label}
-          </span>
-          <div className="flex gap-1">
-            <span className="wa-thinking-dot h-1.5 w-1.5 rounded-full bg-brand-green" />
-            <span className="wa-thinking-dot h-1.5 w-1.5 rounded-full bg-brand-green" />
-            <span className="wa-thinking-dot h-1.5 w-1.5 rounded-full bg-brand-green" />
+        <div className="space-y-2.5">
+          <div className="flex items-center gap-3">
+            <span className="wa-status-enter text-sm font-medium">{label}</span>
+            <div className="flex gap-1">
+              <span className="wa-thinking-dot h-1.5 w-1.5 rounded-full bg-brand-green" />
+              <span className="wa-thinking-dot h-1.5 w-1.5 rounded-full bg-brand-green" />
+              <span className="wa-thinking-dot h-1.5 w-1.5 rounded-full bg-brand-green" />
+            </div>
+          </div>
+          <div className="grid grid-cols-3 gap-1.5">
+            {phaseOrder.map((phase, idx) => (
+              <span
+                key={phase}
+                className={`wa-process-phase ${
+                  idx <= activeStep ? "wa-process-phase-active" : ""
+                }`}
+              />
+            ))}
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function ProcessStatusBubble({ state }: { state: ProcessState }) {
+  const inProgress = state.kind !== "applied";
+  return (
+    <div className="wa-chat-bubble-ai wa-process-bubble max-w-[85%] rounded-2xl rounded-bl-md px-4 py-3">
+      <div className="flex items-center gap-2.5">
+        <span className={`wa-process-icon ${state.kind === "applied" ? "wa-process-icon-done" : ""}`}>
+          {state.kind === "applied" ? (
+            <SparklesIcon className="h-3.5 w-3.5 text-brand-green" />
+          ) : (
+            <RefreshIcon className="wa-process-spinner h-3.5 w-3.5 text-brand-green" />
+          )}
+        </span>
+        <p className="m-0 text-sm font-semibold text-defaulttextcolor">{state.label}</p>
+      </div>
+      <p className="m-0 mt-1 text-xs text-textmuted">{state.hint}</p>
+      {inProgress && (
+        <div className="wa-process-track mt-2">
+          <span className="wa-process-indeterminate" />
+        </div>
+      )}
     </div>
   );
 }
@@ -471,6 +557,7 @@ function ChatBubble({
 }) {
   const isUser = message.role === "user";
   const hasAttachments = Boolean(message.attachments?.length);
+  const processState = !isUser && message.content ? processStateFor(message.content) : null;
 
   if (
     showInlineQuestion &&
@@ -501,7 +588,9 @@ function ChatBubble({
         {hasAttachments && message.attachments && (
           <ChatMessageAttachments attachments={message.attachments} align={isUser ? "end" : "start"} />
         )}
-        {message.content ? (
+        {processState ? (
+          <ProcessStatusBubble state={processState} />
+        ) : message.content ? (
           <div
             className={`rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${
               isUser ? "wa-chat-bubble-user rounded-br-md text-white" : "wa-chat-bubble-ai rounded-bl-md text-defaulttextcolor"

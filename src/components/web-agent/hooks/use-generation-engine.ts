@@ -35,17 +35,12 @@ export function useGenerationEngine() {
     setState({ phase: "generating", stageIndex: 0, progress: 20 });
     let stage = 0;
     const interval = setInterval(() => {
-      stage++;
-      if (stage >= GENERATION_STAGES.length) {
-        clearInterval(interval);
-        setState({ phase: "complete", stageIndex: GENERATION_STAGES.length - 1, progress: 100 });
-        return;
-      }
-      setState({
+      stage = (stage + 1) % GENERATION_STAGES.length;
+      setState((prev) => ({
         phase: "generating",
         stageIndex: stage,
-        progress: 20 + ((stage + 1) / GENERATION_STAGES.length) * 75,
-      });
+        progress: Math.min(prev.progress + 1.5, 72),
+      }));
     }, STAGE_MS);
     intervalsRef.current.push(interval);
   }, []);
@@ -101,16 +96,15 @@ export function useGenerationEngine() {
       const stage = prev.stageIndex;
       const interval = setInterval(() => {
         setState((current) => {
-          if (current.phase !== "generating" && current.phase !== "stopped") return current;
-          const next = current.stageIndex + 1;
-          if (next >= GENERATION_STAGES.length) {
+          if (current.phase !== "generating" && current.phase !== "stopped") {
             clearInterval(interval);
-            return { phase: "complete", stageIndex: GENERATION_STAGES.length - 1, progress: 100 };
+            return current;
           }
+          const next = (current.stageIndex + 1) % GENERATION_STAGES.length;
           return {
             phase: "generating",
             stageIndex: next,
-            progress: 20 + ((next + 1) / GENERATION_STAGES.length) * 75,
+            progress: Math.min(current.progress + 1.5, 72),
           };
         });
       }, STAGE_MS);

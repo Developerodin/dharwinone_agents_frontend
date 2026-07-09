@@ -37,6 +37,13 @@ const DEVICE_OPTIONS: { id: PreviewDevice; label: string; icon: React.ComponentT
   { id: "mobile", label: "Mobile", icon: SmartphoneIcon },
 ];
 
+function withPreviewLinkGuard(doc: string) {
+  const guard = `<script>(function(){document.addEventListener("click",function(e){var t=e.target;if(!t||!t.closest)return;var a=t.closest("a[href]");if(!a)return;var href=(a.getAttribute("href")||"").trim();if(!href)return;if(href==="#"){e.preventDefault();return;}if(href.charAt(0)==="#")return;if(/^(mailto:|tel:|sms:)/i.test(href))return;e.preventDefault();},true);})();</script>`;
+  if (/<\/body>/i.test(doc)) return doc.replace(/<\/body>/i, `${guard}</body>`);
+  if (/<\/html>/i.test(doc)) return doc.replace(/<\/html>/i, `${guard}</html>`);
+  return `${doc}${guard}`;
+}
+
 export function WorkspacePanel({
   project,
   generation,
@@ -80,11 +87,14 @@ export function WorkspacePanel({
   const css = activeVersion?.css ?? SAMPLE_CSS;
   const js = activeVersion?.js ?? SAMPLE_JS;
 
-  const previewDoc = useMemo(
-    () =>
-      `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${css}</style></head><body>${html.match(/<body[^>]*>([\s\S]*)<\/body>/i)?.[1] ?? ""}<script>${js}</script></body></html>`,
-    [html, css, js]
-  );
+  const previewDoc = useMemo(() => {
+    // Generated templates are full documents; rebuilding them dropped the
+    // <head> <link> tags (Bootstrap, fonts) and broke every layout class.
+    if (/<html[\s>]/i.test(html)) return withPreviewLinkGuard(html);
+    return withPreviewLinkGuard(
+      `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${css}</style></head><body>${html.match(/<body[^>]*>([\s\S]*)<\/body>/i)?.[1] ?? ""}<script>${js}</script></body></html>`
+    );
+  }, [html, css, js]);
 
   useEffect(() => {
     if (activeTab === "preview" && hasWebsite) {
