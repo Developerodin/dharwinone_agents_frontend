@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { DialPad } from "@/components/call-agent/dial-pad";
-import { AGENTS, OPENAI_CONVERSATION } from "@/lib/call-agent-data";
+import { AGENTS } from "@/lib/call-agent-data";
+import { useTwilioDialer } from "@/hooks/use-twilio-dialer";
 import {
   COUNTRIES,
   DEFAULT_COUNTRY,
@@ -10,25 +11,35 @@ import {
   formatDomesticNumber,
   getCallTypeLabel,
   getCountryByCode,
+  getFullNumber,
   getMaxDigits,
   isValidNumber,
   type CallType,
   type CountryOption,
 } from "@/lib/phone-utils";
-import { MicIcon, PauseIcon, PhoneCallIcon } from "@/components/icons";
+import { MicIcon, PhoneCallIcon } from "@/components/icons";
 
-type CallState = "idle" | "connecting" | "active" | "ended";
+type CallState = "idle" | "connecting" | "active";
+
+function formatTimer(totalSeconds: number): string {
+  const m = Math.floor(totalSeconds / 60).toString().padStart(2, "0");
+  const s = (totalSeconds % 60).toString().padStart(2, "0");
+  return `${m}:${s}`;
+}
 
 export function DialerView() {
   const [callType, setCallType] = useState<CallType>("domestic");
   const [country, setCountry] = useState<CountryOption>(DEFAULT_COUNTRY);
   const [nationalDigits, setNationalDigits] = useState("");
-  const [callState, setCallState] = useState<CallState>("idle");
   const [selectedAgent, setSelectedAgent] = useState(AGENTS[0]?.id ?? "");
+  const dialer = useTwilioDialer();
+
+  const callState: CallState =
+    dialer.status === "in-call" ? "active" : dialer.status === "connecting" ? "connecting" : "idle";
 
   const displayNumber = formatDisplayNumber(callType, nationalDigits, country);
   const digitCount = nationalDigits.replace(/\D/g, "").length;
-  const canCall = isValidNumber(callType, nationalDigits, country);
+  const canCall = isValidNumber(callType, nationalDigits, country) && dialer.status === "ready";
   const isInCall = callState === "connecting" || callState === "active";
   const agent = AGENTS.find((a) => a.id === selectedAgent) ?? AGENTS[0];
 
@@ -55,13 +66,11 @@ export function DialerView() {
 
   const handleStartCall = () => {
     if (!canCall) return;
-    setCallState("connecting");
-    setTimeout(() => setCallState("active"), 1200);
+    void dialer.dial(`+${getFullNumber(callType, nationalDigits, country)}`);
   };
 
   const handleEndCall = () => {
-    setCallState("ended");
-    setTimeout(() => setCallState("idle"), 800);
+    dialer.hangup();
   };
 
   const requiredDigits = `${country.minDigits}–${country.maxDigits}`;
@@ -184,8 +193,19 @@ export function DialerView() {
 
             <DialPad onKeyPress={handleKeyPress} onBackspace={handleBackspace} disabled={isInCall} />
 
-            <div className="pt-1">
-              {!isInCall && callState !== "ended" ? (
+            <div className="space-y-2 pt-1">
+              {dialer.error && (
+                <div className="flex items-center justify-between rounded-xl border border-red-200 bg-red-50 px-3.5 py-2.5 text-xs text-red-700">
+                  <span className="min-w-0 truncate">{dialer.error}</span>
+                  <button type="button" onClick={dialer.retry} className="ml-3 shrink-0 font-semibold underline">
+                    Retry
+                  </button>
+                </div>
+              )}
+              {dialer.status === "initializing" && (
+                <p className="m-0 text-center text-xs text-textmuted">Connecting softphone…</p>
+              )}
+              {!isInCall ? (
                 <button
                   type="button"
                   onClick={handleStartCall}
@@ -198,13 +218,13 @@ export function DialerView() {
               ) : callState === "connecting" ? (
                 <button
                   type="button"
-                  disabled
+                  onClick={handleEndCall}
                   className="ti-btn h-14 w-full border border-amber-200 bg-amber-50 text-base text-amber-700"
                 >
                   <span className="h-2 w-2 animate-pulse rounded-full bg-amber-500" />
-                  Connecting…
+                  Connecting… (tap to cancel)
                 </button>
-              ) : callState === "active" ? (
+              ) : (
                 <button
                   type="button"
                   onClick={handleEndCall}
@@ -212,14 +232,6 @@ export function DialerView() {
                 >
                   <PhoneCallIcon className="h-5 w-5 rotate-[135deg]" />
                   End Call
-                </button>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => setCallState("idle")}
-                  className="ti-btn ti-btn-light h-14 w-full text-base"
-                >
-                  Call Ended — Dial Again
                 </button>
               )}
             </div>
@@ -237,9 +249,7 @@ export function DialerView() {
                   ? "bg-emerald-50 text-emerald-700"
                   : callState === "connecting"
                     ? "bg-amber-50 text-amber-700"
-                    : callState === "ended"
-                      ? "bg-slate-100 text-slate-600"
-                      : "bg-light text-textmuted"
+                    : "bg-light text-textmuted"
               }`}
             >
               {(callState === "active" || callState === "connecting") && (
@@ -252,7 +262,6 @@ export function DialerView() {
               {callState === "idle" && "Ready"}
               {callState === "connecting" && "Connecting"}
               {callState === "active" && "In Progress"}
-              {callState === "ended" && "Completed"}
             </span>
           </div>
           <div className="box-body">
@@ -281,7 +290,9 @@ export function DialerView() {
                     </p>
                   </div>
                   {callState === "active" && (
-                    <div className="font-mono text-3xl font-bold tracking-wider text-defaulttextcolor">04:32</div>
+                    <div className="font-mono text-3xl font-bold tracking-wider text-defaulttextcolor">
+                      {formatTimer(dialer.durationSeconds)}
+                    </div>
                   )}
                 </div>
 
@@ -289,8 +300,13 @@ export function DialerView() {
                   <div className="flex items-center justify-center gap-4 py-2">
                     <button
                       type="button"
-                      className="flex h-12 w-12 items-center justify-center rounded-xl border border-defaultborder/70 bg-light transition-colors hover:bg-defaultborder/30"
-                      aria-label="Mute"
+                      onClick={dialer.toggleMute}
+                      className={`flex h-12 w-12 items-center justify-center rounded-xl border transition-colors ${
+                        dialer.muted
+                          ? "border-brand-green bg-brand-green/10"
+                          : "border-defaultborder/70 bg-light hover:bg-defaultborder/30"
+                      }`}
+                      aria-label={dialer.muted ? "Unmute" : "Mute"}
                     >
                       <MicIcon className="h-5 w-5" />
                     </button>
@@ -301,13 +317,6 @@ export function DialerView() {
                       aria-label="End call"
                     >
                       <PhoneCallIcon className="h-6 w-6 rotate-[135deg]" />
-                    </button>
-                    <button
-                      type="button"
-                      className="flex h-12 w-12 items-center justify-center rounded-xl border border-defaultborder/70 bg-light transition-colors hover:bg-defaultborder/30"
-                      aria-label="Hold"
-                    >
-                      <PauseIcon className="h-5 w-5" />
                     </button>
                   </div>
                 )}
@@ -330,37 +339,6 @@ export function DialerView() {
           </div>
         </div>
 
-        {(callState === "active" || callState === "ended") && (
-          <div className="box">
-            <div className="box-header">
-              <h2 className="box-title">Live Transcript</h2>
-              <span className="badge bg-violet-50 text-violet-700">OpenAI</span>
-            </div>
-            <div className="box-body">
-              <div className="max-h-64 space-y-3 overflow-y-auto custom-scrollbar pr-1">
-                {OPENAI_CONVERSATION.slice(0, callState === "ended" ? undefined : 4).map((msg, i) => (
-                  <div
-                    key={i}
-                    className={`flex ${msg.speaker === "agent" ? "justify-start" : "justify-end"}`}
-                  >
-                    <div
-                      className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-                        msg.speaker === "agent"
-                          ? "rounded-bl-md bg-light text-defaulttextcolor"
-                          : "rounded-br-md bg-brand-green/10 text-defaulttextcolor"
-                      }`}
-                    >
-                      <span className="mb-0.5 block text-[0.65rem] font-semibold capitalize text-textmuted">
-                        {msg.speaker === "agent" ? "AI Agent" : "Customer"}
-                      </span>
-                      {msg.text}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

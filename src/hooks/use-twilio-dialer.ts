@@ -35,10 +35,10 @@ export function useTwilioDialer() {
     setStatus((s) => (s === "error" ? s : "ready"));
   }, [stopTimer]);
 
+  // Never sets state synchronously — initial useState defaults cover the first
+  // run, and retry() resets status/error before re-invoking.
   const init = useCallback(async () => {
     if (deviceRef.current) return;
-    setStatus("initializing");
-    setError(null);
     try {
       const { token } = await fetchDialerToken();
       const { Device } = await import("@twilio/voice-sdk");
@@ -65,6 +65,9 @@ export function useTwilioDialer() {
   }, []);
 
   useEffect(() => {
+    // init() is async — every setState inside it runs after an await (token
+    // fetch / SDK events), never synchronously in the effect body.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     init();
     return () => {
       stopTimer();
@@ -122,6 +125,8 @@ export function useTwilioDialer() {
   const retry = useCallback(() => {
     deviceRef.current?.destroy();
     deviceRef.current = null;
+    setStatus("initializing");
+    setError(null);
     init();
   }, [init]);
 
