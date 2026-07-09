@@ -1,99 +1,144 @@
 "use client";
 
 import { useState } from "react";
-import { CALL_HISTORY } from "@/lib/call-agent-data";
-import type { CallStatus } from "@/lib/call-agent-data";
-import { BotIcon, FilterIcon, DownloadIcon } from "@/components/icons";
+import { useCallRecords } from "@/hooks/use-call-records";
+import { recordingStreamUrl, type TelephonyCallRecord } from "@/lib/telephony-api";
+import { FilterIcon, DownloadIcon } from "@/components/icons";
 
-const STATUS_STYLES: Record<CallStatus, string> = {
+type UiStatus = "completed" | "in-progress" | "failed" | "no-answer";
+
+const STATUS_STYLES: Record<UiStatus, string> = {
   completed: "status-completed",
   "in-progress": "status-in-progress",
   failed: "status-failed",
   "no-answer": "status-no-answer",
-  scheduled: "status-scheduled",
 };
 
-const STATUS_LABELS: Record<CallStatus, string> = {
+const STATUS_LABELS: Record<UiStatus, string> = {
   completed: "Completed",
   "in-progress": "In Progress",
   failed: "Failed",
   "no-answer": "No Answer",
-  scheduled: "Scheduled",
 };
 
-export function TrackHistoryView() {
-  const [selectedId, setSelectedId] = useState(CALL_HISTORY[0].id);
+export function toUiStatus(status: string): UiStatus {
+  const s = (status || "").toLowerCase();
+  if (s === "completed") return "completed";
+  if (s === "no_answer") return "no-answer";
+  if (s === "failed" || s === "busy" || s === "call_disconnected" || s === "expired") return "failed";
+  return "in-progress"; // initiated, ringing, in_progress, unknown
+}
 
-  const selected = CALL_HISTORY.find((c) => c.id === selectedId) ?? CALL_HISTORY[0];
+export function formatDuration(seconds?: number): string {
+  if (seconds == null || Number.isNaN(seconds)) return "—";
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m}:${s.toString().padStart(2, "0")}`;
+}
+
+function formatDate(iso: string): string {
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime())
+    ? "—"
+    : d.toLocaleString(undefined, {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+      });
+}
+
+export function TrackHistoryView() {
+  const { records, error } = useCallRecords();
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  // Derived, no effect: newest call is selected until the user picks one.
+  const effectiveId = selectedId ?? records?.[0]?.executionId ?? null;
+  const selected: TelephonyCallRecord | undefined =
+    records?.find((r) => r.executionId === effectiveId) ?? records?.[0];
 
   return (
     <div className="space-y-6">
       <div>
         <h2 className="m-0 text-lg font-bold tracking-tight text-defaulttextcolor">Call Reports</h2>
         <p className="m-0 mt-1 text-sm text-textmuted">
-          AI-generated summaries, transcripts, and call details
+          Live call records from the dialer — status, duration, and recordings
         </p>
       </div>
+
+      {error && (
+        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          Could not load call records: {error}
+        </div>
+      )}
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-12">
         <div className="xl:col-span-7">
           <div className="box">
             <div className="box-header">
               <div>
-                <h2 className="box-title">All Reports</h2>
-                <p className="box-subtitle">Generated automatically when each call ends</p>
+                <h2 className="box-title">All Calls</h2>
+                <p className="box-subtitle">Recorded automatically for every dialer call</p>
               </div>
               <div className="flex gap-2">
                 <button type="button" className="ti-btn ti-btn-sm ti-btn-light gap-1.5">
                   <FilterIcon className="w-3.5 h-3.5" />
                   Filter
                 </button>
-                <button type="button" className="ti-btn ti-btn-sm ti-btn-light gap-1.5">
-                  <DownloadIcon className="w-3.5 h-3.5" />
-                  Export
-                </button>
               </div>
             </div>
             <div className="box-body p-0">
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b border-defaultborder/60 bg-light/60 text-textmuted">
-                      <th className="px-5 py-3.5 text-start text-xs font-semibold uppercase tracking-wide">Customer</th>
-                      <th className="px-5 py-3.5 text-start text-xs font-semibold uppercase tracking-wide">Campaign</th>
-                      <th className="px-5 py-3.5 text-start text-xs font-semibold uppercase tracking-wide">Status</th>
-                      <th className="px-5 py-3.5 text-start text-xs font-semibold uppercase tracking-wide">Duration</th>
-                      <th className="hidden px-5 py-3.5 text-start text-xs font-semibold uppercase tracking-wide md:table-cell">Outcome</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {CALL_HISTORY.map((call) => (
-                      <tr
-                        key={call.id}
-                        onClick={() => setSelectedId(call.id)}
-                        className={`cursor-pointer border-b border-defaultborder/40 transition-colors last:border-0 ${
-                          selectedId === call.id ? "bg-brand-green/5" : "hover:bg-light/50"
-                        }`}
-                      >
-                        <td className="px-5 py-4">
-                          <p className="m-0 font-semibold text-defaulttextcolor">{call.customer}</p>
-                          <p className="m-0 mt-0.5 text-xs text-textmuted">{call.company}</p>
-                        </td>
-                        <td className="px-5 py-4 text-xs text-defaulttextcolor">{call.campaign}</td>
-                        <td className="px-5 py-4">
-                          <span className={`badge ${STATUS_STYLES[call.status]}`}>
-                            {STATUS_LABELS[call.status]}
-                          </span>
-                        </td>
-                        <td className="px-5 py-4 font-mono text-xs text-textmuted">{call.duration}</td>
-                        <td className="hidden max-w-[180px] truncate px-5 py-4 text-xs text-defaulttextcolor md:table-cell">
-                          {call.outcome}
-                        </td>
+              {records === null && !error ? (
+                <p className="m-0 px-5 py-10 text-center text-sm text-textmuted">Loading call records…</p>
+              ) : records?.length ? (
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-defaultborder/60 bg-light/60 text-textmuted">
+                        <th className="px-5 py-3.5 text-start text-xs font-semibold uppercase tracking-wide">Number</th>
+                        <th className="px-5 py-3.5 text-start text-xs font-semibold uppercase tracking-wide">Direction</th>
+                        <th className="px-5 py-3.5 text-start text-xs font-semibold uppercase tracking-wide">Status</th>
+                        <th className="px-5 py-3.5 text-start text-xs font-semibold uppercase tracking-wide">Duration</th>
+                        <th className="hidden px-5 py-3.5 text-start text-xs font-semibold uppercase tracking-wide md:table-cell">Date</th>
                       </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                    </thead>
+                    <tbody>
+                      {records.map((call) => {
+                        const ui = toUiStatus(call.status);
+                        return (
+                          <tr
+                            key={call.executionId}
+                            onClick={() => setSelectedId(call.executionId)}
+                            className={`cursor-pointer border-b border-defaultborder/40 transition-colors last:border-0 ${
+                              effectiveId === call.executionId ? "bg-brand-green/5" : "hover:bg-light/50"
+                            }`}
+                          >
+                            <td className="px-5 py-4">
+                              <p className="m-0 font-semibold text-defaulttextcolor">{call.toPhoneNumber ?? "Unknown"}</p>
+                              <p className="m-0 mt-0.5 font-mono text-xs text-textmuted">{call.executionId.slice(0, 12)}…</p>
+                            </td>
+                            <td className="px-5 py-4 text-xs capitalize text-defaulttextcolor">
+                              {call.telephonyData?.direction ?? "outbound"}
+                            </td>
+                            <td className="px-5 py-4">
+                              <span className={`badge ${STATUS_STYLES[ui]}`}>{STATUS_LABELS[ui]}</span>
+                            </td>
+                            <td className="px-5 py-4 font-mono text-xs text-textmuted">{formatDuration(call.duration)}</td>
+                            <td className="hidden px-5 py-4 text-xs text-defaulttextcolor md:table-cell">
+                              {formatDate(call.createdAt)}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <p className="m-0 px-5 py-10 text-center text-sm text-textmuted">
+                  No calls yet — place one from the Dialer tab.
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -101,90 +146,55 @@ export function TrackHistoryView() {
         <div className="xl:col-span-5">
           <div className="box xl:sticky xl:top-[88px]">
             <div className="box-header">
-              <h2 className="box-title">Call Report</h2>
-              <span className="font-mono text-xs text-textmuted">{selected.id}</span>
+              <h2 className="box-title">Call Detail</h2>
+              <span className="font-mono text-xs text-textmuted">{selected?.executionId ?? "—"}</span>
             </div>
             <div className="box-body space-y-5">
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-green/10 text-sm font-bold text-brand-green">
-                  {selected.customer.split(" ").map((n) => n[0]).join("")}
-                </div>
-                <div>
-                  <p className="m-0 font-semibold text-defaulttextcolor">{selected.customer}</p>
-                  <p className="m-0 text-sm text-textmuted">{selected.company}</p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-2 gap-3">
-                {[
-                  { label: "Phone", value: selected.phone },
-                  { label: "Campaign", value: selected.campaign },
-                  { label: "Agent", value: selected.agent },
-                  { label: "Duration", value: selected.duration },
-                  { label: "Sentiment", value: selected.sentiment },
-                  { label: "Date", value: selected.date },
-                  { label: "Recording", value: selected.recordingUrl ? "Available" : "—" },
-                ].map((item) => (
-                  <div key={item.label} className="rounded-xl border border-defaultborder/50 bg-light/80 p-3">
-                    <p className="m-0 mb-0.5 text-[0.65rem] uppercase tracking-wide text-textmuted">{item.label}</p>
-                    <p className="m-0 text-sm font-semibold text-defaulttextcolor">{item.value}</p>
-                  </div>
-                ))}
-              </div>
-
-              <div>
-                <div className="mb-2 flex items-center gap-2">
-                  <BotIcon className="h-4 w-4 text-brand-green" />
-                  <p className="m-0 text-sm font-semibold text-defaulttextcolor">AI Summary</p>
-                </div>
-                <p className="m-0 rounded-xl border border-brand-green/20 bg-brand-green/5 p-3.5 text-sm leading-relaxed text-defaulttextcolor">
-                  {selected.aiSummary}
-                </p>
-              </div>
-
-              <div>
-                <p className="mb-2 text-sm font-semibold text-defaulttextcolor">Outcome & Follow-up</p>
-                <div className="space-y-2">
-                  <p className="m-0 rounded-xl border border-defaultborder/50 bg-light p-3.5 text-sm text-textmuted">
-                    <span className="font-semibold text-defaulttextcolor">Outcome: </span>
-                    {selected.outcome}
-                  </p>
-                  <p className="m-0 rounded-xl border border-defaultborder/50 bg-light p-3.5 text-sm text-textmuted">
-                    <span className="font-semibold text-defaulttextcolor">Follow-up: </span>
-                    {selected.followUp}
-                  </p>
-                </div>
-              </div>
-
-              {selected.transcript.length > 0 && (
-                <div>
-                  <p className="mb-3 text-sm font-semibold text-defaulttextcolor">Transcript</p>
-                  <div className="max-h-52 space-y-2.5 overflow-y-auto custom-scrollbar pr-1">
-                    {selected.transcript.map((msg, i) => (
-                      <div key={i} className={`flex ${msg.speaker === "agent" ? "justify-start" : "justify-end"}`}>
-                        <div
-                          className={`max-w-[90%] rounded-xl px-3.5 py-2 text-xs leading-relaxed ${
-                            msg.speaker === "agent"
-                              ? "bg-light text-defaulttextcolor"
-                              : "bg-brand-green/10 text-defaulttextcolor"
-                          }`}
-                        >
-                          <span className="font-semibold capitalize text-textmuted">
-                            {msg.speaker === "agent" ? "AI Agent (OpenAI)" : "Customer"}:{" "}
-                          </span>
-                          {msg.text}
-                        </div>
+              {!selected ? (
+                <p className="m-0 py-8 text-center text-sm text-textmuted">Select a call to see its details.</p>
+              ) : (
+                <>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { label: "To", value: selected.toPhoneNumber ?? "—" },
+                      { label: "From", value: selected.fromPhoneNumber ?? "—" },
+                      { label: "Status", value: STATUS_LABELS[toUiStatus(selected.status)] },
+                      { label: "Duration", value: formatDuration(selected.duration) },
+                      { label: "Date", value: formatDate(selected.createdAt) },
+                      { label: "Recording", value: selected.recordingUrl ? "Available" : "—" },
+                    ].map((item) => (
+                      <div key={item.label} className="rounded-xl border border-defaultborder/50 bg-light/80 p-3">
+                        <p className="m-0 mb-0.5 text-[0.65rem] uppercase tracking-wide text-textmuted">{item.label}</p>
+                        <p className="m-0 break-words text-sm font-semibold text-defaulttextcolor">{item.value}</p>
                       </div>
                     ))}
                   </div>
-                </div>
-              )}
 
-              {selected.recordingUrl && (
-                <button type="button" className="ti-btn ti-btn-light w-full gap-2">
-                  <DownloadIcon className="h-4 w-4" />
-                  Download Recording
-                </button>
+                  {selected.notes ? (
+                    <div>
+                      <p className="mb-2 text-sm font-semibold text-defaulttextcolor">Notes</p>
+                      <p className="m-0 rounded-xl border border-defaultborder/50 bg-light p-3.5 text-sm text-textmuted">
+                        {selected.notes}
+                      </p>
+                    </div>
+                  ) : null}
+
+                  {selected.recordingUrl && (
+                    <div>
+                      <p className="mb-2 text-sm font-semibold text-defaulttextcolor">Recording</p>
+                      {/* Streams through the sidecar proxy — Twilio creds never reach the browser. */}
+                      <audio controls preload="none" className="w-full" src={recordingStreamUrl(selected.executionId)} />
+                      <a
+                        href={recordingStreamUrl(selected.executionId)}
+                        download={`${selected.executionId}.mp3`}
+                        className="ti-btn ti-btn-light mt-2 w-full gap-2"
+                      >
+                        <DownloadIcon className="h-4 w-4" />
+                        Download Recording
+                      </a>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>

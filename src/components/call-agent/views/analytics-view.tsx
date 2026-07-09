@@ -1,31 +1,60 @@
-import { ANALYTICS_STATS, CALL_HISTORY } from "@/lib/call-agent-data";
-import { TrendUpIcon } from "@/components/icons";
+"use client";
 
-const CHART_BARS = [65, 78, 52, 88, 72, 95, 68, 82, 74, 90, 85, 79];
+import { useCallRecords } from "@/hooks/use-call-records";
+import { toUiStatus, formatDuration } from "@/components/call-agent/views/track-history-view";
 
 export function AnalyticsView() {
+  const { records } = useCallRecords();
+  const calls = records ?? [];
+
   const statusCounts = {
-    completed: CALL_HISTORY.filter((c) => c.status === "completed").length,
-    "in-progress": CALL_HISTORY.filter((c) => c.status === "in-progress").length,
-    "no-answer": CALL_HISTORY.filter((c) => c.status === "no-answer").length,
+    completed: calls.filter((c) => toUiStatus(c.status) === "completed").length,
+    "in-progress": calls.filter((c) => toUiStatus(c.status) === "in-progress").length,
+    "no-answer": calls.filter((c) => toUiStatus(c.status) === "no-answer").length,
+    failed: calls.filter((c) => toUiStatus(c.status) === "failed").length,
   };
+  const total = calls.length;
+  const callsWithDuration = calls.filter((c) => c.duration != null);
+  const avgDuration = callsWithDuration.length
+    ? Math.round(callsWithDuration.reduce((sum, c) => sum + (c.duration ?? 0), 0) / callsWithDuration.length)
+    : 0;
+  const successRate = total ? Math.round((statusCounts.completed / total) * 100) : 0;
+
+  const stats = [
+    { label: "Total Calls", value: String(total) },
+    { label: "Completed", value: String(statusCounts.completed) },
+    { label: "Avg. Duration", value: formatDuration(avgDuration) },
+    { label: "Success Rate", value: `${successRate}%` },
+  ];
+
+  // Call volume per day, last 12 days (oldest → newest).
+  const days = Array.from({ length: 12 }, (_, i) => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    d.setDate(d.getDate() - (11 - i));
+    return d;
+  });
+  const volume = days.map(
+    (day) =>
+      calls.filter((c) => {
+        const t = new Date(c.createdAt);
+        return (
+          t.getFullYear() === day.getFullYear() &&
+          t.getMonth() === day.getMonth() &&
+          t.getDate() === day.getDate()
+        );
+      }).length,
+  );
+  const maxVolume = Math.max(...volume, 1);
 
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {ANALYTICS_STATS.map((stat) => (
+        {stats.map((stat) => (
           <div key={stat.label} className="box">
             <div className="box-body">
               <p className="text-xs font-semibold text-textmuted uppercase tracking-wide m-0 mb-2">{stat.label}</p>
-              <div className="flex items-end justify-between gap-2">
-                <p className="text-2xl font-bold text-defaulttextcolor m-0 tracking-tight">{stat.value}</p>
-                {stat.trend !== "neutral" && (
-                  <span className={`text-xs font-semibold flex items-center gap-0.5 ${stat.trend === "up" ? "text-emerald-600" : "text-red-500"}`}>
-                    <TrendUpIcon className={`w-3 h-3 ${stat.trend === "down" ? "rotate-180" : ""}`} />
-                    {stat.change}
-                  </span>
-                )}
-              </div>
+              <p className="text-2xl font-bold text-defaulttextcolor m-0 tracking-tight">{stat.value}</p>
             </div>
           </div>
         ))}
@@ -47,14 +76,15 @@ export function AnalyticsView() {
             </div>
             <div className="box-body">
               <div className="flex items-end justify-between gap-2 h-48 px-2">
-                {CHART_BARS.map((height, i) => (
+                {volume.map((count, i) => (
                   <div key={i} className="flex-1 flex flex-col items-center gap-2">
                     <div
                       className="w-full max-w-[28px] rounded-t-lg bg-brand-green/80 hover:bg-brand-green transition-colors"
-                      style={{ height: `${height}%` }}
+                      style={{ height: `${Math.max((count / maxVolume) * 100, count ? 8 : 2)}%` }}
+                      title={`${count} call${count === 1 ? "" : "s"}`}
                     />
                     <span className="text-[0.6rem] text-textmuted font-medium">
-                      {["M", "T", "W", "T", "F", "S", "S", "M", "T", "W", "T", "F"][i]}
+                      {days[i].toLocaleDateString(undefined, { weekday: "narrow" })}
                     </span>
                   </div>
                 ))}
@@ -70,20 +100,24 @@ export function AnalyticsView() {
             </div>
             <div className="box-body space-y-4">
               {[
-                { label: "Completed", count: statusCounts.completed, color: "bg-emerald-500", pct: 60 },
-                { label: "In Progress", count: statusCounts["in-progress"], color: "bg-blue-500", pct: 20 },
-                { label: "No Answer", count: statusCounts["no-answer"], color: "bg-amber-500", pct: 20 },
-              ].map((item) => (
-                <div key={item.label}>
-                  <div className="flex justify-between text-sm mb-2">
-                    <span className="text-defaulttextcolor font-semibold">{item.label}</span>
-                    <span className="text-textmuted">{item.count}</span>
+                { label: "Completed", count: statusCounts.completed, color: "bg-emerald-500" },
+                { label: "In Progress", count: statusCounts["in-progress"], color: "bg-blue-500" },
+                { label: "No Answer", count: statusCounts["no-answer"], color: "bg-amber-500" },
+                { label: "Failed", count: statusCounts.failed, color: "bg-red-500" },
+              ].map((item) => {
+                const pct = total ? Math.round((item.count / total) * 100) : 0;
+                return (
+                  <div key={item.label}>
+                    <div className="flex justify-between text-sm mb-2">
+                      <span className="text-defaulttextcolor font-semibold">{item.label}</span>
+                      <span className="text-textmuted">{item.count}</span>
+                    </div>
+                    <div className="h-2 rounded-full bg-light overflow-hidden">
+                      <div className={`h-full rounded-full ${item.color}`} style={{ width: `${pct}%` }} />
+                    </div>
                   </div>
-                  <div className="h-2 rounded-full bg-light overflow-hidden">
-                    <div className={`h-full rounded-full ${item.color}`} style={{ width: `${item.pct}%` }} />
-                  </div>
-                </div>
-              ))}
+                );
+              })}
 
               <div className="pt-4 border-t border-defaultborder/50 space-y-3">
                 <h3 className="text-sm font-bold text-defaulttextcolor m-0">Top Campaigns</h3>
