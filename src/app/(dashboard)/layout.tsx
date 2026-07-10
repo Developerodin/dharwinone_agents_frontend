@@ -16,20 +16,25 @@ export default function DashboardLayout({
   const router = useRouter();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const token = getToken();
+  const [authReady, setAuthReady] = useState(false);
+  const [authed, setAuthed] = useState(false);
 
   useEffect(() => {
+    const token = getToken();
+    setAuthed(Boolean(token));
+    setAuthReady(true);
     if (!token) {
       router.replace(ROUTES.signIn);
     }
-  }, [router, token]);
+  }, [router]);
 
   const handleSignOut = () => {
     logout();
     router.push(ROUTES.signIn);
   };
 
-  if (!token) return null;
+  // Keep server and first client render identical; auth is checked after mount.
+  if (!authReady || !authed) return null;
 
   return (
     <WebAgentProvider>
