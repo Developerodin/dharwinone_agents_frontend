@@ -1,6 +1,9 @@
 export const ROUTES = {
   signIn: "/sign-in",
   register: "/register",
+  forgotPassword: "/forgot-password",
+  verify: "/verify",
+  resetPassword: "/reset-password",
   dashboard: "/dashboard",
   callAgent: "/call-agent",
   webAgent: "/web-agent",

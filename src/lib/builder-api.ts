@@ -5,6 +5,7 @@ import type {
   BuilderTemplate,
   BuilderGenerateResponse,
 } from "@/lib/builder-types";
+import { getToken, handleUnauthorized } from "@/lib/auth";
 
 export const BASE = (
   process.env.NEXT_PUBLIC_STUDIO_API ?? "http://127.0.0.1:8787"
@@ -19,8 +20,13 @@ async function realFetch<T>(
 ): Promise<T> {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  const token = getToken();
   const mergedInit: RequestInit = {
     ...init,
+    headers: {
+      ...((init?.headers as Record<string, string>) ?? {}),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
     signal: controller.signal,
   };
   let res: Response;
@@ -33,6 +39,10 @@ async function realFetch<T>(
     throw err;
   } finally {
     clearTimeout(timeout);
+  }
+  if (res.status === 401) {
+    handleUnauthorized();
+    throw new Error(`API 401: ${path} - session expired`);
   }
   if (!res.ok) {
     let detail = "";

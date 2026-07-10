@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCallRecords } from "@/hooks/use-call-records";
-import { recordingStreamUrl, type TelephonyCallRecord } from "@/lib/telephony-api";
+import { fetchRecordingBlobUrl, type TelephonyCallRecord } from "@/lib/telephony-api";
 import { FilterIcon, DownloadIcon } from "@/components/icons";
 
 type UiStatus = "completed" | "in-progress" | "failed" | "no-answer";
@@ -52,11 +52,32 @@ function formatDate(iso: string): string {
 export function TrackHistoryView() {
   const { records, error } = useCallRecords();
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [recordingState, setRecordingState] = useState<{ id: string; url: string } | null>(null);
 
   // Derived, no effect: newest call is selected until the user picks one.
   const effectiveId = selectedId ?? records?.[0]?.executionId ?? null;
   const selected: TelephonyCallRecord | undefined =
     records?.find((r) => r.executionId === effectiveId) ?? records?.[0];
+  const recordingSrc =
+    selected?.executionId && recordingState?.id === selected.executionId ? recordingState.url : null;
+
+  useEffect(() => {
+    if (!selected?.recordingUrl || !selected?.executionId) return;
+    let objectUrl: string | null = null;
+    let cancelled = false;
+    fetchRecordingBlobUrl(selected.executionId)
+      .then((url) => {
+        objectUrl = url;
+        if (!cancelled) setRecordingState({ id: selected.executionId, url });
+      })
+      .catch(() => {
+        if (!cancelled) setRecordingState(null);
+      });
+    return () => {
+      cancelled = true;
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+    };
+  }, [selected?.executionId, selected?.recordingUrl]);
 
   return (
     <div className="space-y-6">
@@ -183,15 +204,21 @@ export function TrackHistoryView() {
                     <div>
                       <p className="mb-2 text-sm font-semibold text-defaulttextcolor">Recording</p>
                       {/* Streams through the sidecar proxy — Twilio creds never reach the browser. */}
-                      <audio controls preload="none" className="w-full" src={recordingStreamUrl(selected.executionId)} />
-                      <a
-                        href={recordingStreamUrl(selected.executionId)}
-                        download={`${selected.executionId}.mp3`}
-                        className="ti-btn ti-btn-light mt-2 w-full gap-2"
-                      >
-                        <DownloadIcon className="h-4 w-4" />
-                        Download Recording
-                      </a>
+                      {recordingSrc ? (
+                        <>
+                          <audio controls preload="none" className="w-full" src={recordingSrc} />
+                          <a
+                            href={recordingSrc}
+                            download={`${selected.executionId}.mp3`}
+                            className="ti-btn ti-btn-light mt-2 w-full gap-2"
+                          >
+                            <DownloadIcon className="h-4 w-4" />
+                            Download Recording
+                          </a>
+                        </>
+                      ) : (
+                        <p className="m-0 text-sm text-textmuted">Loading recording…</p>
+                      )}
                     </div>
                   )}
                 </>

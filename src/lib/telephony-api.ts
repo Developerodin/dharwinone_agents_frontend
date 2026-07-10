@@ -1,4 +1,6 @@
-const BASE = process.env.NEXT_PUBLIC_TELEPHONY_API_URL ?? "http://localhost:8788";
+import { getToken, handleUnauthorized } from "@/lib/auth";
+
+const BASE = (process.env.NEXT_PUBLIC_TELEPHONY_API_URL ?? "http://localhost:8788").trim();
 
 export type TelephonyCallRecord = {
   _id: string;
@@ -16,7 +18,18 @@ export type TelephonyCallRecord = {
 };
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`${BASE}${path}`, init);
+  const token = getToken();
+  const res = await fetch(`${BASE}${path}`, {
+    ...init,
+    headers: {
+      ...((init?.headers as Record<string, string>) ?? {}),
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
+  });
+  if (res.status === 401) {
+    handleUnauthorized();
+    throw new Error("Telephony session expired");
+  }
   if (!res.ok) {
     const body = await res.json().catch(() => null);
     throw new Error(body?.error ?? `Telephony request failed (${res.status})`);
@@ -37,6 +50,18 @@ export function fetchCallRecords(limit = 100) {
   );
 }
 
-export function recordingStreamUrl(callSid: string) {
-  return `${BASE}/api/telephony/call-records/${encodeURIComponent(callSid)}/recording`;
+export async function fetchRecordingBlobUrl(callSid: string): Promise<string> {
+  const token = getToken();
+  const res = await fetch(
+    `${BASE}/api/telephony/call-records/${encodeURIComponent(callSid)}/recording`,
+    { headers: token ? { Authorization: `Bearer ${token}` } : {} },
+  );
+  if (res.status === 401) {
+    handleUnauthorized();
+    throw new Error("Telephony session expired");
+  }
+  if (!res.ok) {
+    throw new Error(`Recording fetch failed (${res.status})`);
+  }
+  return URL.createObjectURL(await res.blob());
 }

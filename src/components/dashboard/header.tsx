@@ -6,6 +6,7 @@ import {
   SearchIcon,
   BriefcaseIcon,
 } from "@/components/icons";
+import { getUser } from "@/lib/auth";
 
 type HeaderProps = {
   sidebarCollapsed: boolean;
@@ -13,6 +14,16 @@ type HeaderProps = {
 };
 
 export function Header({ sidebarCollapsed, onMobileMenuOpen }: HeaderProps) {
+  const user = getUser();
+  const userName = user?.name?.trim() || "User";
+  const userSubtitle = user?.email?.trim() || "Account";
+  const initials = userName
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("") || "U";
+
   return (
     <header
       className={`fixed top-0 right-0 left-0 z-30 h-[64px] bg-white border-b border-[var(--header-border)] transition-[padding] duration-300 ${
@@ -66,15 +77,15 @@ export function Header({ sidebarCollapsed, onMobileMenuOpen }: HeaderProps) {
           {/* Profile */}
           <div className="hidden sm:flex items-center gap-2.5 ps-2 ms-1 border-s border-defaultborder/70">
             <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#E0F2FE] to-[#DBEAFE] text-brand-navy flex items-center justify-center font-semibold text-sm ring-2 ring-white shadow-sm">
-              JD
+              {initials}
             </div>
 
             <div className="hidden md:block min-w-0">
               <p className="text-sm font-medium text-[#111827] leading-tight truncate">
-                Jane Doe
+                {userName}
               </p>
               <p className="text-[0.6875rem] text-textmuted">
-                Retailer
+                {userSubtitle}
               </p>
             </div>
           </div>

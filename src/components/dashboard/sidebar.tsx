@@ -7,6 +7,7 @@ import { BrandLogo } from "@/components/brand/brand-logo";
 import { WebAgentSidebarNav } from "@/components/web-agent/web-agent-sidebar-nav";
 import { SidebarTooltip } from "@/components/web-agent/ui/sidebar-tooltip";
 import { PhoneCallIcon, ChevronLeftIcon, LogOutIcon } from "@/components/icons";
+import { getUser } from "@/lib/auth";
 
 type SidebarProps = {
   collapsed: boolean;
@@ -25,6 +26,15 @@ export function Sidebar({
 }: SidebarProps) {
   const pathname = usePathname();
   const isCallAgentActive = pathname.startsWith(ROUTES.callAgent);
+  const user = getUser();
+  const userName = user?.name?.trim() || "User";
+  const userSubtitle = user?.email?.trim() || "Account";
+  const initials = userName
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("") || "U";
 
   return (
     <>
@@ -79,16 +89,16 @@ export function Sidebar({
           <div className={`sidebar-profile ${collapsed ? "sidebar-profile-collapsed" : ""}`}>
             <div
               className="sidebar-avatar"
-              title={collapsed ? "Jane Doe" : undefined}
+              title={collapsed ? userName : undefined}
             >
-              JD
+              {initials}
             </div>
             {!collapsed && (
               <div className="min-w-0 flex-1">
                 <p className="m-0 truncate text-sm font-semibold leading-tight text-[#111827]">
-                  Jane Doe
+                  {userName}
                 </p>
-                <p className="m-0 mt-0.5 truncate text-xs text-textmuted">Retailer</p>
+                <p className="m-0 mt-0.5 truncate text-xs text-textmuted">{userSubtitle}</p>
               </div>
             )}
           </div>
