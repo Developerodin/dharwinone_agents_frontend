@@ -138,28 +138,12 @@ function persistState(payload: {
 
 export function WebAgentProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
-  const persisted = loadPersistedState();
-  const [projects, setProjects] = useState<WebProject[]>(
-    Array.isArray(persisted?.projects) ? persisted.projects : []
-  );
-  const [deployments, setDeployments] = useState<DeploymentRecord[]>(
-    Array.isArray(persisted?.deployments) ? persisted.deployments : []
-  );
-  const [activeProjectId, setActiveProjectId] = useState<string | null>(
-    typeof persisted?.activeProjectId === "string" || persisted?.activeProjectId === null
-      ? (persisted?.activeProjectId ?? null)
-      : null
-  );
-  const [pageView, setPageView] = useState<WebAgentPageView>(
-    persisted?.pageView === "workspace" ||
-      persisted?.pageView === "my-projects" ||
-      persisted?.pageView === "deploy-projects"
-      ? persisted.pageView
-      : "new"
-  );
-  const [splitView, setSplitView] = useState(
-    typeof persisted?.splitView === "boolean" ? persisted.splitView : false
-  );
+  const [projects, setProjects] = useState<WebProject[]>([]);
+  const [deployments, setDeployments] = useState<DeploymentRecord[]>([]);
+  const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
+  const [pageView, setPageView] = useState<WebAgentPageView>("new");
+  const [splitView, setSplitView] = useState(false);
+  const [stateRestored, setStateRestored] = useState(false);
 
   const activeProject = useMemo(
     () => projects.find((p) => p.id === activeProjectId) ?? null,
@@ -174,6 +158,30 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
   );
 
   useEffect(() => {
+    const persisted = loadPersistedState();
+    if (Array.isArray(persisted?.projects)) setProjects(persisted.projects);
+    if (Array.isArray(persisted?.deployments)) setDeployments(persisted.deployments);
+    if (
+      typeof persisted?.activeProjectId === "string" ||
+      persisted?.activeProjectId === null
+    ) {
+      setActiveProjectId(persisted.activeProjectId ?? null);
+    }
+    if (
+      persisted?.pageView === "workspace" ||
+      persisted?.pageView === "my-projects" ||
+      persisted?.pageView === "deploy-projects"
+    ) {
+      setPageView(persisted.pageView);
+    }
+    if (typeof persisted?.splitView === "boolean") {
+      setSplitView(persisted.splitView);
+    }
+    setStateRestored(true);
+  }, []);
+
+  useEffect(() => {
+    if (!stateRestored) return;
     persistState({
       projects,
       deployments,
@@ -181,7 +189,7 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
       pageView,
       splitView,
     });
-  }, [projects, deployments, activeProjectId, pageView, splitView]);
+  }, [projects, deployments, activeProjectId, pageView, splitView, stateRestored]);
 
   useEffect(() => {
     let cancelled = false;

@@ -220,7 +220,12 @@ export function WorkspacePanel({
                 <div className="h-full min-h-[400px]"><PreviewSkeleton /></div>
               ) : (
                 <div className={`wa-animate-preview wa-device-frame wa-device-${previewDevice} h-full min-h-[400px] w-full overflow-hidden`}>
-                  <iframe title="Preview" srcDoc={previewDoc} className="h-full w-full border-0" sandbox="allow-scripts" />
+                  <iframe
+                    title="Preview"
+                    srcDoc={previewDoc}
+                    className="h-full w-full border-0"
+                    sandbox="allow-scripts allow-same-origin"
+                  />
                 </div>
               )}
             </div>
