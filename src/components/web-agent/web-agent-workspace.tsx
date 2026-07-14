@@ -432,6 +432,24 @@ function WebAgentWorkspaceInner() {
             updateProject(updated);
             project = updated;
             activeProjectRef.current = updated;
+
+            // Hydration is async, so local state can still show zero versions for a
+            // project the backend already built. Ask the server before routing, or an
+            // edit gets sent down the generate path and rebuilds the site.
+            if (!project.versions.length) {
+              const working = await getBuilderWorkingHtml(project.id).catch(() => null);
+              const html = working?.html?.trim();
+              if (html) {
+                project = {
+                  ...project,
+                  status: "generated",
+                  versions: [asVersion(html, project.prompt || cleanPrompt, 1)],
+                  updatedAt: new Date().toISOString(),
+                };
+                updateProject(project);
+                activeProjectRef.current = project;
+              }
+            }
           }
 
           if (project.versions.length > 0 && !isGenerateIntent(cleanPrompt)) {
@@ -624,7 +642,7 @@ function WebAgentWorkspaceInner() {
           updateProject(updatedAfterChat);
           setTypingMessageId(assistantMsg.id);
 
-          const shouldGenerate = response.readyToGenerate || isGenerateIntent(cleanPrompt);
+          const shouldGenerate = response.startGeneration || isGenerateIntent(cleanPrompt);
           if (shouldGenerate) {
             const generated = await applyTemplateGeneration(
               updatedAfterChat,

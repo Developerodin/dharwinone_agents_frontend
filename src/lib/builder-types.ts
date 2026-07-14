@@ -27,6 +27,7 @@ export interface BuilderChatResponse {
   assistantMessage: string;
   completeness: BuilderCompleteness;
   readyToGenerate: boolean;
+  startGeneration?: boolean;
 }
 
 export interface BuilderTemplate {
