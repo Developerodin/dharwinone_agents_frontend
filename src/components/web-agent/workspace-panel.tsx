@@ -38,7 +38,7 @@ const DEVICE_OPTIONS: { id: PreviewDevice; label: string; icon: React.ComponentT
 ];
 
 function withPreviewLinkGuard(doc: string) {
-  const guard = `<script>(function(){document.addEventListener("click",function(e){var t=e.target;if(!t||!t.closest)return;var a=t.closest("a[href]");if(!a)return;var href=(a.getAttribute("href")||"").trim();if(!href)return;if(href==="#"){e.preventDefault();return;}if(href.charAt(0)==="#")return;if(/^(mailto:|tel:|sms:)/i.test(href))return;e.preventDefault();},true);})();</script>`;
+  const guard = `<script>(function(){document.addEventListener("click",function(e){var t=e.target;if(!t||!t.closest)return;var btn=t.closest("button");if(btn){e.preventDefault();e.stopPropagation();return;}var a=t.closest("a[href]");if(!a)return;var href=(a.getAttribute("href")||"").trim();if(!href)return;if(href==="#"){e.preventDefault();e.stopPropagation();return;}if(href.charAt(0)==="#"){e.preventDefault();var id=href.slice(1);if(!id)return;var target=document.getElementById(id)||document.querySelector('[id="'+id+'"]');if(target){target.scrollIntoView({behavior:"smooth",block:"start"});}return;}if(/^(mailto:|tel:|sms:)/i.test(href))return;e.preventDefault();e.stopPropagation();},true);})();</script>`;
   if (/<\/body>/i.test(doc)) return doc.replace(/<\/body>/i, `${guard}</body>`);
   if (/<\/html>/i.test(doc)) return doc.replace(/<\/html>/i, `${guard}</html>`);
   return `${doc}${guard}`;
@@ -224,7 +224,7 @@ export function WorkspacePanel({
                     title="Preview"
                     srcDoc={previewDoc}
                     className="h-full w-full border-0"
-                    sandbox="allow-scripts allow-same-origin"
+                    sandbox="allow-scripts"
                   />
                 </div>
               )}
