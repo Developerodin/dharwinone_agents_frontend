@@ -210,13 +210,15 @@ export function ChatPanel({
 
   const conversationContent = (
     <>
-      {messages.map((msg) => (
+      {messages.map((msg, idx) => (
         <ChatBubble
           key={msg.id}
           message={msg}
           isTyping={msg.role === "assistant" && msg.id === typingMessageId}
           onTypingComplete={onTypingComplete}
           centered={fullscreen}
+          // A status bubble with anything after it is done — the reply already landed.
+          settled={idx < messages.length - 1}
           showInlineQuestion={
             gatheringActive &&
             gatheringStatus === "asking" &&
@@ -519,7 +521,10 @@ function GenerationBubble({ generation, centered }: { generation: GenerationStat
 function ProcessStatusBubble({ state }: { state: ProcessState }) {
   const inProgress = state.kind !== "applied";
   return (
-    <div className="wa-chat-bubble-ai wa-process-bubble max-w-[85%] rounded-2xl rounded-bl-md px-4 py-3">
+    <div
+      className="wa-chat-bubble-ai wa-process-bubble max-w-[85%] rounded-2xl rounded-bl-md px-4 py-3"
+      aria-busy={inProgress}
+    >
       <div className="flex items-center gap-2.5">
         <span className={`wa-process-icon ${state.kind === "applied" ? "wa-process-icon-done" : ""}`}>
           {state.kind === "applied" ? (
@@ -545,12 +550,14 @@ function ChatBubble({
   isTyping,
   onTypingComplete,
   centered,
+  settled,
   showInlineQuestion,
   onQuestionAnswer,
 }: {
   message: ChatMessage;
   isTyping: boolean;
   onTypingComplete: () => void;
+  settled?: boolean;
   centered?: boolean;
   showInlineQuestion?: boolean;
   onQuestionAnswer?: (questionId: GatheringQuestionId, answer: WebsiteQuestionnaireAnswer) => void;
@@ -558,6 +565,9 @@ function ChatBubble({
   const isUser = message.role === "user";
   const hasAttachments = Boolean(message.attachments?.length);
   const processState = !isUser && message.content ? processStateFor(message.content) : null;
+
+  // A status card is transient: once the reply lands it has served its purpose.
+  if (processState && settled && !hasAttachments) return null;
 
   if (
     showInlineQuestion &&

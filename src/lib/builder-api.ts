@@ -60,7 +60,9 @@ async function realFetch<T>(
     clearTimeout(timeout);
   }
   if (res.status === 401) {
-    handleUnauthorized();
+    if (token) {
+      handleUnauthorized();
+    }
     throw new BuilderApiError(`API 401: ${path} - session expired`, 401);
   }
   if (!res.ok) {
@@ -83,6 +85,7 @@ async function realFetch<T>(
 }
 
 export async function listBuilderProjects(): Promise<BuilderProject[]> {
+  if (!getToken()) return [];
   return realFetch("/builder/projects");
 }
 
