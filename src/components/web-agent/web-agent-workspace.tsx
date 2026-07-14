@@ -21,11 +21,13 @@ import {
   editBuilderProject,
   getBuilderProjectContext,
   getBuilderWorkingHtml,
+  isUnauthorizedError,
   listBuilderTemplates,
   requestTemplateGeneration,
   selectBuilderTemplate,
   sendBuilderChat,
 } from "@/lib/builder-api";
+import { getToken } from "@/lib/auth";
 import type {
   BuilderChatTurn,
   BuilderEditRecord,
@@ -207,13 +209,14 @@ function WebAgentWorkspaceInner() {
     let cancelled = false;
     hydratingRef.current = activeProjectId;
     const hydrate = async () => {
+      if (!getToken()) return;
       try {
         const ctx = await getBuilderProjectContext(activeProjectId);
         if (cancelled) return;
         const hydrated = hydrateProjectFromContext(activeProjectRef.current, ctx);
         updateProject(hydrated);
       } catch (e) {
-        if (cancelled) return;
+        if (cancelled || isUnauthorizedError(e)) return;
         console.warn("project context hydrate failed", e);
       } finally {
         hydratingRef.current = null;
@@ -345,7 +348,9 @@ function WebAgentWorkspaceInner() {
           id: `msg-${Date.now()}-gen-failed`,
           role: "assistant",
           content: retryable
-            ? "Generation is still running. I'll keep checking and load it automatically once it's ready."
+            ? message.toLowerCase().includes("api timeout")
+              ? "Template generation is taking longer than usual. I'm still checking in the background and will load your site as soon as it's ready."
+              : "Generation is still running. I'll keep checking and load it automatically once it's ready."
             : detail || "I couldn't finish generation due to a backend error. Please try again.",
           timestamp: new Date().toISOString(),
         };
@@ -362,7 +367,9 @@ function WebAgentWorkspaceInner() {
         updateProject(failed);
         activeProjectRef.current = failed;
         setTypingMessageId(assistantMsg.id);
-        console.warn("template generation failed", e);
+        if (!retryable) {
+          console.warn("template generation failed", e);
+        }
         return false;
       }
     },

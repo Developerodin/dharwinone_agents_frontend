@@ -12,6 +12,25 @@ export const BASE = (
 ).trim();
 
 const REQUEST_TIMEOUT_MS = 35000;
+const TEMPLATE_GENERATION_TIMEOUT_MS = 240000;
+
+export class BuilderApiError extends Error {
+  status?: number;
+
+  constructor(message: string, status?: number) {
+    super(message);
+    this.name = "BuilderApiError";
+    this.status = status;
+  }
+}
+
+export function isUnauthorizedError(err: unknown): boolean {
+  return err instanceof BuilderApiError && err.status === 401;
+}
+
+export function isTimeoutError(err: unknown): boolean {
+  return err instanceof BuilderApiError && err.status === 408;
+}
 
 async function realFetch<T>(
   path: string,
@@ -34,7 +53,7 @@ async function realFetch<T>(
     res = await fetch(`${BASE}${path}`, mergedInit);
   } catch (err) {
     if (err instanceof DOMException && err.name === "AbortError") {
-      throw new Error(`API timeout: ${path}`);
+      throw new BuilderApiError(`API timeout: ${path}`, 408);
     }
     throw err;
   } finally {
@@ -42,7 +61,7 @@ async function realFetch<T>(
   }
   if (res.status === 401) {
     handleUnauthorized();
-    throw new Error(`API 401: ${path} - session expired`);
+    throw new BuilderApiError(`API 401: ${path} - session expired`, 401);
   }
   if (!res.ok) {
     let detail = "";
@@ -58,7 +77,7 @@ async function realFetch<T>(
       }
     }
     const suffix = detail ? ` - ${detail}` : "";
-    throw new Error(`API ${res.status}: ${path}${suffix}`);
+    throw new BuilderApiError(`API ${res.status}: ${path}${suffix}`, res.status);
   }
   return res.json() as Promise<T>;
 }
@@ -99,7 +118,7 @@ export async function requestTemplateGeneration(
     {
       method: "POST",
     },
-    120000
+    TEMPLATE_GENERATION_TIMEOUT_MS
   );
 }
 

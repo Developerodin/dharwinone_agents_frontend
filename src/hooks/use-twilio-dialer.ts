@@ -42,7 +42,7 @@ export function useTwilioDialer() {
     try {
       const { token } = await fetchDialerToken();
       const { Device } = await import("@twilio/voice-sdk");
-      const device = new Device(token, { logLevel: "warn" });
+      const device = new Device(token, { logLevel: "error" });
       device.on("registered", () => setStatus("ready"));
       device.on("error", (err: { message?: string }) => {
         setStatus("error");

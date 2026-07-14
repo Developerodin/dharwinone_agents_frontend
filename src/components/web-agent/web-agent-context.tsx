@@ -20,8 +20,9 @@ import {
   type WebProject,
   type WebsiteVersion,
 } from "@/lib/web-agent-data";
-import { listBuilderProjects } from "@/lib/builder-api";
+import { isUnauthorizedError, listBuilderProjects } from "@/lib/builder-api";
 import type { BuilderProject } from "@/lib/builder-types";
+import { getToken } from "@/lib/auth";
 
 type WebAgentContextValue = {
   projects: WebProject[];
@@ -194,6 +195,7 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     let cancelled = false;
     const load = async () => {
+      if (!getToken()) return;
       try {
         const items = await listBuilderProjects();
         if (cancelled) return;
@@ -222,7 +224,7 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
           return [...localOnly, ...merged];
         });
       } catch (e) {
-        if (cancelled) return;
+        if (cancelled || isUnauthorizedError(e)) return;
         console.warn("web-agent projects unavailable", e);
       }
     };
