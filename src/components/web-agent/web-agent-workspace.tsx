@@ -211,6 +211,8 @@ function WebAgentWorkspaceInner() {
   useEffect(() => {
     if (!activeProjectId) return;
     if (activeProject?.kind === "site") return;
+    if (activeProject?.siteId) return;
+    if (/^site[-_]/i.test(activeProjectId)) return;
     if (hydratingRef.current === activeProjectId) return;
     let cancelled = false;
     hydratingRef.current = activeProjectId;
@@ -232,7 +234,7 @@ function WebAgentWorkspaceInner() {
     return () => {
       cancelled = true;
     };
-  }, [activeProjectId, activeProject?.kind, updateProject]);
+  }, [activeProjectId, activeProject?.kind, activeProject?.siteId, updateProject]);
 
   const runSiteProjectTurn = useCallback(
     async (project: WebProject, cleanPrompt: string) => {
@@ -480,7 +482,14 @@ function WebAgentWorkspaceInner() {
 
           if (project.kind === "site") {
             try {
+              const beforeId = project.id;
               await runSiteProjectTurn(project, cleanPrompt);
+              const after = activeProjectRef.current;
+              if (after && after.id !== beforeId) {
+                router.replace(`${ROUTES.webAgent}?project=${encodeURIComponent(after.id)}`, {
+                  scroll: false,
+                });
+              }
             } catch (e) {
               const assistantMsg: ChatMessage = {
                 id: `msg-${Date.now()}-err`,
@@ -760,6 +769,7 @@ function WebAgentWorkspaceInner() {
 
   const handleRegenerate = useCallback(() => {
     if (!activeProject) return;
+    if (activeProject.kind === "site") return;
     void (async () => {
       let keepProgressIndicator = false;
       start();

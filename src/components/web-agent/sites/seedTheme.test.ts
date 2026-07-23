@@ -38,4 +38,19 @@ describe("seedThemeJson", () => {
     expect(t.brand.neutral).toBe("#111814"); // dark ink
     expect(t.brand.bg).toBe("#eef3ec"); // light page
   });
+
+  it("prefers a matched package brand over the generic family palette", () => {
+    const t = seedThemeJson({
+      family: "bold_convert",
+      packageBrand: {
+        primary: "#ff5a4e",
+        accent: "#ff5a4e",
+        neutral: "#16090a",
+        bg: "#f0ede8",
+        surface: "#ff5a4e",
+      },
+    }) as { brand: { accent: string; bg: string } };
+    expect(t.brand.accent).toBe("#ff5a4e");
+    expect(t.brand.bg).toBe("#f0ede8");
+  });
 });

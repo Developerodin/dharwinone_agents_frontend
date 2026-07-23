@@ -29,6 +29,8 @@ import {
   type SiteChatState,
 } from "@/components/web-agent/sites/siteChatMachine";
 import { familyFromTemplateMeta, seedThemeJson } from "@/components/web-agent/sites/seedTheme";
+import { PACKAGES, type TemplateId } from "@/templates/packages";
+import type { SiteTheme } from "@/templates/system/types";
 
 export type SiteChatTurnResult = {
   project: WebProject;
@@ -202,6 +204,19 @@ async function executeAction(
           typeof intake.profile.brand_color === "string"
             ? intake.profile.brand_color
             : undefined,
+        packageBrand:
+          templateId && templateId in PACKAGES
+            ? (() => {
+                const b = (PACKAGES[templateId as TemplateId].theme as SiteTheme).brand;
+                return {
+                  primary: b.primary,
+                  accent: b.accent,
+                  neutral: b.neutral,
+                  bg: b.bg,
+                  surface: b.surface,
+                };
+              })()
+            : undefined,
       });
       await patchSite(created.siteId, {
         themeJson,
@@ -222,6 +237,7 @@ async function executeAction(
       };
       const nextProject: WebProject = bumpPreview({
         ...project,
+        id: created.siteId,
         name: businessName,
         siteId: created.siteId,
         subdomain: generated.site.subdomain ?? subdomain,
@@ -341,6 +357,7 @@ export async function runSiteChatTurn(params: {
 
   while (action.type !== "NOOP" && guard < 12) {
     guard += 1;
+    const executedType = action.type;
     try {
       const result = await executeAction(action, state, project);
       state = result.state;
@@ -349,6 +366,7 @@ export async function runSiteChatTurn(params: {
       previewBump = previewBump || result.previewBump;
       if (result.usedFallback) usedFallback = true;
       if (result.followUp) break;
+      if (executedType === "CREATE_AND_GENERATE") break;
       action = nextAction(state, "");
     } catch (err) {
       if (err instanceof SitesApiError) {

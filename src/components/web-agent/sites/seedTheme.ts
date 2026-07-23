@@ -61,17 +61,55 @@ function isLight(hex: string): boolean {
   return 0.2126 * ((n >> 16) & 255) + 0.7152 * ((n >> 8) & 255) + 0.0722 * (n & 255) > 150;
 }
 
+export function isFamilySeedBrand(
+  brandRaw: Record<string, unknown>,
+  family: FamilyId,
+): boolean {
+  const palette = FAMILY_PALETTES[family];
+  const ink = isLight(palette.primary) ? palette.neutral : palette.primary;
+  const paper = isLight(palette.primary) ? palette.primary : palette.neutral;
+  const accent = typeof brandRaw.accent === "string" ? brandRaw.accent.toLowerCase() : "";
+  const neutral = typeof brandRaw.neutral === "string" ? brandRaw.neutral.toLowerCase() : "";
+  const bg = typeof brandRaw.bg === "string" ? brandRaw.bg.toLowerCase() : "";
+  return accent === palette.accent.toLowerCase() && neutral === ink.toLowerCase() && bg === paper.toLowerCase();
+}
+
 export function seedThemeJson(args: {
   family: FamilyId;
   brandPrimary?: string;
   logoUrl?: string;
   sectionOrder?: string[];
+  /** When a catalog package is matched, prefer its converted default_theme brand colours. */
+  packageBrand?: {
+    primary: string;
+    accent: string;
+    neutral: string;
+    bg: string;
+    surface: string;
+  };
 }): Record<string, unknown> {
+  if (args.packageBrand) {
+    const pkg = args.packageBrand;
+    return {
+      brand: {
+        primary: pkg.primary,
+        accent: args.brandPrimary?.trim() || pkg.accent,
+        neutral: pkg.neutral,
+        bg: pkg.bg,
+        surface: pkg.surface,
+        ...(args.logoUrl ? { logoUrl: args.logoUrl } : {}),
+      },
+      fontPair: FAMILY_FONT_PAIRS[args.family],
+      sectionOrder: args.sectionOrder?.length ? args.sectionOrder : DEFAULT_SECTION_ORDER,
+      sectionOverrides: {},
+      elementOverrides: {},
+      imageOverrides: {},
+      hiddenSections: [],
+    };
+  }
+
   const palette = FAMILY_PALETTES[args.family];
   const accent = args.brandPrimary?.trim() || palette.accent;
-  // The render contract reads --site-ink from brand.neutral (must be the dark tone)
-  // and --site-bg from brand.bg (the light tone). Pick by luminance — the palette
-  // table isn't consistent about which field holds which.
   const ink = isLight(palette.primary) ? palette.neutral : palette.primary;
   const paper = isLight(palette.primary) ? palette.primary : palette.neutral;
 

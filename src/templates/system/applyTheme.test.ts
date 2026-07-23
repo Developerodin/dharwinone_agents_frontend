@@ -47,4 +47,8 @@ describe("applySiteTheme", () => {
     expect(el.backgroundColor).toBe("#D9821B");
     expect(el.borderRadius).toBe("9999px");
   });
+
+  it("returns no inline styles when the element has no theme override", () => {
+    expect(elementStyle(theme, "hero.cta_secondary")).toEqual({});
+  });
 });

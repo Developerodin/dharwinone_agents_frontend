@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import type { ElementOverride, FamilyConfig, SectionKey, SectionOverride, SiteTheme } from "./types";
-import { themeToVars } from "./theme";
+import { getElementStyle, themeToVars } from "./theme";
 
 const PAD: Record<NonNullable<SectionOverride["padding"]>, string> = {
   compact: "2.5rem 1.25rem",
@@ -76,16 +76,9 @@ export function sectionStyle(theme: SiteTheme, key: SectionKey): CSSProperties {
   };
 }
 
-/** Per-element override styles — merges with element CSS vars from applySiteTheme. */
+/** Per-element override styles — only explicit theme JSON overrides; never reference unset CSS vars. */
 export function elementStyle(theme: SiteTheme, key: string): CSSProperties {
-  const o = theme.elementOverrides[key] ?? {};
-  const prefix = elementVarKey(key);
-  return {
-    backgroundColor: o.bg ?? `var(${prefix}-bg)`,
-    color: o.textColor ?? `var(${prefix}-text)`,
-    borderRadius: o.radius ? RADIUS[o.radius] : `var(${prefix}-radius, var(--site-radius))`,
-    padding: o.size ? SIZE[o.size] : `var(${prefix}-padding)`,
-  };
+  return getElementStyle(theme, key);
 }
 
 export { visibleSections } from "./theme";

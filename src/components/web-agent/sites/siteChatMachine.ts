@@ -106,6 +106,11 @@ export function normalizeFollowUpAnswer(field: string, answer: string): string |
     if (/\b(website|web site|what do you mean)\b/i.test(trimmed)) return null;
   }
 
+  if (field === "email") {
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
+    return ok ? trimmed.toLowerCase() : null;
+  }
+
   return trimmed;
 }
 
@@ -302,6 +307,12 @@ export function followUpQuestion(followUp: FollowUp): string {
       "What phone number should customers call? Include country code if helpful."
     );
   }
+  if (followUp.field === "email") {
+    return (
+      followUp.question ||
+      "What email address should customers use to reach you?"
+    );
+  }
   return followUp.hint ? `${followUp.question} (${followUp.hint})` : followUp.question;
 }
 
@@ -324,6 +335,9 @@ export function invalidFollowUpAnswerMessage(followUp: FollowUp): string {
   }
   if (followUp.field === "business_name") {
     return "Please share your business name — just the name customers would recognize.";
+  }
+  if (followUp.field === "email") {
+    return "Please share a valid email address — for example, hello@yourbusiness.com.";
   }
   return `I didn't catch that — ${followUpQuestion(followUp)}`;
 }

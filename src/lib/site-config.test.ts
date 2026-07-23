@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { PACKAGES } from "@/templates/packages";
 import type { SiteRecord } from "@/lib/site-types";
-import { isLaunchTemplateId, resolveTemplateId, siteRecordToConfig } from "./site-config";
+import { isLaunchTemplateId, mergeContactFromProfile, phoneToWhatsAppHref, resolveTemplateId, siteRecordToConfig } from "./site-config";
 
 function record(
   contentJson: Record<string, unknown>,
@@ -94,6 +94,45 @@ describe("siteRecordToConfig normalizes backend content field aliases", () => {
     const config = siteRecordToConfig(record({ cta_footer: { text: "Visit us today", cta_text: "Book" } }));
     expect(config.content.cta_footer.headline).toBe("Visit us today");
     expect(config.content.cta_footer.cta_text).toBe("Book");
+  });
+});
+
+describe("mergeContactFromProfile", () => {
+  it("overrides placeholder phone and address from businessProfile", () => {
+    const fallback = siteRecordToConfig(record({ contact: { section_title: "Get In Touch" } })).content;
+    const merged = mergeContactFromProfile(fallback, {
+      whatsapp_number: "8755887760",
+      city: "Jaipur",
+    });
+    expect(merged.contact.phone).toBe("+91 87558 87760");
+    expect(merged.contact.address).toBe("Jaipur");
+    expect(merged.contact.email).toBe("");
+  });
+
+  it("applies merge in siteRecordToConfig for draft preview", () => {
+    const config = siteRecordToConfig({
+      ...record({ contact: { section_title: "Get In Touch" } }),
+      templateId: "he_fitness_v1",
+      businessProfileJson: { whatsapp_number: "8755887760", city: "Jaipur" },
+    });
+    expect(config.content.contact.phone).toBe("+91 87558 87760");
+    expect(config.content.contact.address).toBe("Jaipur");
+  });
+
+  it("clears placeholder email when whatsapp phone is provided", () => {
+    const fallback = siteRecordToConfig(
+      record({ contact: { email: "hello@ironleaffitness.example" } }),
+    ).content;
+    const merged = mergeContactFromProfile(fallback, {
+      whatsapp_number: "8755887760",
+      cta_preference: "whatsapp",
+    });
+    expect(merged.contact.email).toBe("");
+    expect(merged.cta_footer.cta_text).toMatch(/whatsapp/i);
+  });
+
+  it("builds wa.me href for ten-digit Indian numbers", () => {
+    expect(phoneToWhatsAppHref("+91 87558 87760")).toBe("https://wa.me/918755887760");
   });
 });
 

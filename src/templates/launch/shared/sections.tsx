@@ -39,8 +39,8 @@ export function HeroSplit({
             </CtaButton>
           </div>
         </div>
-        <figure className="relative m-0 min-h-[280px] overflow-hidden rounded-site sm:min-h-[380px]">
-          <SlotImage slot="hero.background" src={content.image} alt="" eager className="min-h-[280px] sm:min-h-[380px]" />
+        <figure className="relative m-0 grid min-h-[280px] overflow-hidden rounded-site sm:min-h-[380px]">
+          <SlotImage slot="hero.background" src={content.image} alt="" eager />
         </figure>
       </SiteWrap>
     </section>
@@ -64,8 +64,8 @@ export function HeroFullbleed({
       style={{ ...style, color: "var(--section-hero-text, var(--site-on-dark))" }}
       className="relative min-h-[75vh] px-5 sm:min-h-[80vh]"
     >
-      <div className="absolute inset-0 bg-ink">
-        <SlotImage slot="hero.background" src={content.image} alt="" eager className="min-h-full opacity-90" />
+      <div className="absolute inset-0 grid bg-ink">
+        <SlotImage slot="hero.background" src={content.image} alt="" eager className="opacity-90" />
       </div>
       <ScrimOverlay />
       <SiteWrap className="relative flex min-h-[75vh] flex-col justify-end pb-14 pt-24 sm:min-h-[80vh] sm:pb-16 sm:pt-28">
@@ -107,8 +107,13 @@ export function ServicesCards({
               key={i}
               className="overflow-hidden rounded-site border border-line bg-bg"
             >
-              <div className="h-[180px] sm:h-[200px]">
-                <SlotImage slot={`services.items[${i}].image`} src={item.image} alt={item.title} />
+              <div className="h-[180px] overflow-hidden sm:h-[200px]">
+                <SlotImage
+                  slot={`services.items[${i}].image`}
+                  src={item.image}
+                  alt={item.title}
+                  className="h-full w-full"
+                />
               </div>
               <div className="p-5">
                 <h3
@@ -147,7 +152,7 @@ export function ServicesTiles({
               key={i}
               className="grid grid-cols-[120px_1fr] overflow-hidden rounded-site border border-line bg-surface sm:grid-cols-[140px_1fr]"
             >
-              <div className="min-h-[120px]">
+              <div className="grid min-h-[120px] overflow-hidden">
                 <SlotImage slot={`services.items[${i}].image`} src={item.image} alt={item.title} />
               </div>
               <div className="flex min-w-0 flex-col justify-center p-4">
@@ -223,7 +228,7 @@ export function TestimonialsSection({
                 &ldquo;{item.quote}&rdquo;
               </blockquote>
               <div className="mt-auto flex items-center gap-3">
-                <div className="h-10 w-10 shrink-0 overflow-hidden rounded-full">
+                <div className="grid h-10 w-10 shrink-0 overflow-hidden rounded-full">
                   <SlotImage slot={`testimonials.items[${i}].avatar`} src={item.avatar} alt={item.name} />
                 </div>
                 <cite
@@ -331,8 +336,8 @@ export function StorySection({
   return (
     <section id="story" data-section="about" style={style} className="bg-bg">
       <SiteWrap className="grid grid-cols-1 items-center gap-10 md:grid-cols-2 md:gap-12">
-        <figure className="relative m-0 min-h-[300px] overflow-hidden rounded-site">
-          <SlotImage slot="about.image" src={content.image} alt="" className="min-h-[300px]" />
+        <figure className="relative m-0 grid min-h-[300px] overflow-hidden rounded-site">
+          <SlotImage slot="about.image" src={content.image} alt="" />
         </figure>
         <div className="min-w-0">
           <SectionTitle elementKey="about.section_title">{content.section_title}</SectionTitle>
@@ -461,8 +466,13 @@ export function GalleryGrid({
         <ul className="m-0 grid list-none grid-cols-2 gap-3 p-0 sm:grid-cols-3 lg:grid-cols-4">
           {content.items.map((item, i) => (
             <li key={i} className="relative overflow-hidden rounded-site">
-              <div className="aspect-square">
-                <SlotImage slot={`gallery.items[${i}].image`} src={item.image} alt={item.caption} />
+              <div className="aspect-square overflow-hidden">
+                <SlotImage
+                  slot={`gallery.items[${i}].image`}
+                  src={item.image}
+                  alt={item.caption}
+                  className="h-full w-full"
+                />
               </div>
               {item.caption ? (
                 <span
@@ -593,8 +603,14 @@ export function HeroCentered({
         </CtaButton>
         {content.image ? (
           <figure className="mt-12 w-full overflow-hidden rounded-site">
-            <div className="aspect-[16/9]">
-              <SlotImage slot="hero.background" src={content.image} alt="" eager />
+            <div className="aspect-[16/9] overflow-hidden">
+              <SlotImage
+                slot="hero.background"
+                src={content.image}
+                alt=""
+                eager
+                className="h-full w-full"
+              />
             </div>
           </figure>
         ) : null}

@@ -74,21 +74,30 @@ export function CtaButton({
   const base: CSSProperties = ghost
     ? {
         backgroundColor: "transparent",
-        color: "inherit",
-        border: "1.5px solid currentColor",
+        color: "var(--site-ink)",
+        border: "2px solid var(--site-line)",
       }
     : {
         backgroundColor: "var(--site-accent)",
         color: "var(--site-on-accent)",
-        border: "1.5px solid var(--site-accent)",
+        border: "2px solid var(--site-accent)",
+        textTransform: "uppercase",
+        letterSpacing: "0.08em",
       };
 
   return (
     <a
       href={href}
       data-element-key={elementKey}
-      style={{ ...base, ...overrides, textDecoration: "none", fontWeight: 700, fontSize: "0.95rem", letterSpacing: "0.03em", display: "inline-block" }}
-      className={`rounded-site px-7 py-3 transition-opacity hover:opacity-90 ${className}`}
+      style={{
+        ...base,
+        ...overrides,
+        textDecoration: "none",
+        fontWeight: 700,
+        fontSize: "0.92rem",
+        display: "inline-block",
+      }}
+      className={`rounded-site px-8 py-3.5 transition-opacity hover:opacity-90 ${className}`}
     >
       {children}
     </a>
@@ -108,23 +117,25 @@ export function SlotImage({
   className?: string;
   eager?: boolean;
 }) {
+  const frame = `relative overflow-hidden ${className}`.trim();
   if (src) {
     return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        data-image-slot={slot}
-        src={src}
-        alt={alt}
-        loading={eager ? "eager" : "lazy"}
-        className={`block h-full w-full object-cover ${className}`}
-      />
+      <div data-image-slot={slot} className={frame}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={src}
+          alt={alt}
+          loading={eager ? "eager" : "lazy"}
+          className="absolute inset-0 block h-full w-full object-cover"
+        />
+      </div>
     );
   }
   return (
     <div
       data-image-slot={slot}
       aria-hidden
-      className={`min-h-[10rem] w-full bg-gradient-to-br from-primary-soft to-surface ${className}`}
+      className={`${frame} min-h-[10rem] bg-gradient-to-br from-primary-soft to-surface`}
     />
   );
 }

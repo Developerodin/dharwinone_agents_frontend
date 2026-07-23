@@ -3,6 +3,7 @@ import type { SectionKey, SiteContent, SiteTheme } from "@/templates/system/type
 import { getLaunchTemplate, LAUNCH_TEMPLATES, type LaunchTemplateId } from "@/templates/launch/registry";
 import { PACKAGES, type TemplateId } from "@/templates/packages";
 import { PALETTE_PRESETS, getPalettePreset } from "@/lib/palette-presets";
+import { familyFromTemplateMeta, isFamilySeedBrand } from "@/components/web-agent/sites/seedTheme";
 
 export interface SiteConfig {
   siteId: string;
@@ -85,6 +86,74 @@ function normalizeContentAliases(raw: Record<string, unknown>): Record<string, u
   return out;
 }
 
+function profileString(bp: Record<string, unknown>, ...keys: string[]): string {
+  for (const key of keys) {
+    const v = bp[key];
+    if (typeof v === "string" && v.trim()) return v.trim();
+  }
+  return "";
+}
+
+/** Format Indian mobile numbers for display; pass through values that already include +. */
+function formatPhoneDisplay(raw: string): string {
+  const trimmed = raw.trim();
+  const digits = trimmed.replace(/\D/g, "");
+  if (!digits) return trimmed;
+  if (trimmed.startsWith("+")) return trimmed;
+  if (digits.length === 10) return `+91 ${digits.slice(0, 5)} ${digits.slice(5)}`;
+  return `+${digits}`;
+}
+
+/**
+ * Templates read contact phone/email/address from content, not businessProfile.
+ * Merge intake fields so chat-collected WhatsApp, phone, city replace package placeholders.
+ */
+export function mergeContactFromProfile(
+  content: SiteContent,
+  businessProfile: Record<string, unknown>,
+): SiteContent {
+  const contact = { ...content.contact };
+
+  const phone = profileString(businessProfile, "whatsapp_number", "phone", "phone_number");
+  if (phone) contact.phone = formatPhoneDisplay(phone);
+
+  const email = profileString(businessProfile, "email", "contact_email");
+  if (email) contact.email = email;
+
+  const address = profileString(
+    businessProfile,
+    "address",
+    "business_address",
+    "service_area",
+  );
+  const city = profileString(businessProfile, "city");
+  if (address) contact.address = address;
+  else if (city) contact.address = city;
+
+  if (phone && /\.example$/i.test(contact.email ?? "")) {
+    contact.email = "";
+  }
+
+  const ctaPref = profileString(businessProfile, "cta_preference").toLowerCase();
+  if (ctaPref === "whatsapp" && phone) {
+    const footer = { ...content.cta_footer };
+    if (!/whatsapp/i.test(footer.cta_text ?? "")) {
+      footer.cta_text = "Chat on WhatsApp";
+    }
+    return { ...content, contact, cta_footer: footer };
+  }
+
+  return { ...content, contact };
+}
+
+/** Build a wa.me link from a display or raw phone string. */
+export function phoneToWhatsAppHref(phone: string): string | null {
+  const digits = phone.replace(/\D/g, "");
+  if (!digits) return null;
+  if (digits.length === 10) return `https://wa.me/91${digits}`;
+  return `https://wa.me/${digits}`;
+}
+
 function asSiteContent(rawInput: Record<string, unknown>, fallback: SiteContent): SiteContent {
   const raw = normalizeContentAliases(rawInput);
   // ponytail: merge each section one level deep so a partial persisted section
@@ -103,23 +172,41 @@ function asSiteContent(rawInput: Record<string, unknown>, fallback: SiteContent)
   return merged as unknown as SiteContent;
 }
 
-function asSiteTheme(raw: Record<string, unknown>, fallback: SiteTheme): SiteTheme {
+function asSiteTheme(
+  raw: Record<string, unknown>,
+  fallback: SiteTheme,
+  templateId?: string,
+): SiteTheme {
   const brandRaw = (raw.brand ?? {}) as Record<string, unknown>;
   const fallbackBrand = fallback.brand;
   const presetId = typeof raw.palettePreset === "string" ? raw.palettePreset : fallback.palettePreset;
   const preset = getPalettePreset(presetId);
+  const family = templateId ? familyFromTemplateMeta(templateId) : undefined;
+  const usePackageBrand = family != null && isFamilySeedBrand(brandRaw, family);
 
-  const brand = {
-    logo_url: (brandRaw.logo_url as string | null) ?? fallbackBrand.logo_url,
-    logo_dark_url: (brandRaw.logo_dark_url as string | null) ?? fallbackBrand.logo_dark_url,
-    favicon_url: (brandRaw.favicon_url as string | null) ?? fallbackBrand.favicon_url,
-    palette_from_logo: (brandRaw.palette_from_logo as string[]) ?? fallbackBrand.palette_from_logo,
-    primary: (brandRaw.primary as string) ?? preset?.primary ?? fallbackBrand.primary,
-    accent: (brandRaw.accent as string) ?? preset?.accent ?? fallbackBrand.accent,
-    neutral: (brandRaw.neutral as string) ?? preset?.neutral ?? fallbackBrand.neutral,
-    bg: (brandRaw.bg as string) ?? preset?.bg ?? fallbackBrand.bg,
-    surface: (brandRaw.surface as string) ?? preset?.surface ?? fallbackBrand.surface,
-  };
+  const brand = usePackageBrand
+    ? {
+        logo_url: (brandRaw.logo_url as string | null) ?? fallbackBrand.logo_url,
+        logo_dark_url: (brandRaw.logo_dark_url as string | null) ?? fallbackBrand.logo_dark_url,
+        favicon_url: (brandRaw.favicon_url as string | null) ?? fallbackBrand.favicon_url,
+        palette_from_logo: (brandRaw.palette_from_logo as string[]) ?? fallbackBrand.palette_from_logo,
+        primary: fallbackBrand.primary,
+        accent: fallbackBrand.accent,
+        neutral: fallbackBrand.neutral,
+        bg: fallbackBrand.bg,
+        surface: fallbackBrand.surface,
+      }
+    : {
+        logo_url: (brandRaw.logo_url as string | null) ?? fallbackBrand.logo_url,
+        logo_dark_url: (brandRaw.logo_dark_url as string | null) ?? fallbackBrand.logo_dark_url,
+        favicon_url: (brandRaw.favicon_url as string | null) ?? fallbackBrand.favicon_url,
+        palette_from_logo: (brandRaw.palette_from_logo as string[]) ?? fallbackBrand.palette_from_logo,
+        primary: (brandRaw.primary as string) ?? preset?.primary ?? fallbackBrand.primary,
+        accent: (brandRaw.accent as string) ?? preset?.accent ?? fallbackBrand.accent,
+        neutral: (brandRaw.neutral as string) ?? preset?.neutral ?? fallbackBrand.neutral,
+        bg: (brandRaw.bg as string) ?? preset?.bg ?? fallbackBrand.bg,
+        surface: (brandRaw.surface as string) ?? preset?.surface ?? fallbackBrand.surface,
+      };
 
   // --site-ink = brand.neutral. Older generated themes stored a light paper tone
   // there, so ink ended up the same lightness as the page bg (invisible text).
@@ -179,13 +266,19 @@ export function siteRecordToConfig(site: SiteRecord): SiteConfig {
   const templateId = resolveTemplateId(site.templateId);
   const { content: fallbackContent, theme: fallbackTheme } = templateFallbacks(templateId);
 
+  const businessProfile = site.businessProfileJson ?? {};
+  const content = mergeContactFromProfile(
+    asSiteContent(site.contentJson ?? {}, fallbackContent),
+    businessProfile,
+  );
+
   return {
     siteId: site.siteId,
     templateId,
     templateVersion: site.templateVersion,
-    businessProfile: site.businessProfileJson ?? {},
-    content: asSiteContent(site.contentJson ?? {}, fallbackContent),
-    theme: asSiteTheme(site.themeJson ?? {}, fallbackTheme),
+    businessProfile,
+    content,
+    theme: asSiteTheme(site.themeJson ?? {}, fallbackTheme, templateId),
   };
 }
 

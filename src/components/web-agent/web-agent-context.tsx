@@ -22,6 +22,8 @@ import {
 } from "@/lib/web-agent-data";
 import { isUnauthorizedError, isNotFoundError, deleteBuilderProject, listBuilderProjects } from "@/lib/builder-api";
 import type { BuilderProject } from "@/lib/builder-types";
+import { deleteSite, listSites } from "@/lib/sites-api";
+import type { SiteDoc } from "@/lib/sites-types";
 import { getToken } from "@/lib/auth";
 
 type WebAgentContextValue = {
@@ -88,6 +90,39 @@ function mapBuilderProject(project: BuilderProject): WebProject {
   };
 }
 
+function mapSiteDoc(site: SiteDoc): WebProject {
+  const bp = site.businessProfileJson ?? {};
+  const name =
+    (typeof bp.business_name === "string" && bp.business_name.trim()) ||
+    (typeof bp.brandName === "string" && bp.brandName.trim()) ||
+    site.subdomain ||
+    site.siteId;
+  const content = site.contentJson ?? {};
+  const hasContent = typeof content === "object" && Object.keys(content).length > 0;
+  const prompt =
+    (typeof bp.description === "string" && bp.description.trim()) ||
+    (typeof bp.initial_prompt === "string" && bp.initial_prompt.trim()) ||
+    String(name);
+
+  return {
+    id: site.siteId,
+    siteId: site.siteId,
+    kind: "site",
+    name: String(name),
+    description: prompt.slice(0, 120),
+    status:
+      site.status === "published" ? "deployed" : hasContent ? "generated" : "draft",
+    prompt,
+    createdAt: secondsToIso(site.createdAt),
+    updatedAt: secondsToIso(site.updatedAt),
+    subdomain: site.subdomain ?? undefined,
+    templateId: site.templateId ?? undefined,
+    versions: [],
+    chatHistory: [],
+    uploadedAssets: [],
+  };
+}
+
 function mergeProjectFromApi(mapped: WebProject, existing: WebProject | undefined): WebProject {
   if (!existing) return mapped;
   return {
@@ -106,7 +141,41 @@ function mergeProjectFromApi(mapped: WebProject, existing: WebProject | undefine
     deployedUrl: existing.deployedUrl ?? mapped.deployedUrl,
     prompt: existing.prompt || mapped.prompt,
     description: existing.description || mapped.description,
+    status:
+      existing.status === "deployed" || existing.status === "generated"
+        ? existing.status
+        : mapped.status,
   };
+}
+
+/** Merge builder + site API rows with local session state (chat history, preview bump). */
+export function mergeRemoteProjects(
+  builderRows: WebProject[],
+  siteRows: WebProject[],
+  prev: WebProject[],
+): WebProject[] {
+  const prevById = new Map(prev.map((p) => [p.id, p]));
+  const prevBySiteId = new Map(
+    prev.filter((p) => p.siteId).map((p) => [p.siteId as string, p]),
+  );
+  const merged = new Map<string, WebProject>();
+
+  for (const row of builderRows) {
+    merged.set(row.id, mergeProjectFromApi(row, prevById.get(row.id)));
+  }
+  for (const row of siteRows) {
+    const existing = prevBySiteId.get(row.siteId ?? row.id) ?? prevById.get(row.id);
+    merged.set(row.id, mergeProjectFromApi(row, existing));
+  }
+  for (const row of prev) {
+    if (row.kind === "site" && !row.siteId && !merged.has(row.id)) {
+      merged.set(row.id, row);
+    }
+  }
+
+  return [...merged.values()].sort(
+    (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
+  );
 }
 
 function buildUrl(projectId?: string | null, view?: WebAgentPageView) {
@@ -183,9 +252,8 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const persisted = loadPersistedState();
-    const hasAuth = Boolean(getToken());
-    if (!hasAuth && Array.isArray(persisted?.projects)) setProjects(persisted.projects);
-    if (!hasAuth && Array.isArray(persisted?.deployments)) setDeployments(persisted.deployments);
+    if (Array.isArray(persisted?.projects)) setProjects(persisted.projects);
+    if (Array.isArray(persisted?.deployments)) setDeployments(persisted.deployments);
     if (
       typeof persisted?.activeProjectId === "string" ||
       persisted?.activeProjectId === null
@@ -221,24 +289,28 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
     const load = async () => {
       if (!getToken()) return;
       try {
-        const items = await listBuilderProjects();
+        const [builderItems, siteItems] = await Promise.all([
+          listBuilderProjects(),
+          listSites(),
+        ]);
         if (cancelled) return;
-        const mapped = items.map(mapBuilderProject);
-        setProjects((prev) => {
-          const prevById = new Map(prev.map((p) => [p.id, p]));
-          return mapped.map((project) =>
-            mergeProjectFromApi(
-              { ...project, kind: project.kind ?? "builder" },
-              prevById.get(project.id),
-            ),
-          );
-        });
+        const builderRows = builderItems.map(mapBuilderProject);
+        const siteRows = siteItems.map(mapSiteDoc);
+        setProjects((prev) => mergeRemoteProjects(builderRows, siteRows, prev));
         setActiveProjectId((current) => {
           if (!current) return current;
-          return items.some((item) => item.projectId === current) ? current : null;
+          const knownIds = new Set([
+            ...builderItems.map((item) => item.projectId),
+            ...siteItems.map((item) => item.siteId),
+          ]);
+          return knownIds.has(current) ? current : null;
         });
         setDeployments((prev) =>
-          prev.filter((deployment) => items.some((item) => item.projectId === deployment.projectId)),
+          prev.filter(
+            (deployment) =>
+              builderItems.some((item) => item.projectId === deployment.projectId) ||
+              siteItems.some((item) => item.siteId === deployment.projectId),
+          ),
         );
       } catch (e) {
         if (cancelled || isUnauthorizedError(e)) return;
@@ -320,8 +392,13 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
 
   const deleteProject = useCallback(
     async (id: string) => {
+      const target = projects.find((p) => p.id === id);
       try {
-        await deleteBuilderProject(id);
+        if (target?.kind === "site" && target.siteId) {
+          await deleteSite(target.siteId);
+        } else {
+          await deleteBuilderProject(id);
+        }
       } catch (err) {
         if (!isNotFoundError(err)) throw err;
       }
@@ -335,7 +412,7 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
         return null;
       });
     },
-    [router],
+    [router, projects],
   );
 
   const addDeployment = useCallback((project: WebProject, version: WebsiteVersion) => {

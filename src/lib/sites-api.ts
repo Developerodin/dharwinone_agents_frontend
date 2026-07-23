@@ -130,6 +130,15 @@ export async function createSite(body: {
   });
 }
 
+export async function listSites(): Promise<SiteDoc[]> {
+  if (!getToken()) return [];
+  return sitesFetch<SiteDoc[]>("/api/sites");
+}
+
+export async function deleteSite(siteId: string): Promise<{ status: string }> {
+  return sitesFetch(`/api/sites/${encodeURIComponent(siteId)}`, { method: "DELETE" });
+}
+
 export async function matchTemplates(body: {
   businessProfile: Record<string, unknown>;
 }): Promise<{ matches: TemplateMatch[] }> {
