@@ -1,0 +1,19 @@
+{
+  "id": "ht_restaurant_v1",
+  "displayName": "The Copper Table",
+  "segment": "hospitality_travel",
+  "segmentLabel": "Hospitality & Travel",
+  "subcategory": "restaurant",
+  "subcategoryLabel": "Restaurant",
+  "family": "premium_dark",
+  "familyLabel": "Premium Dark",
+  "style_tags": [
+    "premium_dark"
+  ],
+  "version": 1,
+  "status": "convert",
+  "source": "cafe-2.html (re-themed for dining)",
+  "wave": 2,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

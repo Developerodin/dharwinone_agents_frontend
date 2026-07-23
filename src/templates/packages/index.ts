@@ -73,6 +73,10 @@ import ht_cafe_v1_schema from "./ht_cafe_v1/section_schema.json";
 import ht_cafe_v1_content from "./ht_cafe_v1/default_content.json";
 import ht_cafe_v1_theme from "./ht_cafe_v1/default_theme.json";
 import ht_cafe_v1_registry from "./ht_cafe_v1/registry.json";
+import ht_restaurant_v1_schema from "./ht_restaurant_v1/section_schema.json";
+import ht_restaurant_v1_content from "./ht_restaurant_v1/default_content.json";
+import ht_restaurant_v1_theme from "./ht_restaurant_v1/default_theme.json";
+import ht_restaurant_v1_registry from "./ht_restaurant_v1/registry.json";
 import ht_travel_v1_schema from "./ht_travel_v1/section_schema.json";
 import ht_travel_v1_content from "./ht_travel_v1/default_content.json";
 import ht_travel_v1_theme from "./ht_travel_v1/default_theme.json";
@@ -177,6 +181,7 @@ export const PACKAGES = {
   rt_boutique_v1: { schema: rt_boutique_v1_schema, content: rt_boutique_v1_content, theme: rt_boutique_v1_theme, registry: rt_boutique_v1_registry },
   rt_handmade_v1: { schema: rt_handmade_v1_schema, content: rt_handmade_v1_content, theme: rt_handmade_v1_theme, registry: rt_handmade_v1_registry },
   ht_cafe_v1: { schema: ht_cafe_v1_schema, content: ht_cafe_v1_content, theme: ht_cafe_v1_theme, registry: ht_cafe_v1_registry },
+  ht_restaurant_v1: { schema: ht_restaurant_v1_schema, content: ht_restaurant_v1_content, theme: ht_restaurant_v1_theme, registry: ht_restaurant_v1_registry },
   ht_travel_v1: { schema: ht_travel_v1_schema, content: ht_travel_v1_content, theme: ht_travel_v1_theme, registry: ht_travel_v1_registry },
   he_medical_v1: { schema: he_medical_v1_schema, content: he_medical_v1_content, theme: he_medical_v1_theme, registry: he_medical_v1_registry },
   he_fitness_v1: { schema: he_fitness_v1_schema, content: he_fitness_v1_content, theme: he_fitness_v1_theme, registry: he_fitness_v1_registry },

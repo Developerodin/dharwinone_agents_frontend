@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "A table worth staying for.",
+    "subtext": "Seasonal plates, an unhurried room, and a cellar that earns its keep.",
+    "cta_text": "Reserve a Table",
+    "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "The Menu",
+    "items": [
+      {
+        "title": "Small plates",
+        "desc": "Bright, share-friendly starters that set the table talking.",
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "From the grill",
+        "desc": "Dry-aged cuts and day-boat fish, cooked over live fire.",
+        "image": "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Chef's tasting",
+        "desc": "A guided seven-course journey through the season.",
+        "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Cellar & pairings",
+        "desc": "A living list, poured by the glass or matched course by course.",
+        "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Private dining",
+        "desc": "A room of your own for celebrations and long lunches.",
+        "image": "https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Desserts",
+        "desc": "Pastry that remembers you were saving room.",
+        "image": "https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About the Restaurant",
+    "body": "We cook with what the season gives us and serve it in a room built for lingering. Ingredients are sourced close to home, the fire stays lit, and every plate leaves the pass only when it is right. Come hungry, stay late.",
+    "image": "https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Dine With Us",
+    "points": [
+      "Seasonal menu, changed as the market changes",
+      "Thoughtful wine list with by-the-glass pairings",
+      "Warm, unhurried service in a room made for evenings"
+    ]
+  },
+  "gallery": {
+    "section_title": "The Room & The Plates",
+    "items": [
+      {
+        "caption": "The dining room",
+        "image": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the pass",
+        "image": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "A table set",
+        "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Guests Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "An effortless evening — every course better than the last, and never rushed."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "The pairings made the meal. Booked our anniversary here before we'd left."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Menus & Occasions",
+    "items": [
+      {
+        "name": "À la carte",
+        "price": "From the menu",
+        "features": [
+          "Seasonal small and large plates.",
+          "Available lunch and dinner"
+        ]
+      },
+      {
+        "name": "Chef's tasting",
+        "price": "Per guest",
+        "features": [
+          "Seven courses, guided by the kitchen.",
+          "Optional wine pairing"
+        ]
+      },
+      {
+        "name": "Private dining",
+        "price": "On request",
+        "features": [
+          "Your own room for groups and events.",
+          "Bespoke menu planned with our team"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Do you take reservations?",
+        "a": "Yes — book online or call ahead, especially for weekends and larger tables."
+      },
+      {
+        "q": "Can you handle dietary needs?",
+        "a": "Absolutely. Tell us when you book and the kitchen will plan around it."
+      },
+      {
+        "q": "What are your hours?",
+        "a": "Open for lunch and dinner — see the contact section for today's hours."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Find Us",
+    "address": "Main Road, Your City",
+    "phone": "+91 00000 00000",
+    "email": "book@thecoppertable.example",
+    "hours": "Tue–Sun, 12:00–15:00 & 18:30–23:00"
+  },
+  "cta_footer": {
+    "headline": "Hungry yet? Book your table.",
+    "cta_text": "Reserve Now"
+  },
+  "seo": {
+    "title": "The Copper Table — Restaurant",
+    "description": "Seasonal plates, an unhurried room, and a cellar that earns its keep."
+  }
+}

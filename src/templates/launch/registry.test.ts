@@ -24,8 +24,14 @@ describe("every package is a launch template", () => {
     expect(getLaunchTemplate("electrician_bold_v1")).toBeDefined();
   });
 
-  it("assigns ht_cafe_v1 the warm_craft family from its registry", () => {
+  it("assigns ht_cafe_v1 the warm_craft family and cafe subcategory", () => {
     expect(LAUNCH_TEMPLATES.ht_cafe_v1.registry.style_tags).toContain("warm_craft");
-    expect(LAUNCH_TEMPLATES.ht_cafe_v1.registry.subcategory).toBe("cafe_restaurant");
+    expect(LAUNCH_TEMPLATES.ht_cafe_v1.registry.subcategory).toBe("cafe");
+  });
+
+  it("registers ht_restaurant_v1 as a premium_dark restaurant template", () => {
+    expect(getLaunchTemplate("ht_restaurant_v1")).toBeDefined();
+    expect(LAUNCH_TEMPLATES.ht_restaurant_v1.registry.subcategory).toBe("restaurant");
+    expect(LAUNCH_TEMPLATES.ht_restaurant_v1.registry.style_tags).toContain("premium_dark");
   });
 });
