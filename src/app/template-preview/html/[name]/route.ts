@@ -3,7 +3,7 @@ import path from "node:path";
 import { NextResponse } from "next/server";
 
 // Dev preview of the ORIGINAL HTML templates (conversion feedstock, master plan v2 §2.6).
-// Serves backend/studio/templates/<name>.html read-only.
+// Serves backend/assets/templates/<name>.html read-only.
 const TEMPLATES_DIR = path.resolve(process.cwd(), "..", "..", "backend", "assets", "templates");
 
 export async function GET(_req: Request, ctx: { params: Promise<{ name: string }> }) {
