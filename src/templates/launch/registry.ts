@@ -7,6 +7,7 @@ import { FAMILY_PRESETS } from "./shared/familyPresets";
 import { ElectricianBoldTemplate } from "./electrician_bold_v1/ElectricianBoldTemplate";
 import { ElectricianTrustTemplate } from "./electrician_trust_v1/ElectricianTrustTemplate";
 import { GymNightShiftTemplate } from "./he_fitness_v1/GymNightShiftTemplate";
+import { StudioCalmTemplate } from "./he_fitness_v2/StudioCalmTemplate";
 import boldContent from "./electrician_bold_v1/default_content.json";
 import boldTheme from "./electrician_bold_v1/default_theme.json";
 import boldSchema from "./electrician_bold_v1/section_schema.json";
@@ -42,7 +43,30 @@ const gymSchemaDoc = gymSchema as unknown as SectionSchemaDocument;
 // Hand-tuned reference templates. Keys that match a catalog package id (e.g.
 // he_fitness_v1) intentionally OVERRIDE the GENERATED factory entry below, so the
 // bespoke port renders instead of the generic family skeleton.
+const fitnessV2 = PACKAGES.he_fitness_v2;
+const fitnessV2Schema = fitnessV2.schema as unknown as SectionSchemaDocument;
+
 const BESPOKE: Record<string, LaunchTemplateDefinition> = {
+  // Faithful "Studio Calm" port of fitness-3.html — reuses the packaged
+  // content/theme/schema (warm palette already matches), warm_craft family.
+  he_fitness_v2: {
+    registry: {
+      id: "he_fitness_v2",
+      category: "health_education",
+      subcategory: "fitness_gym",
+      style_tags: ["warm_craft", "studio_calm", "serif"],
+      version: 1,
+      status: "active",
+      preview_desktop_url: null,
+      preview_mobile_url: null,
+      section_schema: fitnessV2Schema,
+    },
+    section_schema: fitnessV2Schema,
+    default_content: fitnessV2.content as unknown as SiteContent,
+    default_theme: fitnessV2.theme as unknown as SiteTheme,
+    Component: StudioCalmTemplate,
+    renders: ["hero", "services", "about", "why_us", "gallery", "testimonials", "pricing", "faq", "contact", "cta_footer"],
+  },
   he_fitness_v1: {
     registry: {
       id: "he_fitness_v1",

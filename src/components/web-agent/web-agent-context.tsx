@@ -19,6 +19,7 @@ import {
   type DeploymentRecord,
   type WebProject,
   type WebsiteVersion,
+  type ChatMessage,
 } from "@/lib/web-agent-data";
 import { isUnauthorizedError, isNotFoundError, deleteBuilderProject, listBuilderProjects } from "@/lib/builder-api";
 import type { BuilderProject } from "@/lib/builder-types";
@@ -123,6 +124,28 @@ function mapSiteDoc(site: SiteDoc): WebProject {
   };
 }
 
+function mergeChatHistory(...histories: (ChatMessage[] | undefined)[]): ChatMessage[] {
+  const byId = new Map<string, ChatMessage>();
+  for (const history of histories) {
+    for (const message of history ?? []) {
+      byId.set(message.id, message);
+    }
+  }
+  return [...byId.values()].sort(
+    (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime(),
+  );
+}
+
+/** Resolve a project by local id or remote siteId (URL uses siteId after create). */
+export function findProjectByKey(
+  projects: WebProject[],
+  key: string,
+): WebProject | undefined {
+  return (
+    projects.find((p) => p.id === key) ?? projects.find((p) => p.siteId === key)
+  );
+}
+
 function mergeProjectFromApi(mapped: WebProject, existing: WebProject | undefined): WebProject {
   if (!existing) return mapped;
   return {
@@ -133,7 +156,7 @@ function mergeProjectFromApi(mapped: WebProject, existing: WebProject | undefine
     templateId: existing.templateId ?? mapped.templateId,
     family: existing.family ?? mapped.family,
     previewVersion: existing.previewVersion ?? mapped.previewVersion,
-    chatHistory: existing.chatHistory.length ? existing.chatHistory : mapped.chatHistory,
+    chatHistory: mergeChatHistory(existing.chatHistory, mapped.chatHistory),
     versions: existing.versions.length ? existing.versions : mapped.versions,
     uploadedAssets: existing.uploadedAssets.length
       ? existing.uploadedAssets
@@ -239,8 +262,8 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
   const [stateRestored, setStateRestored] = useState(false);
 
   const activeProject = useMemo(
-    () => projects.find((p) => p.id === activeProjectId) ?? null,
-    [projects, activeProjectId]
+    () => (activeProjectId ? findProjectByKey(projects, activeProjectId) ?? null : null),
+    [projects, activeProjectId],
   );
 
   const myProjects = useMemo(() => projects, [projects]);
@@ -285,6 +308,7 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
   }, [projects, deployments, activeProjectId, pageView, splitView, stateRestored]);
 
   useEffect(() => {
+    if (!stateRestored) return;
     let cancelled = false;
     const load = async () => {
       if (!getToken()) return;
@@ -321,7 +345,7 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [stateRestored]);
 
   const startNewProject = useCallback(() => {
     setActiveProjectId(null);
@@ -376,9 +400,24 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
 
   const updateProject = useCallback((updated: WebProject) => {
     setProjects((prev) => {
-      const exists = prev.some((p) => p.id === updated.id);
-      if (exists) return prev.map((p) => (p.id === updated.id ? updated : p));
-      return [updated, ...prev];
+      const related = prev.filter(
+        (p) =>
+          p.id !== updated.id &&
+          ((updated.siteId && p.siteId === updated.siteId) ||
+            (updated.siteId && p.id === updated.siteId)),
+      );
+      const chatHistory = mergeChatHistory(
+        updated.chatHistory,
+        ...related.map((p) => p.chatHistory),
+      );
+      const nextProject = { ...updated, chatHistory };
+      const rest = prev.filter((p) => {
+        if (p.id === nextProject.id) return false;
+        if (nextProject.siteId && p.siteId === nextProject.siteId) return false;
+        if (nextProject.siteId && p.id === nextProject.siteId) return false;
+        return true;
+      });
+      return [nextProject, ...rest];
     });
     setActiveProjectId(updated.id);
     setPageView("workspace");

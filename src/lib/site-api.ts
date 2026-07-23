@@ -86,6 +86,18 @@ export async function listTokenTransactions(): Promise<{ transactions: TokenTran
   return siteFetch("/tokens/transactions");
 }
 
+/** Charge `cost` tokens for site-editor changes; returns the new balance. */
+export async function spendTokens(
+  cost: number,
+  siteId?: string,
+): Promise<{ balance: number; charged: number }> {
+  return siteFetch("/tokens/spend", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ cost, siteId, idempotencyKey: idempotencyKey("site-edit") }),
+  });
+}
+
 export async function listSites(): Promise<SiteRecord[]> {
   if (!getToken()) return [];
   return siteFetch("/sites");

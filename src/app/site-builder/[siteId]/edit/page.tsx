@@ -8,7 +8,6 @@ import { siteRecordToConfig } from "@/lib/site-config";
 import { getToken } from "@/lib/auth";
 import { ROUTES } from "@/lib/constants";
 import { useSiteEditorStore } from "@/store/site-editor-store";
-import { useSiteAutosave } from "@/hooks/use-site-autosave";
 
 export default function SiteEditorPage() {
   const params = useParams<{ siteId: string }>();
@@ -16,8 +15,6 @@ export default function SiteEditorPage() {
   const router = useRouter();
   const loadConfig = useSiteEditorStore((s) => s.loadConfig);
   const [error, setError] = useState<string | null>(null);
-
-  useSiteAutosave(siteId);
 
   useEffect(() => {
     if (!getToken()) {
@@ -48,5 +45,5 @@ export default function SiteEditorPage() {
     );
   }
 
-  return <SiteEditorShell />;
+  return <SiteEditorShell siteId={siteId} />;
 }

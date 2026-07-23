@@ -2,6 +2,9 @@
 
 import { SITES_BASE, SitesApiError } from "@/lib/sites-api";
 
+export const TOKEN_EXHAUSTED_MESSAGE =
+  "You have exhausted your free tokens. Please recharge to continue.";
+
 type GenerationErrorBubbleProps = {
   error: SitesApiError;
   usedFallback?: boolean;
@@ -29,20 +32,16 @@ export function GenerationErrorBubble({ error, usedFallback, onRetry }: Generati
   }
 
   if (error.status === 402) {
-    const need = error.cost ?? 50;
-    const have = error.balance ?? 0;
     return (
       <div className="rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-950">
-        <p className="m-0 font-medium">
-          You need {need} tokens (have {have}).
-        </p>
+        <p className="m-0 font-medium">{TOKEN_EXHAUSTED_MESSAGE}</p>
         <a
           href={`${SITES_BASE}/api/token-packs`}
           className="mt-2 inline-block text-sm font-medium text-rose-700 underline"
           target="_blank"
           rel="noopener noreferrer"
         >
-          View token packs
+          Recharge tokens
         </a>
       </div>
     );
@@ -76,9 +75,7 @@ export function generationErrorMessage(error: SitesApiError, usedFallback?: bool
     return "Generated a starter version — want me to refine it?";
   }
   if (error.status === 402) {
-    const need = error.cost ?? 50;
-    const have = error.balance ?? 0;
-    return `You need ${need} tokens (have ${have}). View token packs at ${SITES_BASE}/api/token-packs`;
+    return TOKEN_EXHAUSTED_MESSAGE;
   }
   if (error.status === 403) {
     return formatModerationMessage(error.moderation ?? error.detail);

@@ -35,6 +35,13 @@ function isTextEditableElement(el: HTMLElement): boolean {
   return /^(services|testimonials|pricing|faq|gallery|why_us)\./.test(key);
 }
 
+function sectionKeyFromElement(el: HTMLElement): SectionKey | null {
+  const sectionEl = el.closest("[data-section-key],[data-section]") as HTMLElement | null;
+  if (!sectionEl) return null;
+  const key = sectionEl.getAttribute("data-section-key") ?? sectionEl.getAttribute("data-section");
+  return key as SectionKey | null;
+}
+
 function elementKeyToContentPath(key: string): string | null {
   if (ELEMENT_CONTENT_PATHS[key]) return ELEMENT_CONTENT_PATHS[key];
   if (key === "brand.name") return null;
@@ -48,9 +55,11 @@ export function EditorPreview() {
   const config = useSiteEditorStore((s) => s.config);
   const aiProposal = useSiteEditorStore((s) => s.aiProposal);
   const selectedSection = useSiteEditorStore((s) => s.selectedSection);
+  const editingSectionKey = useSiteEditorStore((s) => s.editingSectionKey);
   const selectedElementKey = useSiteEditorStore((s) => s.selectedElementKey);
   const selectedImageSlot = useSiteEditorStore((s) => s.selectedImageSlot);
   const setSelectedSection = useSiteEditorStore((s) => s.setSelectedSection);
+  const setEditingSection = useSiteEditorStore((s) => s.setEditingSection);
   const setSelectedElement = useSiteEditorStore((s) => s.setSelectedElement);
   const setSelectedImageSlot = useSiteEditorStore((s) => s.setSelectedImageSlot);
   const setPreviewCaps = useSiteEditorStore((s) => s.setPreviewCaps);
@@ -133,7 +142,9 @@ export function EditorPreview() {
       el.style.outline = selected ? "2px dashed #41a454" : "";
       el.style.outlineOffset = selected ? "2px" : "";
       if (isTextEditableElement(el)) {
-        el.contentEditable = selected ? "true" : "false";
+        const sectionKey = sectionKeyFromElement(el);
+        const canEditText = Boolean(editingSectionKey && sectionKey === editingSectionKey);
+        el.contentEditable = canEditText ? "true" : "false";
         el.spellcheck = false;
       }
     });
@@ -155,7 +166,50 @@ export function EditorPreview() {
       el.style.outline = selected ? "2px dashed #41a454" : editable ? "" : el.style.outline;
       el.style.outlineOffset = selected ? "2px" : el.style.outlineOffset;
     });
-  }, [config, selectedElementKey, selectedSection, selectedImageSlot]);
+  }, [config, selectedElementKey, selectedSection, selectedImageSlot, editingSectionKey]);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const sections = root.querySelectorAll("[data-section-key],[data-section]");
+    const cleanups: Array<() => void> = [];
+
+    sections.forEach((node) => {
+      const sectionEl = node as HTMLElement;
+      const key = (sectionEl.getAttribute("data-section-key") ??
+        sectionEl.getAttribute("data-section")) as SectionKey | null;
+      if (!key) return;
+
+      if (getComputedStyle(sectionEl).position === "static") {
+        sectionEl.style.position = "relative";
+      }
+
+      const toolbar = document.createElement("div");
+      toolbar.className = "site-editor-section-toolbar";
+      toolbar.setAttribute("data-site-editor-ui", "true");
+
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "site-editor-section-edit-btn";
+      btn.textContent = editingSectionKey === key ? "Editing" : "Edit";
+      btn.setAttribute("aria-pressed", editingSectionKey === key ? "true" : "false");
+      btn.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const next = editingSectionKey === key ? null : key;
+        setEditingSection(next);
+        setSelectedSection(key);
+      });
+
+      toolbar.appendChild(btn);
+      sectionEl.appendChild(toolbar);
+      cleanups.push(() => toolbar.remove());
+    });
+
+    return () => {
+      cleanups.forEach((fn) => fn());
+    };
+  }, [config, editingSectionKey, setEditingSection, setSelectedSection]);
 
   if (!config) return null;
 

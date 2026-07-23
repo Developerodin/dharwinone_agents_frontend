@@ -42,6 +42,15 @@ describe("every package is a launch template", () => {
     expect(getRenderedSectionKeys("nope_v9")).toBeNull();
   });
 
+  it("overrides he_fitness_v2 with the bespoke Studio Calm port (warm_craft, all sections)", () => {
+    expect(LAUNCH_TEMPLATES.he_fitness_v2.registry.style_tags).toContain("warm_craft");
+    expect(LAUNCH_TEMPLATES.he_fitness_v2.registry.subcategory).toBe("fitness_gym");
+    // Bespoke overrides the generic compose entry with a real component.
+    expect(LAUNCH_TEMPLATES.he_fitness_v2.Component.name).toBe("StudioCalmTemplate");
+    const v2 = getRenderedSectionKeys("he_fitness_v2")!;
+    expect(v2).toEqual(expect.arrayContaining(["about", "why_us", "gallery", "testimonials"]));
+  });
+
   it("registers ht_restaurant_v1 as a premium_dark restaurant template", () => {
     expect(getLaunchTemplate("ht_restaurant_v1")).toBeDefined();
     expect(LAUNCH_TEMPLATES.ht_restaurant_v1.registry.subcategory).toBe("restaurant");

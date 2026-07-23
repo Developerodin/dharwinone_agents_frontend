@@ -61,10 +61,28 @@ describe("site-editor-store", () => {
     expect(useSiteEditorStore.getState().config?.content.hero.headline).toBe("Changed");
   });
 
-  it("reorders sections via sectionOrder patch", () => {
+  it("tracks unbilled changes against billed baseline", () => {
+    const store = useSiteEditorStore.getState();
+    expect(store.unbilledChangeCount()).toBe(0);
+    store.dispatch([{ op: "replace", path: "/content/hero/headline", value: "Changed" }]);
+    expect(useSiteEditorStore.getState().unbilledChangeCount()).toBe(1);
+    useSiteEditorStore.getState().markChangesBilled();
+    expect(useSiteEditorStore.getState().unbilledChangeCount()).toBe(0);
     useSiteEditorStore.getState().dispatch([
-      { op: "replace", path: "/theme/sectionOrder", value: ["services", "hero"] },
+      { op: "replace", path: "/content/hero/subtext", value: "More" },
     ]);
-    expect(useSiteEditorStore.getState().config?.theme.sectionOrder[0]).toBe("services");
+    expect(useSiteEditorStore.getState().unbilledChangeCount()).toBe(1);
+  });
+
+  it("resets editing section and billing on loadConfig", () => {
+    const store = useSiteEditorStore.getState();
+    store.setEditingSection("hero");
+    store.dispatch([{ op: "replace", path: "/content/hero/headline", value: "X" }]);
+    store.markChangesBilled();
+    useSiteEditorStore.getState().loadConfig(structuredClone(sampleConfig));
+    const next = useSiteEditorStore.getState();
+    expect(next.editingSectionKey).toBeNull();
+    expect(next.billedChanges).toBe(0);
+    expect(next.unbilledChangeCount()).toBe(0);
   });
 });

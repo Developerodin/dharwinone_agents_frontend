@@ -38,4 +38,23 @@ describe("EditorPreview section selection", () => {
     fireEvent.click(el!);
     expect(useSiteEditorStore.getState().selectedElementKey).toBe("hero.headline");
   });
+
+  it("does not enable contentEditable until section Edit is clicked", () => {
+    const { container } = render(<EditorPreview />);
+    const el = container.querySelector("[data-element-key='hero.headline']") as HTMLElement;
+    expect(el.contentEditable).toBe("false");
+
+    const editBtn = container.querySelector("[data-section='hero'] .site-editor-section-edit-btn");
+    expect(editBtn).toBeTruthy();
+    fireEvent.click(editBtn!);
+
+    const updated = container.querySelector("[data-element-key='hero.headline']") as HTMLElement;
+    expect(updated.contentEditable).toBe("true");
+  });
+
+  it("renders per-section Edit controls in the preview", () => {
+    const { container } = render(<EditorPreview />);
+    const hero = container.querySelector("[data-section='hero']");
+    expect(hero?.querySelector(".site-editor-section-edit-btn")).toBeTruthy();
+  });
 });

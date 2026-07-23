@@ -27,12 +27,16 @@ interface PreviewCaps {
 interface SiteEditorState {
   config: SiteConfig | null;
   selectedSection: SectionKey | null;
+  /** Section whose inline text is editable in the preview. */
+  editingSectionKey: SectionKey | null;
   selectedElementKey: string | null;
   selectedImageSlot: string | null;
   device: PreviewDevice;
   saveStatus: SaveStatus;
   past: HistoryEntry[];
   future: HistoryEntry[];
+  /** How many undo-stack entries were already billed on the last Rewrite. */
+  billedChanges: number;
   aiProposal: { sectionKey: SectionKey; content: Record<string, unknown> } | null;
   previewCaps: PreviewCaps;
   setPreviewCaps: (caps: PreviewCaps) => void;
@@ -45,6 +49,9 @@ interface SiteEditorState {
   canUndo: () => boolean;
   canRedo: () => boolean;
   setSelectedSection: (key: SectionKey | null) => void;
+  setEditingSection: (key: SectionKey | null) => void;
+  unbilledChangeCount: () => number;
+  markChangesBilled: () => void;
   setSelectedElement: (key: string | null) => void;
   setSelectedImageSlot: (slot: string | null) => void;
   setDevice: (device: PreviewDevice) => void;
@@ -59,12 +66,14 @@ const MAX_HISTORY = 100;
 export const useSiteEditorStore = create<SiteEditorState>((set, get) => ({
   config: null,
   selectedSection: null,
+  editingSectionKey: null,
   selectedElementKey: null,
   selectedImageSlot: null,
   device: "desktop",
   saveStatus: "idle",
   past: [],
   future: [],
+  billedChanges: 0,
   aiProposal: null,
   previewCaps: { galleryImages: false, frameFixedSections: [] },
 
@@ -84,8 +93,10 @@ export const useSiteEditorStore = create<SiteEditorState>((set, get) => ({
       config,
       past: [],
       future: [],
+      billedChanges: 0,
       saveStatus: "idle",
       selectedSection: null,
+      editingSectionKey: null,
       selectedElementKey: null,
       selectedImageSlot: null,
       aiProposal: null,
@@ -155,6 +166,9 @@ export const useSiteEditorStore = create<SiteEditorState>((set, get) => ({
 
   setSelectedSection: (key) =>
     set({ selectedSection: key, selectedElementKey: null, selectedImageSlot: null }),
+  setEditingSection: (key) => set({ editingSectionKey: key }),
+  unbilledChangeCount: () => Math.max(0, get().past.length - get().billedChanges),
+  markChangesBilled: () => set({ billedChanges: get().past.length }),
   setSelectedElement: (key) => set({ selectedElementKey: key, selectedImageSlot: null }),
   setSelectedImageSlot: (slot) => set({ selectedImageSlot: slot, selectedElementKey: null }),
   setDevice: (device) => set({ device }),
