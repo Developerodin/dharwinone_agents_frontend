@@ -23,9 +23,14 @@ const CATEGORIES = [
     name: "Hospitality & travel",
     subcategoriesJson: [
       {
-        id: "cafe_restaurant",
-        name: "Cafe & restaurant",
-        keywords: ["cafe", "restaurant", "menu", "bakery", "sweets", "dining"],
+        id: "cafe",
+        name: "Cafe",
+        keywords: ["cafe", "coffee", "bakery", "sweets", "patisserie", "brew", "espresso"],
+      },
+      {
+        id: "restaurant",
+        name: "Restaurant",
+        keywords: ["restaurant", "dining", "diner", "eatery", "bistro", "menu", "food", "kitchen"],
       },
     ],
   },
@@ -49,8 +54,8 @@ describe("inferCategory", () => {
       CATEGORIES,
     );
     expect(result.categoryId).toBe("hospitality_travel");
-    expect(result.subcategoryId).toBe("cafe_restaurant");
-    expect(result.confidence).toBeGreaterThanOrEqual(3);
+    expect(result.subcategoryId).toBe("restaurant");
+    expect(result.confidence).toBeGreaterThanOrEqual(2);
   });
 
   it("returns null for gibberish", async () => {
