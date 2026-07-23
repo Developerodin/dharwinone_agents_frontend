@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { CafeWarmTemplate } from "./ht_cafe_v1/CafeWarmTemplate";
+import { PACKAGES } from "../packages";
 import { getLaunchTemplate, LAUNCH_TEMPLATES } from "./registry";
 
 describe("launch registry", () => {
@@ -15,11 +15,17 @@ describe("launch registry", () => {
   });
 });
 
-describe("cafe launch registration", () => {
-  it("routes ht_cafe_v1 to CafeWarmTemplate with cafe taxonomy", () => {
-    const entry = getLaunchTemplate("ht_cafe_v1");
-    expect(entry?.Component).toBe(CafeWarmTemplate);
-    expect(entry?.registry.subcategory).toBe("cafe_restaurant");
-    expect(entry?.registry.category).toBe("hospitality_travel");
+describe("every package is a launch template", () => {
+  it("registers all package ids plus the electrician bespoke pair", () => {
+    for (const id of Object.keys(PACKAGES)) {
+      expect(getLaunchTemplate(id), id).toBeDefined();
+    }
+    expect(getLaunchTemplate("electrician_trust_v1")).toBeDefined();
+    expect(getLaunchTemplate("electrician_bold_v1")).toBeDefined();
+  });
+
+  it("assigns ht_cafe_v1 the warm_craft family from its registry", () => {
+    expect(LAUNCH_TEMPLATES.ht_cafe_v1.registry.style_tags).toContain("warm_craft");
+    expect(LAUNCH_TEMPLATES.ht_cafe_v1.registry.subcategory).toBe("cafe_restaurant");
   });
 });
