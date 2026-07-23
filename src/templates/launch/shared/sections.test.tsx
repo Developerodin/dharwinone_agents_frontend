@@ -1,7 +1,17 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import type { SiteContent, SiteTheme } from "../../system/types";
-import { BandStrip, MenuBoard, QuoteSection, StorySection, VisitSection } from "./sections";
+import {
+  BandStrip,
+  FaqAccordion,
+  GalleryGrid,
+  HeroCentered,
+  MenuBoard,
+  PricingCards,
+  QuoteSection,
+  StorySection,
+  VisitSection,
+} from "./sections";
 
 const theme = { sectionOverrides: {}, elementOverrides: {} } as unknown as SiteTheme;
 
@@ -102,5 +112,60 @@ describe("VisitSection", () => {
     );
     expect(container.querySelector('[data-element-key="contact.phone"]')).not.toBeNull();
     expect(container.querySelector('[data-element-key="contact.email"]')).not.toBeNull();
+  });
+});
+
+describe("GalleryGrid", () => {
+  const content: SiteContent["gallery"] = {
+    section_title: "Our Work",
+    items: [{ caption: "Recent", image: "x.jpg" }, { caption: "Job", image: "y.jpg" }],
+  };
+  it("renders every tile with image slot + caption key", () => {
+    const { container } = render(<GalleryGrid content={content} theme={theme} />);
+    expect(container.querySelector('[data-section="gallery"]')).not.toBeNull();
+    expect(container.querySelectorAll('[data-image-slot^="gallery.items"]').length).toBe(2);
+    expect(container.querySelector('[data-element-key="gallery.items[0].caption"]')?.textContent).toBe("Recent");
+  });
+});
+
+describe("PricingCards", () => {
+  const content: SiteContent["pricing"] = {
+    section_title: "Plans",
+    items: [{ name: "Basic", price: "₹999", features: ["A", "B"] }],
+  };
+  it("renders name, price and features with keys", () => {
+    const { container } = render(<PricingCards content={content} theme={theme} />);
+    expect(container.querySelector('[data-section="pricing"]')).not.toBeNull();
+    expect(container.querySelector('[data-element-key="pricing.items[0].price"]')?.textContent).toBe("₹999");
+    expect(container.querySelectorAll('[data-element-key^="pricing.items[0].features"]').length).toBe(2);
+  });
+});
+
+describe("FaqAccordion", () => {
+  const content: SiteContent["faq"] = {
+    section_title: "FAQ",
+    items: [{ q: "Open?", a: "Daily." }],
+  };
+  it("renders a details/summary per item with keys", () => {
+    const { container } = render(<FaqAccordion content={content} theme={theme} />);
+    expect(container.querySelector('[data-section="faq"]')).not.toBeNull();
+    expect(container.querySelector("details")).not.toBeNull();
+    expect(container.querySelector('[data-element-key="faq.items[0].q"]')?.textContent).toBe("Open?");
+    expect(container.querySelector('[data-element-key="faq.items[0].a"]')?.textContent).toBe("Daily.");
+  });
+});
+
+describe("HeroCentered", () => {
+  const content: SiteContent["hero"] = {
+    headline: "Big headline",
+    subtext: "sub",
+    cta_text: "Go",
+    image: "hero.jpg",
+  };
+  it("renders headline, subtext, eyebrow and cta", () => {
+    const { container } = render(<HeroCentered content={content} theme={theme} eyebrow="Studio" />);
+    expect(container.querySelector('[data-section="hero"]')).not.toBeNull();
+    expect(container.querySelector('[data-element-key="hero.headline"]')?.textContent).toBe("Big headline");
+    expect(container.textContent).toContain("Studio");
   });
 });

@@ -445,3 +445,160 @@ export function VisitSection({
     </section>
   );
 }
+
+export function GalleryGrid({
+  content,
+  theme,
+}: {
+  content: SiteContent["gallery"];
+  theme: SiteTheme;
+}) {
+  const style = sectionStyle(theme, "gallery");
+  return (
+    <section id="gallery" data-section="gallery" style={style} className="bg-bg">
+      <SiteWrap>
+        <SectionTitle elementKey="gallery.section_title">{content.section_title}</SectionTitle>
+        <ul className="m-0 grid list-none grid-cols-2 gap-3 p-0 sm:grid-cols-3 lg:grid-cols-4">
+          {content.items.map((item, i) => (
+            <li key={i} className="relative overflow-hidden rounded-site">
+              <div className="aspect-square">
+                <SlotImage slot={`gallery.items[${i}].image`} src={item.image} alt={item.caption} />
+              </div>
+              {item.caption ? (
+                <span
+                  data-element-key={`gallery.items[${i}].caption`}
+                  className="absolute inset-x-0 bottom-0 bg-ink/60 px-3 py-2 text-xs text-on-dark"
+                >
+                  {item.caption}
+                </span>
+              ) : null}
+            </li>
+          ))}
+        </ul>
+      </SiteWrap>
+    </section>
+  );
+}
+
+export function PricingCards({
+  content,
+  theme,
+}: {
+  content: SiteContent["pricing"];
+  theme: SiteTheme;
+}) {
+  const style = sectionStyle(theme, "pricing");
+  return (
+    <section id="pricing" data-section="pricing" style={style} className="bg-surface">
+      <SiteWrap>
+        <SectionTitle elementKey="pricing.section_title">{content.section_title}</SectionTitle>
+        <ul className="m-0 grid list-none grid-cols-1 gap-5 p-0 sm:grid-cols-2 lg:grid-cols-3">
+          {content.items.map((item, i) => (
+            <li key={i} className="flex flex-col rounded-site border border-line bg-bg p-6">
+              <h3
+                data-element-key={`pricing.items[${i}].name`}
+                className="mb-1 font-heading text-lg font-bold text-ink"
+              >
+                {item.name}
+              </h3>
+              <p
+                data-element-key={`pricing.items[${i}].price`}
+                className="mb-4 font-heading text-2xl font-extrabold text-accent"
+              >
+                {item.price}
+              </p>
+              <ul className="m-0 flex list-none flex-col gap-2 p-0 text-sm text-muted">
+                {item.features.map((f, j) => (
+                  <li
+                    key={j}
+                    data-element-key={`pricing.items[${i}].features[${j}]`}
+                    className="flex gap-2"
+                  >
+                    <span className="text-accent">✓</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </SiteWrap>
+    </section>
+  );
+}
+
+export function FaqAccordion({
+  content,
+  theme,
+}: {
+  content: SiteContent["faq"];
+  theme: SiteTheme;
+}) {
+  const style = sectionStyle(theme, "faq");
+  return (
+    <section id="faq" data-section="faq" style={style} className="bg-bg">
+      <SiteWrap className="max-w-[46rem]">
+        <SectionTitle elementKey="faq.section_title">{content.section_title}</SectionTitle>
+        <div className="flex flex-col gap-3">
+          {content.items.map((item, i) => (
+            <details key={i} className="rounded-site border border-line bg-surface px-5 py-4">
+              <summary
+                data-element-key={`faq.items[${i}].q`}
+                className="cursor-pointer font-heading font-bold text-ink"
+              >
+                {item.q}
+              </summary>
+              <p
+                data-element-key={`faq.items[${i}].a`}
+                className="m-0 mt-3 text-sm leading-relaxed text-muted"
+              >
+                {item.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </SiteWrap>
+    </section>
+  );
+}
+
+export function HeroCentered({
+  content,
+  theme,
+  eyebrow,
+}: {
+  content: SiteContent["hero"];
+  theme: SiteTheme;
+  eyebrow: string;
+}) {
+  const style = sectionStyle(theme, "hero");
+  return (
+    <section id="hero" data-section="hero" style={style} className="bg-bg text-center">
+      <SiteWrap className="flex max-w-[52rem] flex-col items-center pt-16 pb-12 sm:pt-20 sm:pb-16">
+        <p className="mb-5 text-[0.78rem] font-bold uppercase tracking-[0.18em] text-kicker">{eyebrow}</p>
+        <h1
+          data-element-key="hero.headline"
+          className="mb-5 font-heading text-[clamp(2rem,5.5vw,3.5rem)] font-extrabold leading-[1.08] text-ink"
+        >
+          {content.headline}
+        </h1>
+        <p
+          data-element-key="hero.subtext"
+          className="mb-8 max-w-[44ch] text-[1.05rem] leading-relaxed text-muted"
+        >
+          {content.subtext}
+        </p>
+        <CtaButton elementKey="hero.cta_button" theme={theme}>
+          {content.cta_text}
+        </CtaButton>
+        {content.image ? (
+          <figure className="mt-12 w-full overflow-hidden rounded-site">
+            <div className="aspect-[16/9]">
+              <SlotImage slot="hero.background" src={content.image} alt="" eager />
+            </div>
+          </figure>
+        ) : null}
+      </SiteWrap>
+    </section>
+  );
+}
