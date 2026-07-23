@@ -508,7 +508,7 @@ export function PricingCards({
                 {item.price}
               </p>
               <ul className="m-0 flex list-none flex-col gap-2 p-0 text-sm text-muted">
-                {item.features.map((f, j) => (
+                {(item.features ?? []).map((f, j) => (
                   <li
                     key={j}
                     data-element-key={`pricing.items[${i}].features[${j}]`}

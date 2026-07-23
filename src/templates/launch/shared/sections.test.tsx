@@ -139,6 +139,16 @@ describe("PricingCards", () => {
     expect(container.querySelector('[data-element-key="pricing.items[0].price"]')?.textContent).toBe("₹999");
     expect(container.querySelectorAll('[data-element-key^="pricing.items[0].features"]').length).toBe(2);
   });
+
+  it("renders an item that omits the features array without crashing", () => {
+    const partial = {
+      section_title: "Plans",
+      items: [{ name: "Basic", price: "₹999" }],
+    } as unknown as SiteContent["pricing"];
+    const { container } = render(<PricingCards content={partial} theme={theme} />);
+    expect(container.querySelector('[data-element-key="pricing.items[0].name"]')?.textContent).toBe("Basic");
+    expect(container.querySelectorAll('[data-element-key^="pricing.items[0].features"]').length).toBe(0);
+  });
 });
 
 describe("FaqAccordion", () => {
