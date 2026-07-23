@@ -1,0 +1,65 @@
+{
+  "template_id": "he_fitness_v1",
+  "template_version": 1,
+  "sections": ["hero", "services", "pricing", "faq", "contact", "cta_footer"],
+  "image_slots": {
+    "hero.image": {
+      "role": "card_thumb",
+      "aspect": "4:5",
+      "minPx": { "w": 800, "h": 1000 },
+      "displayPx": { "w": 800, "h": 1000 },
+      "safeZone": "center",
+      "label": "Hero photo",
+      "required": false
+    }
+  },
+  "schema": {
+    "hero": {
+      "headline": { "type": "string", "maxLength": 60 },
+      "subtext": { "type": "string", "maxLength": 200 },
+      "cta_text": { "type": "string", "maxLength": 25 }
+    },
+    "services": {
+      "section_title": { "type": "string", "maxLength": 60 },
+      "items": {
+        "maxItems": 3,
+        "item": {
+          "title": { "type": "string", "maxLength": 40 },
+          "desc": { "type": "string", "maxLength": 160 }
+        }
+      }
+    },
+    "pricing": {
+      "section_title": { "type": "string", "maxLength": 60 },
+      "items": {
+        "maxItems": 3,
+        "item": {
+          "name": { "type": "string", "maxLength": 30 },
+          "price": { "type": "string", "maxLength": 20 },
+          "features": { "maxItems": 5, "item": { "type": "string", "maxLength": 80 } }
+        }
+      }
+    },
+    "faq": {
+      "section_title": { "type": "string", "maxLength": 40 },
+      "items": {
+        "maxItems": 6,
+        "item": {
+          "q": { "type": "string", "maxLength": 100 },
+          "a": { "type": "string", "maxLength": 240 }
+        }
+      }
+    },
+    "contact": {
+      "section_title": { "type": "string", "maxLength": 40 },
+      "address": { "type": "string", "maxLength": 120 },
+      "phone": { "type": "string", "maxLength": 30 },
+      "email": { "type": "string", "maxLength": 60 },
+      "hours": { "type": "string", "maxLength": 80 }
+    },
+    "cta_footer": {
+      "headline": { "type": "string", "maxLength": 70 },
+      "cta_text": { "type": "string", "maxLength": 25 }
+    }
+  }
+}

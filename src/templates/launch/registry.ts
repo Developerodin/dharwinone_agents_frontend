@@ -6,12 +6,16 @@ import { composeLaunchTemplate } from "./shared/composeLaunchTemplate";
 import { FAMILY_PRESETS } from "./shared/familyPresets";
 import { ElectricianBoldTemplate } from "./electrician_bold_v1/ElectricianBoldTemplate";
 import { ElectricianTrustTemplate } from "./electrician_trust_v1/ElectricianTrustTemplate";
+import { GymNightShiftTemplate } from "./he_fitness_v1/GymNightShiftTemplate";
 import boldContent from "./electrician_bold_v1/default_content.json";
 import boldTheme from "./electrician_bold_v1/default_theme.json";
 import boldSchema from "./electrician_bold_v1/section_schema.json";
 import trustContent from "./electrician_trust_v1/default_content.json";
 import trustTheme from "./electrician_trust_v1/default_theme.json";
 import trustSchema from "./electrician_trust_v1/section_schema.json";
+import gymContent from "./he_fitness_v1/default_content.json";
+import gymTheme from "./he_fitness_v1/default_theme.json";
+import gymSchema from "./he_fitness_v1/section_schema.json";
 
 export interface LaunchTemplateProps {
   content?: SiteContent;
@@ -29,9 +33,29 @@ export interface LaunchTemplateDefinition {
 
 const trustSchemaDoc = trustSchema as unknown as SectionSchemaDocument;
 const boldSchemaDoc = boldSchema as unknown as SectionSchemaDocument;
+const gymSchemaDoc = gymSchema as unknown as SectionSchemaDocument;
 
-// Hand-tuned reference templates (not catalog package ids).
+// Hand-tuned reference templates. Keys that match a catalog package id (e.g.
+// he_fitness_v1) intentionally OVERRIDE the GENERATED factory entry below, so the
+// bespoke port renders instead of the generic family skeleton.
 const BESPOKE: Record<string, LaunchTemplateDefinition> = {
+  he_fitness_v1: {
+    registry: {
+      id: "he_fitness_v1",
+      category: "health_education",
+      subcategory: "fitness_gym",
+      style_tags: ["bold_convert", "night_shift", "24h_clock"],
+      version: 1,
+      status: "active",
+      preview_desktop_url: null,
+      preview_mobile_url: null,
+      section_schema: gymSchemaDoc,
+    },
+    section_schema: gymSchemaDoc,
+    default_content: gymContent as unknown as SiteContent,
+    default_theme: gymTheme as SiteTheme,
+    Component: GymNightShiftTemplate,
+  },
   electrician_trust_v1: {
     registry: {
       id: "electrician_trust_v1",

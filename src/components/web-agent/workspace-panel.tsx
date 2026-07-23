@@ -1,8 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
 import type { PreviewDevice, WorkspaceTab } from "@/lib/constants";
-import { WORKSPACE_TABS } from "@/lib/constants";
+import { ROUTES, WORKSPACE_TABS } from "@/lib/constants";
 import type { DeploymentRecord, WebProject, WebsiteVersion } from "@/lib/web-agent-data";
 import { DEPLOY_STAGES, SAMPLE_CSS, SAMPLE_HTML, SAMPLE_JS } from "@/lib/web-agent-data";
 import type { GenerationState } from "./hooks/use-generation-engine";
@@ -26,6 +27,7 @@ import {
   MonitorIcon,
   RefreshIcon,
   RocketIcon,
+  SlidersIcon,
   SmartphoneIcon,
   SparklesIcon,
   TabletIcon,
@@ -61,6 +63,7 @@ export function WorkspacePanel({
   onDeploy,
   onRegenerate,
 }: WorkspacePanelProps) {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<WorkspaceTab>("preview");
   const [activeVersionId, setActiveVersionId] = useState("");
   const [previewDevice, setPreviewDevice] = useState<PreviewDevice>("desktop");
@@ -182,6 +185,12 @@ export function WorkspacePanel({
     const url = URL.createObjectURL(blob);
     window.open(url, "_blank");
   };
+
+  // Generated sites live in the visual editor at /site-builder/[siteId]/edit.
+  const canEdit = isSiteProject && Boolean(project?.siteId);
+  const handleEdit = useCallback(() => {
+    if (project?.siteId) router.push(ROUTES.siteEditor(project.siteId));
+  }, [project?.siteId, router]);
 
   const handleExport = () => {
     setExporting(true);
@@ -349,6 +358,8 @@ export function WorkspacePanel({
         onExport={handleExport}
         onDeploy={handleDeploy}
         onOpenPreview={handleOpenPreview}
+        onEdit={handleEdit}
+        canEdit={canEdit}
         exporting={exporting}
         isDeploying={isDeploying}
       />
@@ -576,6 +587,8 @@ function WorkspaceToolbar({
   onExport,
   onDeploy,
   onOpenPreview,
+  onEdit,
+  canEdit,
   exporting,
   isDeploying,
   disabled,
@@ -589,6 +602,8 @@ function WorkspaceToolbar({
   onExport?: () => void;
   onDeploy?: () => void;
   onOpenPreview?: () => void;
+  onEdit?: () => void;
+  canEdit?: boolean;
   exporting?: boolean;
   isDeploying?: boolean;
   disabled?: boolean;
@@ -632,6 +647,12 @@ function WorkspaceToolbar({
             <DownloadIcon className="h-3.5 w-3.5" />
             <span className="hidden lg:inline">{exporting ? "..." : "Export"}</span>
           </button>
+          {canEdit && onEdit && (
+            <button type="button" onClick={onEdit} className="ti-btn ti-btn-outline-primary ti-btn-sm gap-1.5" title="Open the visual editor">
+              <SlidersIcon className="h-3.5 w-3.5" />
+              <span className="hidden sm:inline">Edit</span>
+            </button>
+          )}
           <button type="button" onClick={onDeploy} disabled={isDeploying} className="ti-btn ti-btn-primary-full ti-btn-sm wa-btn-glow gap-1.5">
             <RocketIcon className="h-3.5 w-3.5" />
             {isDeploying ? "Deploying..." : "Deploy"}

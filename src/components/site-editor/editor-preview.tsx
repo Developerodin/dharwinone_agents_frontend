@@ -57,9 +57,13 @@ export function EditorPreview() {
   const handleClick = useCallback(
     (e: React.MouseEvent) => {
       const target = e.target as HTMLElement;
-      const sectionEl = target.closest("[data-section-key]") as HTMLElement | null;
+      // BaseTemplate exposes data-section-key (editorMode); launch templates
+      // (all web-agent sites) expose data-section on each <section>. Accept both.
+      const sectionEl = target.closest("[data-section-key],[data-section]") as HTMLElement | null;
       if (sectionEl) {
-        setSelectedSection(sectionEl.getAttribute("data-section-key") as SectionKey);
+        const key =
+          sectionEl.getAttribute("data-section-key") ?? sectionEl.getAttribute("data-section");
+        if (key) setSelectedSection(key as SectionKey);
       }
       const elementEl = target.closest("[data-element-key]") as HTMLElement | null;
       if (elementEl) {
@@ -101,6 +105,14 @@ export function EditorPreview() {
         el.contentEditable = selected ? "true" : "false";
         el.spellcheck = false;
       }
+    });
+    // Selected-section outline for launch templates (BaseTemplate draws its own
+    // via editorMode and uses data-section-key, so it is untouched here).
+    root.querySelectorAll("[data-section]").forEach((node) => {
+      const el = node as HTMLElement;
+      const selected = el.getAttribute("data-section") === selectedSection;
+      el.style.outline = selected ? "2px solid #41a454" : "";
+      el.style.outlineOffset = selected ? "2px" : "";
     });
   }, [config, selectedElementKey, selectedSection]);
 

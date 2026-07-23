@@ -1,0 +1,105 @@
+{
+  "hero": {
+    "headline": "The gym that keeps your hours.",
+    "subtext": "Nurses off a double, kitchen crews after close, founders who think best at 3am. Strength floor, sled track, and a coach on shift around the clock.",
+    "cta_text": "Start at $39",
+    "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1000&q=70"
+  },
+  "services": {
+    "section_title": "Built for people who train off-peak",
+    "items": [
+      {
+        "title": "Never a queue",
+        "desc": "Fourteen racks, two sled lanes, and a cap on total keyfobs sold. Peak occupancy last quarter was 61 percent, at 6pm on a Monday."
+      },
+      {
+        "title": "Coach on every shift",
+        "desc": "A certified coach is on the floor from midnight to 6am too, not just daytime. Form checks and program tweaks are free, at any hour."
+      },
+      {
+        "title": "Safe at 3am",
+        "desc": "Keyfob entry, staffed desk around the clock, lit parking on both sides, and a lone-worker check-in system for solo sessions."
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About the floor",
+    "body": "A strength and conditioning floor that never closes. Keyfob access every hour of every day, coached blocks around the clock, and a room built for people whose schedule does not fit a 6am class."
+  },
+  "why_us": {
+    "section_title": "Why train here",
+    "points": [
+      "Open 24 hours, 365 nights a year",
+      "A coach on the floor on every shift",
+      "No initiation fee, cancel from your phone"
+    ]
+  },
+  "gallery": {
+    "section_title": "The floor",
+    "items": [
+      { "caption": "Strength floor", "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=70" },
+      { "caption": "Sled track", "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=800&q=70" }
+    ]
+  },
+  "testimonials": {
+    "section_title": "From the members",
+    "items": [
+      { "name": "Night-shift nurse", "quote": "I train at 4am after a double and there is always a coach and never a queue." }
+    ]
+  },
+  "pricing": {
+    "section_title": "Two prices. No initiation fee.",
+    "items": [
+      {
+        "name": "Keyfob",
+        "price": "$39",
+        "features": [
+          "24 hour keyfob access, every day",
+          "All open floor hours and quiet hours",
+          "Lone-worker check-in for night sessions"
+        ]
+      },
+      {
+        "name": "Keyfob + Coach",
+        "price": "$79",
+        "features": [
+          "Everything in Keyfob",
+          "All coached blocks, any hour, unlimited",
+          "Quarterly program review, one on one"
+        ]
+      },
+      {
+        "name": "Night pass",
+        "price": "$25",
+        "features": [
+          "Access from 10pm to 6am only",
+          "Includes the 1am and 5am coached blocks",
+          "For the true night shift. Bring your badge."
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Answers before you call",
+    "items": [
+      { "q": "Do you offer trial sessions?", "a": "Yes — one complimentary session before you choose a plan." },
+      { "q": "Can I freeze my membership?", "a": "Memberships can be paused once per term with prior notice." },
+      { "q": "Do you provide diet guidance?", "a": "Nutrition plans are included with personal training packages." }
+    ]
+  },
+  "contact": {
+    "section_title": "Find the floor",
+    "address": "Ground Floor, Medical Plaza, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@ironleaffitness.example",
+    "hours": "Open 24 hours · desk staffed around the clock"
+  },
+  "cta_footer": {
+    "headline": "It is always a good time to start.",
+    "cta_text": "Claim a free session"
+  },
+  "seo": {
+    "title": "IronLeaf Fitness — Gym / Fitness",
+    "description": "A 24 hour strength floor with a coach on every shift. Open 365 nights a year, keyfob access, no initiation fee."
+  }
+}
