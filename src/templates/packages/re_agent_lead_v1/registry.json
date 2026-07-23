@@ -1,0 +1,21 @@
+{
+  "id": "re_agent_lead_v1",
+  "displayName": "Verma Realty",
+  "segment": "real_estate",
+  "segmentLabel": "Real Estate",
+  "subcategory": "agent",
+  "subcategoryLabel": "Independent Agent",
+  "family": "bold_convert",
+  "familyLabel": "Bold Convert",
+  "style_tags": [
+    "bold_convert"
+  ],
+  "intents": [
+    "lead_gen_landing"
+  ],
+  "version": 1,
+  "status": "new",
+  "wave": 1,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

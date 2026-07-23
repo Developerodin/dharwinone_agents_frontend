@@ -1,0 +1,137 @@
+{
+  "hero": {
+    "headline": "Counsel you call before the decision, not after.",
+    "subtext": "Category sizing, pricing architecture and a go or no-go memo the board can actually vote on. Twelve weeks, one recommendation, no hedging.",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Strategy and market entry",
+        "desc": "Category sizing, pricing architecture and a go or no-go memo the board can actually vote on. Twelve weeks, one",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Commercial and regulatory counsel",
+        "desc": "Contracts, compliance reviews and dispute strategy handled before they become disputes. We read the fine print so it",
+        "image": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Brand and demand",
+        "desc": "Positioning, messaging systems and campaigns measured on pipeline, not impressions. Creative that survives a finance",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Operating cadence",
+        "desc": "Weekly management rhythms, dashboards and decision rights installed inside your team, so the improvement outlives the",
+        "image": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About North Signal Studio",
+    "body": "North Signal Studio is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Engagement Options",
+    "items": [
+      {
+        "name": "Brand Strategy",
+        "price": "Quote on request",
+        "features": [
+          "Positioning that sets you apart.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Campaigns",
+        "price": "Quote on request",
+        "features": [
+          "Launches planned and executed.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Content & Design",
+        "price": "Quote on request",
+        "features": [
+          "Words and visuals in one voice.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "How does the first consultation work?",
+        "a": "A 45-minute call to understand scope — no obligation."
+      },
+      {
+        "q": "Do you work on fixed-fee engagements?",
+        "a": "Every project starts with a written scope and fee."
+      },
+      {
+        "q": "Which industries do you serve?",
+        "a": "We work with founders, family businesses and regional brands."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Get in Touch",
+    "address": "Level 4, City Centre, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@northsignalstudio.example",
+    "hours": "Mon–Fri, 9:00–18:00 · By appointment"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "North Signal Studio — Agency / Studio",
+    "description": "Category sizing, pricing architecture and a go or no-go memo the board can actually vote on. Twelve weeks, one recommendation, no hedging."
+  }
+}

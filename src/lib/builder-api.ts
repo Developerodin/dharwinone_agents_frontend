@@ -28,6 +28,10 @@ export function isUnauthorizedError(err: unknown): boolean {
   return err instanceof BuilderApiError && err.status === 401;
 }
 
+export function isNotFoundError(err: unknown): boolean {
+  return err instanceof BuilderApiError && err.status === 404;
+}
+
 export function isTimeoutError(err: unknown): boolean {
   return err instanceof BuilderApiError && err.status === 408;
 }
@@ -97,6 +101,14 @@ export async function createBuilderProject(body: {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
+  });
+}
+
+export async function deleteBuilderProject(
+  projectId: string,
+): Promise<{ status: string }> {
+  return realFetch(`/builder/projects/${encodeURIComponent(projectId)}`, {
+    method: "DELETE",
   });
 }
 

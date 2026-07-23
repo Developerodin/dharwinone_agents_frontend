@@ -1,0 +1,19 @@
+{
+  "id": "ls_cleaning_v1",
+  "displayName": "FreshNest Services",
+  "segment": "local_service",
+  "segmentLabel": "Blue-Collar / Local Services",
+  "subcategory": "cleaning_handyman",
+  "subcategoryLabel": "Cleaning / Handyman",
+  "family": "trust_local",
+  "familyLabel": "Trust Local",
+  "style_tags": [
+    "trust_local"
+  ],
+  "version": 1,
+  "status": "convert",
+  "source": "medical.html",
+  "wave": 1,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

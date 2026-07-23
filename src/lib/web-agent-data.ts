@@ -171,15 +171,23 @@ export function composeFullPrompt(initialPrompt: string, questionnaire: WebsiteQ
   return parts.join(" ");
 }
 
+export type WebProjectKind = "site" | "builder";
+
 export type WebProject = {
   id: string;
   name: string;
   description: string;
   status: WebProjectStatus;
+  kind: WebProjectKind;
   prompt: string;
   createdAt: string;
   updatedAt: string;
   deployedUrl?: string;
+  siteId?: string;
+  subdomain?: string;
+  templateId?: string;
+  family?: import("@/lib/sites-types").FamilyId;
+  previewVersion?: number;
   versions: WebsiteVersion[];
   chatHistory: ChatMessage[];
   uploadedAssets: string[];
@@ -345,6 +353,7 @@ export const INITIAL_PROJECTS: WebProject[] = [
     name: "Verdant Studio",
     description: "Creative agency landing page with portfolio grid",
     status: "deployed",
+    kind: "builder",
     prompt: "Build a modern creative agency website with a hero section, portfolio grid, and contact form. Use green accents and clean typography.",
     createdAt: "2026-06-28T10:00:00Z",
     updatedAt: "2026-07-05T14:30:00Z",
@@ -367,6 +376,7 @@ export const INITIAL_PROJECTS: WebProject[] = [
     name: "Bloom Café",
     description: "Warm café website with menu and reservations",
     status: "generated",
+    kind: "builder",
     prompt: "Create a cozy café website with warm colors, a menu section, and online reservation form.",
     createdAt: "2026-07-01T08:00:00Z",
     updatedAt: "2026-07-01T08:05:00Z",
@@ -384,6 +394,7 @@ export const INITIAL_PROJECTS: WebProject[] = [
     name: "TechFlow SaaS",
     description: "SaaS product landing with pricing tiers",
     status: "draft",
+    kind: "builder",
     prompt: "Design a SaaS landing page with feature highlights, pricing table, and testimonials.",
     createdAt: "2026-07-06T16:00:00Z",
     updatedAt: "2026-07-06T16:00:00Z",
@@ -455,6 +466,7 @@ export function createProjectFromPrompt(prompt: string, assets: string[]): WebPr
     id: `proj-${Date.now()}`,
     name: generateProjectName(prompt),
     description: prompt.slice(0, 80) + (prompt.length > 80 ? "..." : ""),
+    kind: "builder",
     status: "generated",
     prompt,
     createdAt: now,

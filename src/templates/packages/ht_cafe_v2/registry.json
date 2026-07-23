@@ -1,0 +1,19 @@
+{
+  "id": "ht_cafe_v2",
+  "displayName": "Amber Oven Cafe",
+  "segment": "hospitality_travel",
+  "segmentLabel": "Hospitality & Travel",
+  "subcategory": "cafe_restaurant",
+  "subcategoryLabel": "Café / Restaurant",
+  "family": "warm_craft",
+  "familyLabel": "Warm Craft",
+  "style_tags": [
+    "warm_craft"
+  ],
+  "version": 1,
+  "status": "convert",
+  "source": "cafe-3.html",
+  "wave": 2,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

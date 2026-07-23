@@ -1,0 +1,31 @@
+/**
+ * Template semantic tokens → Tailwind utilities (plan §3).
+ * Site root sets --site-* via applySiteTheme(); these map to bg-primary, font-heading, etc.
+ */
+@theme inline {
+  --color-primary: var(--site-primary);
+  --color-accent: var(--site-accent);
+  --color-ink: var(--site-ink);
+  --color-muted: var(--site-muted);
+  --color-surface: var(--site-surface);
+  --color-bg: var(--site-bg);
+  --color-on-primary: var(--site-on-primary);
+  --color-on-accent: var(--site-on-accent);
+  --color-on-dark: var(--site-on-dark);
+  --color-line: var(--site-line);
+  --color-primary-soft: var(--site-primary-soft);
+  --color-hero-accent: var(--site-hero-accent);
+  --color-kicker: var(--site-kicker);
+
+  --font-heading: var(--site-font-heading);
+  --font-body: var(--site-font-body);
+
+  --radius-site: var(--site-radius);
+}
+
+[data-site-root] {
+  background-color: var(--site-bg);
+  color: var(--site-ink);
+  font-family: var(--site-font-body);
+  line-height: 1.6;
+}

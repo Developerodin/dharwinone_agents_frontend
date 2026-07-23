@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Walk in unwell.Walk out with answers, the same day.",
+    "subtext": "{{BRAND}} is a family clinic with in-house diagnostics: OPD consultations, a NABL-accredited lab, and pharmacy under one roof. Most blood",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Same-day reports",
+        "desc": "Samples collected before 11 am are reported by 6 pm. Reports arrive as a PDF on WhatsApp and stay in your patient file",
+        "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Empanelled insurers",
+        "desc": "Cashless OPD packages with major insurers and TPAs. Carry your policy card, our front desk handles pre-authorisation",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Home sample collection",
+        "desc": "A phlebotomist visits within a 5 km radius, 7 to 10 am slots, no extra charge for senior citizens.",
+        "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Transparent pricing",
+        "desc": "Consultation and test rates are printed at reception and on your bill. No surprise line items, ever.",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Dr. A. Menon, MD",
+        "desc": "Professional service, done right.",
+        "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Dr. R. Kulkarni, DCH",
+        "desc": "Patient FAQ",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About FreshNest Services",
+    "body": "FreshNest Services is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Service Packages",
+    "items": [
+      {
+        "name": "Deep Cleaning",
+        "price": "Quote on request",
+        "features": [
+          "Kitchens and bathrooms, top to bottom.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Sofa & Carpet Care",
+        "price": "Quote on request",
+        "features": [
+          "Shampooing that lifts years of use.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Handyman Jobs",
+        "price": "Quote on request",
+        "features": [
+          "Mounting, fitting, fixing — done right.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Do you handle emergencies?",
+        "a": "Yes — same-day callouts when urgency demands it."
+      },
+      {
+        "q": "Are estimates free?",
+        "a": "Quotes are free within our service area."
+      },
+      {
+        "q": "Which areas do you cover?",
+        "a": "We cover the city and nearby neighbourhoods."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Book a Service Call",
+    "address": "Shop 12, Industrial Area, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@freshnestservices.example",
+    "hours": "Mon–Sat, 8:00–20:00 · Emergency line 24/7"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "FreshNest Services — Cleaning / Handyman",
+    "description": "{{BRAND}} is a family clinic with in-house diagnostics: OPD consultations, a NABL-accredited lab, and pharmacy under one roof. Most blood"
+  }
+}

@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Move at the pace of your breath.",
+    "subtext": "Twelve mats per room, never more. Classes at {{BRAND}} are built around breath counts, not playlists, and every session ends with ten",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Small rooms, always",
+        "desc": "Twelve mats is the ceiling in every class, ever. Your teacher learns your name in the first session and your injuries",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Breath sets the tempo",
+        "desc": "Sequences are counted in breaths, not beats. If the room breathes slower on a heavy Tuesday, the class slows with it.",
+        "image": "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Rest is part of the work",
+        "desc": "Every class ends with a full ten minutes of guided rest. Not two. We watch the door so nobody has to rush their",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Morning Slow Flow",
+        "desc": "Professional service, done right.",
+        "image": "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Reformer Pilates Foundations",
+        "desc": "Professional service, done right.",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Strong Slow Vinyasa",
+        "desc": "Professional service, done right.",
+        "image": "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About IronLeaf Fitness",
+    "body": "IronLeaf Fitness is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Membership Plans",
+    "items": [
+      {
+        "name": "Personal Training",
+        "price": "Quote on request",
+        "features": [
+          "Programs built for your goals.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Group Classes",
+        "price": "Quote on request",
+        "features": [
+          "Yoga, HIIT, Zumba and more.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Nutrition Plans",
+        "price": "Quote on request",
+        "features": [
+          "Eat right without going hungry.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Do you offer trial sessions?",
+        "a": "Yes — one complimentary session before you choose a plan."
+      },
+      {
+        "q": "Can I freeze my membership?",
+        "a": "Memberships can be paused once per term with prior notice."
+      },
+      {
+        "q": "Do you provide diet guidance?",
+        "a": "Nutrition plans are included with personal training packages."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Visit or Call",
+    "address": "Ground Floor, Medical Plaza, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@ironleaffitness.example",
+    "hours": "Mon–Sat, 9:00–20:00 · Sun by appointment"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "IronLeaf Fitness — Gym / Fitness",
+    "description": "Twelve mats per room, never more. Classes at {{BRAND}} are built around breath counts, not playlists, and every session ends with ten"
+  }
+}

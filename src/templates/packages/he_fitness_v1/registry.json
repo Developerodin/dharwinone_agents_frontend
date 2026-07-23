@@ -1,0 +1,19 @@
+{
+  "id": "he_fitness_v1",
+  "displayName": "IronLeaf Fitness",
+  "segment": "health_education",
+  "segmentLabel": "Health & Education",
+  "subcategory": "fitness_gym",
+  "subcategoryLabel": "Gym / Fitness",
+  "family": "bold_convert",
+  "familyLabel": "Bold Convert",
+  "style_tags": [
+    "bold_convert"
+  ],
+  "version": 1,
+  "status": "convert",
+  "source": "fitness-2.html",
+  "wave": 2,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

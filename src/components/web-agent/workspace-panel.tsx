@@ -10,6 +10,15 @@ import { PreviewSkeleton } from "./ui/skeleton-loaders";
 import { CodeExplorer } from "./ui/code-explorer";
 import { GenerationLoadingPanel } from "./ui/generation-loading-panel";
 import { SuccessToast } from "./ui/success-toast";
+import { getToken } from "@/lib/auth";
+import {
+  listVersions,
+  publishSite,
+  restoreVersion,
+  SitesApiError,
+  SITES_BASE,
+} from "@/lib/sites-api";
+import type { SiteVersionSummary } from "@/lib/sites-types";
 import {
   DownloadIcon,
   ExternalLinkIcon,
@@ -62,18 +71,42 @@ export function WorkspacePanel({
   const [deployProgress, setDeployProgress] = useState(0);
   const [isDeploying, setIsDeploying] = useState(false);
   const [exporting, setExporting] = useState(false);
+  const [deployError, setDeployError] = useState<string | null>(null);
+  const [siteVersions, setSiteVersions] = useState<SiteVersionSummary[]>([]);
+  const [restoringVersionId, setRestoringVersionId] = useState<string | null>(null);
 
+  const isSiteProject = project?.kind === "site";
   const isGenerating =
     generation.phase === "thinking" ||
     generation.phase === "building" ||
     generation.phase === "generating";
-  const hasWebsite = project && project.versions.length > 0;
-  const showWorkspace = hasWebsite && !isGenerating;
+  const hasWebsite = Boolean(
+    project &&
+      ((isSiteProject && project.siteId) || project.versions.length > 0),
+  );
+  const showWorkspace = hasWebsite && !isGenerating && project?.status !== "generating";
 
   const activeVersion = useMemo(() => {
-    if (!project?.versions.length) return null;
-    return project.versions.find((v) => v.id === activeVersionId) ?? project.versions[project.versions.length - 1];
-  }, [project, activeVersionId]);
+    if (!project) return null;
+    if (project.versions.length) {
+      return (
+        project.versions.find((v) => v.id === activeVersionId) ??
+        project.versions[project.versions.length - 1]
+      );
+    }
+    if (isSiteProject && project.siteId) {
+      return {
+        id: project.siteId,
+        label: "Live draft",
+        createdAt: project.updatedAt,
+        prompt: project.prompt,
+        html: "",
+        css: "",
+        js: "",
+      } satisfies WebsiteVersion;
+    }
+    return null;
+  }, [project, activeVersionId, isSiteProject]);
 
   useEffect(() => {
     if (project?.versions.length) {
@@ -88,13 +121,44 @@ export function WorkspacePanel({
   const js = activeVersion?.js ?? SAMPLE_JS;
 
   const previewDoc = useMemo(() => {
+    if (isSiteProject) return "";
     // Generated templates are full documents; rebuilding them dropped the
     // <head> <link> tags (Bootstrap, fonts) and broke every layout class.
     if (/<html[\s>]/i.test(html)) return withPreviewLinkGuard(html);
     return withPreviewLinkGuard(
       `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>${css}</style></head><body>${html.match(/<body[^>]*>([\s\S]*)<\/body>/i)?.[1] ?? ""}<script>${js}</script></body></html>`
     );
-  }, [html, css, js]);
+  }, [html, css, js, isSiteProject]);
+
+  const draftPreviewUrl = useMemo(() => {
+    if (!isSiteProject || !project?.siteId) return null;
+    if (!getToken()) return null;
+    const version = project.previewVersion ?? 0;
+    const origin =
+      typeof window !== "undefined" ? window.location.origin : "";
+    if (!origin) return null;
+    return `${origin}/sites/preview/draft/${encodeURIComponent(project.siteId)}?v=${version}`;
+  }, [isSiteProject, project?.siteId, project?.previewVersion]);
+
+  const sitePreviewSrc = draftPreviewUrl;
+
+  useEffect(() => {
+    if (!isSiteProject || !project?.siteId) {
+      setSiteVersions([]);
+      return;
+    }
+    let cancelled = false;
+    void listVersions(project.siteId)
+      .then((rows) => {
+        if (!cancelled) setSiteVersions(rows);
+      })
+      .catch(() => {
+        if (!cancelled) setSiteVersions([]);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [isSiteProject, project?.siteId, project?.previewVersion]);
 
   useEffect(() => {
     if (activeTab === "preview" && hasWebsite) {
@@ -110,6 +174,10 @@ export function WorkspacePanel({
   }, [activeTab, activeVersionId, hasWebsite]);
 
   const handleOpenPreview = () => {
+    if (draftPreviewUrl) {
+      window.open(draftPreviewUrl, "_blank");
+      return;
+    }
     const blob = new Blob([previewDoc], { type: "text/html" });
     const url = URL.createObjectURL(blob);
     window.open(url, "_blank");
@@ -132,8 +200,64 @@ export function WorkspacePanel({
   };
 
   const handleDeploy = useCallback(() => {
-    if (!project || !activeVersion) return;
+    if (!project) return;
+    if (!isSiteProject && !activeVersion) return;
     setActiveTab("deploy");
+    setDeployError(null);
+
+    if (isSiteProject) {
+      if (!project.siteId) {
+        setDeployError("Site is not ready to publish yet.");
+        return;
+      }
+      setIsDeploying(true);
+      setDeployStage(0);
+      setDeployProgress(20);
+      void (async () => {
+        try {
+          setDeployStage(1);
+          setDeployProgress(45);
+          const result = await publishSite(project.siteId!);
+          setDeployStage(DEPLOY_STAGES.length - 1);
+          setDeployProgress(100);
+          const subdomain = result.site.subdomain ?? project.subdomain;
+          const url = subdomain
+            ? `${SITES_BASE}/sites/preview/${encodeURIComponent(subdomain)}`
+            : project.deployedUrl;
+          const updated = {
+            ...project,
+            status: "deployed" as const,
+            subdomain: subdomain ?? project.subdomain,
+            deployedUrl: url,
+            updatedAt: new Date().toISOString(),
+          };
+          onUpdateProject(updated);
+          if (url) onDeploy(updated, activeVersion ?? {
+            id: project.siteId ?? project.id,
+            label: "Published",
+            createdAt: new Date().toISOString(),
+            prompt: project.prompt,
+            html: "",
+            css: "",
+            js: "",
+          });
+          setSuccessMessage("Website published successfully!");
+        } catch (e) {
+          const message =
+            e instanceof SitesApiError
+              ? typeof e.detail === "string"
+                ? e.detail
+                : e.message
+              : "Publish failed. Please try again.";
+          setDeployError(message);
+        } finally {
+          setIsDeploying(false);
+        }
+      })();
+      return;
+    }
+
+    if (!activeVersion) return;
     setIsDeploying(true);
     setDeployStage(0);
     setDeployProgress(0);
@@ -152,12 +276,44 @@ export function WorkspacePanel({
         setSuccessMessage("Website deployed successfully!");
       }
     }, 750);
-  }, [project, activeVersion, onDeploy, onUpdateProject]);
+  }, [project, activeVersion, onDeploy, onUpdateProject, isSiteProject]);
+
+  const handleRestoreSiteVersion = useCallback(
+    async (versionId: string) => {
+      if (!project?.siteId) return;
+      setRestoringVersionId(versionId);
+      try {
+        const result = await restoreVersion(project.siteId, versionId);
+        onUpdateProject({
+          ...project,
+          previewVersion: (project.previewVersion ?? 0) + 1,
+          updatedAt: new Date().toISOString(),
+          subdomain: result.site.subdomain ?? project.subdomain,
+          templateId: result.site.templateId ?? project.templateId,
+        });
+        setSuccessMessage("Restored an earlier site version.");
+        setActiveTab("preview");
+        const rows = await listVersions(project.siteId);
+        setSiteVersions(rows);
+      } catch (err) {
+        setDeployError(
+          err instanceof SitesApiError
+            ? typeof err.detail === "string"
+              ? err.detail
+              : err.message
+            : "Could not restore that version.",
+        );
+      } finally {
+        setRestoringVersionId(null);
+      }
+    },
+    [project, onUpdateProject],
+  );
 
   const projectDeployments = deployments.filter((d) => d.projectId === project?.id);
 
   if (!showWorkspace) {
-    if (isGenerating) {
+    if (isGenerating || project?.status === "generating") {
       return <GenerationLoadingPanel generation={generation} />;
     }
 
@@ -220,12 +376,22 @@ export function WorkspacePanel({
                 <div className="h-full min-h-[400px]"><PreviewSkeleton /></div>
               ) : (
                 <div className={`wa-animate-preview wa-device-frame wa-device-${previewDevice} h-full min-h-[400px] w-full overflow-hidden`}>
-                  <iframe
-                    title="Preview"
-                    srcDoc={previewDoc}
-                    className="h-full w-full border-0"
-                    sandbox="allow-scripts"
-                  />
+                  {isSiteProject && sitePreviewSrc ? (
+                    <iframe
+                      key={sitePreviewSrc}
+                      title="Site preview"
+                      src={sitePreviewSrc}
+                      className="h-full w-full border-0"
+                      sandbox="allow-scripts allow-same-origin"
+                    />
+                  ) : (
+                    <iframe
+                      title="Preview"
+                      srcDoc={previewDoc}
+                      className="h-full w-full border-0"
+                      sandbox="allow-scripts"
+                    />
+                  )}
                 </div>
               )}
             </div>
@@ -267,6 +433,11 @@ export function WorkspacePanel({
                     <p className="m-0 rounded-xl bg-light p-4 text-sm text-textmuted mb-4">
                       Use the <strong className="text-defaulttextcolor">Deploy</strong> button in the toolbar above to publish your site.
                     </p>
+                  )}
+                  {deployError && !isDeploying && (
+                    <div className="rounded-xl border border-rose-200 bg-rose-50 p-4 text-sm text-rose-950 mb-4">
+                      <p className="m-0 font-medium">{deployError}</p>
+                    </div>
                   )}
                   {project?.deployedUrl && !isDeploying && (
                     <div className="wa-animate-scale-in flex items-center gap-3 rounded-xl border border-brand-green/20 bg-brand-green/8 p-4">
@@ -339,22 +510,50 @@ export function WorkspacePanel({
               <div className="box wa-animate-fade-up wa-stagger-2">
                 <div className="box-header"><h3 className="box-title">Version History</h3></div>
                 <div className="box-body space-y-2">
-                  {[...project.versions].reverse().map((v) => (
-                    <button
-                      key={v.id}
-                      type="button"
-                      onClick={() => { setActiveVersionId(v.id); setActiveTab("preview"); }}
-                      className={`flex w-full items-center justify-between rounded-xl border p-3 text-left transition-all hover:border-brand-green/30 ${
-                        v.id === activeVersionId ? "border-brand-green/40 bg-brand-green/5" : "border-defaultborder/50"
-                      }`}
-                    >
-                      <div>
-                        <p className="m-0 text-sm font-medium">{v.label}</p>
-                        <p className="m-0 text-xs text-textmuted">{new Date(v.createdAt).toLocaleString()}</p>
-                      </div>
-                      {v.id === activeVersionId && <span className="badge bg-brand-green/10 text-brand-green">Active</span>}
-                    </button>
-                  ))}
+                  {isSiteProject && project.siteId ? (
+                    siteVersions.length ? (
+                      siteVersions.map((v) => (
+                        <div
+                          key={v.versionId}
+                          className="flex w-full items-center justify-between rounded-xl border border-defaultborder/50 p-3"
+                        >
+                          <div>
+                            <p className="m-0 text-sm font-medium">{v.label || v.versionId}</p>
+                            <p className="m-0 text-xs text-textmuted">
+                              {new Date(v.createdAt * 1000).toLocaleString()}
+                            </p>
+                          </div>
+                          <button
+                            type="button"
+                            disabled={restoringVersionId === v.versionId}
+                            onClick={() => handleRestoreSiteVersion(v.versionId)}
+                            className="ti-btn ti-btn-light ti-btn-sm"
+                          >
+                            {restoringVersionId === v.versionId ? "Restoring..." : "Restore"}
+                          </button>
+                        </div>
+                      ))
+                    ) : (
+                      <p className="m-0 text-sm text-textmuted">No saved versions yet.</p>
+                    )
+                  ) : (
+                    [...project.versions].reverse().map((v) => (
+                      <button
+                        key={v.id}
+                        type="button"
+                        onClick={() => { setActiveVersionId(v.id); setActiveTab("preview"); }}
+                        className={`flex w-full items-center justify-between rounded-xl border p-3 text-left transition-all hover:border-brand-green/30 ${
+                          v.id === activeVersionId ? "border-brand-green/40 bg-brand-green/5" : "border-defaultborder/50"
+                        }`}
+                      >
+                        <div>
+                          <p className="m-0 text-sm font-medium">{v.label}</p>
+                          <p className="m-0 text-xs text-textmuted">{new Date(v.createdAt).toLocaleString()}</p>
+                        </div>
+                        {v.id === activeVersionId && <span className="badge bg-brand-green/10 text-brand-green">Active</span>}
+                      </button>
+                    ))
+                  )}
                 </div>
               </div>
             </div>

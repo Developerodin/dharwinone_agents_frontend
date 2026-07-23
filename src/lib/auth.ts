@@ -1,4 +1,8 @@
-const BASE = (process.env.NEXT_PUBLIC_STUDIO_API ?? "http://127.0.0.1:8787").trim();
+const BASE = (
+  process.env.NEXT_PUBLIC_SITES_API ??
+  process.env.NEXT_PUBLIC_STUDIO_API ??
+  "http://127.0.0.1:8787"
+).trim();
 const STORAGE_KEY = "dharwin.auth";
 
 export type AuthUser = { id: string; email: string; name: string };

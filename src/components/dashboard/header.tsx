@@ -7,6 +7,7 @@ import {
   BriefcaseIcon,
 } from "@/components/icons";
 import { getUser } from "@/lib/auth";
+import { useTokenBalance } from "@/hooks/use-token-balance";
 
 type HeaderProps = {
   sidebarCollapsed: boolean;
@@ -15,6 +16,7 @@ type HeaderProps = {
 
 export function Header({ sidebarCollapsed, onMobileMenuOpen }: HeaderProps) {
   const user = getUser();
+  const { balance } = useTokenBalance();
   const userName = user?.name?.trim() || "User";
   const userSubtitle = user?.email?.trim() || "Account";
   const initials = userName
@@ -56,6 +58,15 @@ export function Header({ sidebarCollapsed, onMobileMenuOpen }: HeaderProps) {
 
         {/* RIGHT SECTION */}
         <div className="flex items-center gap-2 shrink-0">
+
+          {balance !== null ? (
+            <span
+              className="hidden sm:inline-flex items-center rounded-full border border-defaultborder/70 bg-[#F8FAFC] px-2.5 py-1 text-xs font-medium text-[#334155]"
+              title="Token balance"
+            >
+              {balance} tokens
+            </span>
+          ) : null}
           
           <button
             type="button"

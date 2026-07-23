@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Rooms that feel like they were always yours.",
+    "subtext": "Marine-ply carcasses, soft-close hardware and counters planned around how you actually move between hob, sink and fridge.",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Kitchens that cook",
+        "desc": "Marine-ply carcasses, soft-close hardware and counters planned around how you actually move between hob, sink and",
+        "image": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Wardrobes and storage",
+        "desc": "Floor-to-ceiling wardrobes, window seats with hidden drawers, and lofts that stop being a place things go to disappear.",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Full-home renovation",
+        "desc": "Flooring, lighting, painting and carpentry run by one site lead, with a weekly photo update and a dust-sealed work zone.",
+        "image": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Garden Design",
+        "desc": "Layouts that fit your space and light.",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Lawn Care",
+        "desc": "Mowing, feeding and seasonal treatment.",
+        "image": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Maintenance Plans",
+        "desc": "Scheduled visits that keep it thriving.",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About GreenFrame Gardens",
+    "body": "GreenFrame Gardens is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Service Packages",
+    "items": [
+      {
+        "name": "Garden Design",
+        "price": "Quote on request",
+        "features": [
+          "Layouts that fit your space and light.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Lawn Care",
+        "price": "Quote on request",
+        "features": [
+          "Mowing, feeding and seasonal treatment.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Maintenance Plans",
+        "price": "Quote on request",
+        "features": [
+          "Scheduled visits that keep it thriving.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Do you handle emergencies?",
+        "a": "Yes — same-day callouts when urgency demands it."
+      },
+      {
+        "q": "Are estimates free?",
+        "a": "Quotes are free within our service area."
+      },
+      {
+        "q": "Which areas do you cover?",
+        "a": "We cover the city and nearby neighbourhoods."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Book a Service Call",
+    "address": "Shop 12, Industrial Area, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@greenframegardens.example",
+    "hours": "Mon–Sat, 8:00–20:00 · Emergency line 24/7"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "GreenFrame Gardens — Landscaping",
+    "description": "Marine-ply carcasses, soft-close hardware and counters planned around how you actually move between hob, sink and fridge."
+  }
+}

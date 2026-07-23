@@ -1,0 +1,19 @@
+{
+  "id": "pf_saas_v1",
+  "displayName": "Loopdesk",
+  "segment": "professional",
+  "segmentLabel": "Professional Services",
+  "subcategory": "saas_startup",
+  "subcategoryLabel": "SaaS / Startup",
+  "family": "fresh_retail",
+  "familyLabel": "Fresh Retail",
+  "style_tags": [
+    "fresh_retail"
+  ],
+  "version": 1,
+  "status": "convert",
+  "source": "saas-2.html",
+  "wave": 2,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

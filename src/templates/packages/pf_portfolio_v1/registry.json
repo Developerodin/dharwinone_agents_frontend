@@ -1,0 +1,19 @@
+{
+  "id": "pf_portfolio_v1",
+  "displayName": "Studio Kavir",
+  "segment": "professional",
+  "segmentLabel": "Professional Services",
+  "subcategory": "portfolio_freelancer",
+  "subcategoryLabel": "Portfolio / Freelancer",
+  "family": "warm_craft",
+  "familyLabel": "Warm Craft",
+  "style_tags": [
+    "warm_craft"
+  ],
+  "version": 1,
+  "status": "convert",
+  "source": "portfolio.html",
+  "wave": 2,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

@@ -1,0 +1,19 @@
+{
+  "id": "rt_print_shop_v1",
+  "displayName": "PressWorks Studio",
+  "segment": "retail",
+  "segmentLabel": "Retail & Small Shops",
+  "subcategory": "print_shop",
+  "subcategoryLabel": "Visiting-Card / Printing",
+  "family": "fresh_retail",
+  "familyLabel": "Fresh Retail",
+  "style_tags": [
+    "fresh_retail"
+  ],
+  "version": 1,
+  "status": "convert",
+  "source": "saas.html",
+  "wave": 1,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

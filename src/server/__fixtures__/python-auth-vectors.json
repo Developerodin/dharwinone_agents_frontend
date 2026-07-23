@@ -1,0 +1,25 @@
+{
+  "secret": "vector-test-secret-0123456789abcdef",
+  "passwords": [
+    {
+      "password": "correct horse battery staple",
+      "hash": "zvJVz+Zw6m+EjjtY3tfwQgec6Px8U1iDZDoWHgmVLoo=",
+      "salt": "82569be2c6936c83b2ee39fbad5b5952"
+    },
+    {
+      "password": "पासवर्ड-unicode-✓",
+      "hash": "8GibF+AsImw4KRJNOpMfHeiR/ODJBQ/3wWZEbFC4/uU=",
+      "salt": "067b064dd2c246662934a11bf3b168d4"
+    },
+    {
+      "password": "s3cret!",
+      "hash": "Jp1z/+VsuEO76wPCa0fdjRWBRtg9VhVSrMFPxr6orgE=",
+      "salt": "11ce5c233153ddcd385d6b4d71db01c8"
+    }
+  ],
+  "jwt_valid": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c3ItdmVjdG9yMSIsImlhdCI6MTc4NDY5NzYyNywiZXhwIjoxNzg0Nzg0MDI3LCJpc3MiOiJkaGFyd2luLWF1dGgiLCJhdWQiOiJkaGFyd2luLWFwaSJ9.KkyZaymrU27rygCI3rvvVAtMgA_ia_NeLaQC1hp2alY",
+    "sub": "usr-vector1"
+  },
+  "jwt_expired": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c3ItdmVjdG9yMiIsImlhdCI6MTc4NDUyNDgyNywiZXhwIjoxNzg0NjExMjI3LCJpc3MiOiJkaGFyd2luLWF1dGgiLCJhdWQiOiJkaGFyd2luLWFwaSJ9.GsbeIfE9WsOT4zHaXnvVq7lgQ3Qvc0ja10loEkwmiNw"
+}

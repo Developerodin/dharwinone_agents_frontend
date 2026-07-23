@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Every trip we sell, we walked first.",
+    "subtext": "The expedition log",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Annapurna Sanctuary, the long way in",
+        "desc": "Twelve days through Gurung villages to the glacier basin. Teahouse nights, dal bhat twice a day, one rest day at",
+        "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Tour du Mont Blanc, hut to hut",
+        "desc": "Eleven days, three countries, blueberry tarts at Rifugio Bonatti. Bags portered, legs not. From 2,650 per person.",
+        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Everest region, the quiet Gokyo line",
+        "desc": "Fifteen days up the valley the crowds skip, five turquoise lakes, Renjo La at dawn with Everest full in the frame. From",
+        "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Torres del Paine O Circuit",
+        "desc": "Nine days around the whole massif, including the backside nobody photographs. Wind you will talk about for years. From",
+        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Holiday Packages",
+        "desc": "Quote on request",
+        "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Custom Itineraries",
+        "desc": "Quote on request",
+        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About Horizon Trails",
+    "body": "Horizon Trails is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Trip Packages",
+    "items": [
+      {
+        "name": "Holiday Packages",
+        "price": "Quote on request",
+        "features": [
+          "Flights, stays and sights bundled.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Custom Itineraries",
+        "price": "Quote on request",
+        "features": [
+          "Built around your pace and taste.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Visa Assistance",
+        "price": "Quote on request",
+        "features": [
+          "Documents guided end to end.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Can you customise a trip itinerary?",
+        "a": "Yes — we build packages around your dates, budget and interests."
+      },
+      {
+        "q": "Do you handle visas and travel insurance?",
+        "a": "Visa guidance and insurance options are included in planning."
+      },
+      {
+        "q": "What is included in your package price?",
+        "a": "Flights, stays and listed activities — extras are quoted upfront."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Visit Us",
+    "address": "Main Road, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@horizontrails.example",
+    "hours": "Daily, 8:00–22:00"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "Horizon Trails — Travel & Tours",
+    "description": "The expedition log"
+  }
+}

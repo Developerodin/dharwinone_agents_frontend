@@ -1,0 +1,210 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model alembic_version {
+  version_num String @id(map: "alembic_version_pkc") @db.VarChar(32)
+}
+
+model auth_tokens {
+  id        Int     @id @default(autoincrement())
+  tokenHash String  @db.VarChar
+  userId    String? @db.VarChar
+  purpose   String? @db.VarChar
+  expiresAt Float?
+  users     users?  @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([tokenHash], map: "ix_auth_tokens_tokenHash")
+  @@index([userId], map: "ix_auth_tokens_userId")
+}
+
+model builder_analytics {
+  id               Int               @id @default(autoincrement())
+  eventId          String            @db.VarChar
+  projectId        String?           @db.VarChar
+  eventType        String?           @db.VarChar
+  metadata         Json?
+  ts               Float?
+  builder_projects builder_projects? @relation(fields: [projectId], references: [projectId], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([eventId], map: "ix_builder_analytics_eventId")
+  @@index([projectId], map: "ix_builder_analytics_projectId")
+}
+
+model builder_edits {
+  id               Int               @id @default(autoincrement())
+  editId           String            @db.VarChar
+  projectId        String?           @db.VarChar
+  versionId        String?           @db.VarChar
+  ts               Float?
+  actor            String?           @db.VarChar
+  source           String?           @db.VarChar
+  userPrompt       String?
+  actionSummary    String?
+  changeScope      String?           @db.VarChar
+  targets          Json?
+  builder_projects builder_projects? @relation(fields: [projectId], references: [projectId], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([editId], map: "ix_builder_edits_editId")
+  @@index([projectId], map: "ix_builder_edits_projectId")
+}
+
+model builder_projects {
+  id                   Int                   @id @default(autoincrement())
+  projectId            String                @unique(map: "ix_builder_projects_projectId") @db.VarChar
+  projectName          String?               @db.VarChar
+  status               String?               @db.VarChar
+  initialPrompt        String?
+  selectedTemplateId   String?               @db.VarChar
+  currentVersionId     String?               @db.VarChar
+  ownerUserId          String?               @db.VarChar
+  visibility           String?               @db.VarChar
+  collaborators        Json?
+  createdAt            Float?
+  updatedAt            Float?
+  builder_analytics    builder_analytics[]
+  builder_edits        builder_edits[]
+  builder_quality      builder_quality[]
+  builder_releases     builder_releases[]
+  builder_templates    builder_templates[]
+  builder_versions     builder_versions[]
+  builder_working_html builder_working_html?
+  businessProfiles     businessProfiles?
+  conversations        conversations?
+  project_assets       project_assets[]
+
+  @@index([ownerUserId], map: "ix_builder_projects_ownerUserId")
+}
+
+model builder_quality {
+  id               Int               @id @default(autoincrement())
+  projectId        String?           @db.VarChar
+  result           Json?
+  ts               Float?
+  builder_projects builder_projects? @relation(fields: [projectId], references: [projectId], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([projectId], map: "ix_builder_quality_projectId")
+}
+
+model builder_releases {
+  id               Int               @id @default(autoincrement())
+  releaseId        String            @db.VarChar
+  projectId        String?           @db.VarChar
+  channel          String?           @db.VarChar
+  versionId        String?           @db.VarChar
+  status           String?           @db.VarChar
+  createdAt        Float?
+  builder_projects builder_projects? @relation(fields: [projectId], references: [projectId], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([projectId], map: "ix_builder_releases_projectId")
+  @@index([releaseId], map: "ix_builder_releases_releaseId")
+}
+
+model builder_templates {
+  id               Int               @id @default(autoincrement())
+  templateId       String            @db.VarChar
+  projectId        String?           @db.VarChar
+  galleryIndex     Int?
+  generatedAt      Float?
+  doc              Json?
+  builder_projects builder_projects? @relation(fields: [projectId], references: [projectId], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([projectId], map: "ix_builder_templates_projectId")
+  @@index([templateId], map: "ix_builder_templates_templateId")
+}
+
+model builder_versions {
+  id                  Int               @id @default(autoincrement())
+  versionId           String            @db.VarChar
+  projectId           String?           @db.VarChar
+  label               String?           @db.VarChar
+  trigger             String?           @db.VarChar
+  createdAt           Float?
+  snapshotHtml        String?
+  snapshotProfileHash String?           @db.VarChar
+  s3HtmlKey           String?           @db.VarChar
+  builder_projects    builder_projects? @relation(fields: [projectId], references: [projectId], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([projectId], map: "ix_builder_versions_projectId")
+  @@index([versionId], map: "ix_builder_versions_versionId")
+}
+
+model builder_working_html {
+  id                 Int              @id @default(autoincrement())
+  projectId          String           @unique(map: "ix_builder_working_html_projectId") @db.VarChar
+  html               String?
+  selectedTemplateId String?          @db.VarChar
+  updatedAt          Float?
+  builder_projects   builder_projects @relation(fields: [projectId], references: [projectId], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model businessProfiles {
+  id               Int              @id @default(autoincrement())
+  projectId        String           @unique(map: "ix_businessProfiles_projectId") @db.VarChar
+  brand            Json?
+  business         Json?
+  location         Json?
+  contact          Json?
+  design           Json?
+  skipped          Json?
+  completeness     Json?
+  updatedAt        Float?
+  builder_projects builder_projects @relation(fields: [projectId], references: [projectId], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model conversations {
+  id               Int              @id @default(autoincrement())
+  projectId        String           @unique(map: "ix_conversations_projectId") @db.VarChar
+  turns            Json?
+  builder_projects builder_projects @relation(fields: [projectId], references: [projectId], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model meta {
+  key   String @id @db.VarChar
+  value Json?
+}
+
+model project_assets {
+  id               Int               @id @default(autoincrement())
+  assetId          String            @db.VarChar
+  projectId        String?           @db.VarChar
+  assetType        String?           @db.VarChar
+  filename         String?           @db.VarChar
+  contentType      String?           @db.VarChar
+  s3Key            String?           @db.VarChar
+  status           String?           @db.VarChar
+  sizeBytes        Int?
+  width            Int?
+  height           Int?
+  uploadedAt       Float?
+  createdAt        Float?
+  updatedAt        Float?
+  builder_projects builder_projects? @relation(fields: [projectId], references: [projectId], onDelete: NoAction, onUpdate: NoAction)
+
+  @@index([assetId], map: "ix_project_assets_assetId")
+  @@index([projectId], map: "ix_project_assets_projectId")
+}
+
+model users {
+  id            Int           @id @default(autoincrement())
+  userId        String        @unique(map: "ix_users_userId") @db.VarChar
+  email         String        @unique(map: "ix_users_email") @db.VarChar
+  name          String?       @db.VarChar
+  passwordHash  String?       @db.VarChar
+  passwordSalt  String?       @db.VarChar
+  emailVerified Boolean?
+  createdAt     Float?
+  phone         String?       @db.VarChar
+  country       String?       @db.VarChar
+  category      String?       @db.VarChar
+  role          String?       @db.VarChar
+  disabled      Boolean?
+  tokenBalance  Int?
+  planId        String?       @db.VarChar
+  auth_tokens   auth_tokens[]
+}

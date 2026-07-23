@@ -1,0 +1,30 @@
+{
+  "brand": {
+    "logo_url": null,
+    "logo_dark_url": null,
+    "favicon_url": null,
+    "palette_from_logo": [],
+    "primary": "#c74600",
+    "accent": "#c74600",
+    "neutral": "#15171a",
+    "bg": "#f2f3f2",
+    "surface": "#e9eae8"
+  },
+  "fontPair": "bricolage_karla",
+  "palettePreset": "fern_coral",
+  "sectionOverrides": {},
+  "elementOverrides": {},
+  "sectionOrder": [
+    "hero",
+    "services",
+    "about",
+    "why_us",
+    "gallery",
+    "testimonials",
+    "pricing",
+    "faq",
+    "contact",
+    "cta_footer"
+  ],
+  "hiddenSections": []
+}

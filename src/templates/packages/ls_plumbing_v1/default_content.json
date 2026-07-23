@@ -1,0 +1,132 @@
+{
+  "hero": {
+    "headline": "Built to drawing.Handed over on date.",
+    "subtext": "From soil test to occupancy certificate. Our site engineers hold daily pour logs, cube test registers and bar bending schedules that your",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Residential, plotted and high-rise",
+        "desc": "From soil test to occupancy certificate. Our site engineers hold daily pour logs, cube test registers and bar bending",
+        "image": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Commercial and industrial",
+        "desc": "Warehouses, PEB sheds and office fit-outs delivered on compressed timelines without shortcuts on MEP coordination. One",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "The boring paperwork that protects you",
+        "desc": "A dedicated EHS officer on every active site, toolbox talks each morning, and a warranty file you receive at handover",
+        "image": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About BlueDrop Plumbing",
+    "body": "BlueDrop Plumbing is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Plumbing Service Packages",
+    "items": [
+      {
+        "name": "Leak Detection & Repair",
+        "price": "Quote on request",
+        "features": [
+          "Find and fix leaks before they spread.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Bathroom Fitting",
+        "price": "Quote on request",
+        "features": [
+          "Complete fittings, neat finish, on schedule.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Emergency Callout",
+        "price": "Quote on request",
+        "features": [
+          "Rapid response when it can't wait.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Do you handle emergencies?",
+        "a": "Yes — same-day callouts for urgent leaks and burst pipes."
+      },
+      {
+        "q": "Are estimates free?",
+        "a": "Site visits for quotes are free within our service area."
+      },
+      {
+        "q": "Which areas do you cover?",
+        "a": "We cover the city and surrounding neighbourhoods."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Book a Plumber",
+    "address": "Shop 12, Industrial Area, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@bluedropplumbing.example",
+    "hours": "Mon–Sat, 8:00–20:00 · Emergency line 24/7"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "BlueDrop Plumbing — Plumbing",
+    "description": "From soil test to occupancy certificate. Our site engineers hold daily pour logs, cube test registers and bar bending schedules that your"
+  }
+}

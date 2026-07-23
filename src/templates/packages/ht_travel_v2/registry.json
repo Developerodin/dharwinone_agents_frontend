@@ -1,0 +1,19 @@
+{
+  "id": "ht_travel_v2",
+  "displayName": "Horizon Trails",
+  "segment": "hospitality_travel",
+  "segmentLabel": "Hospitality & Travel",
+  "subcategory": "travel_tourism",
+  "subcategoryLabel": "Travel & Tours",
+  "family": "premium_dark",
+  "familyLabel": "Premium Dark",
+  "style_tags": [
+    "premium_dark"
+  ],
+  "version": 1,
+  "status": "convert",
+  "source": "travel.html",
+  "wave": 2,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

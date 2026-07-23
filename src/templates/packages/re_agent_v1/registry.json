@@ -1,0 +1,22 @@
+{
+  "id": "re_agent_v1",
+  "displayName": "Verma Realty",
+  "segment": "real_estate",
+  "segmentLabel": "Real Estate",
+  "subcategory": "agent",
+  "subcategoryLabel": "Independent Agent",
+  "family": "trust_local",
+  "familyLabel": "Trust Local",
+  "style_tags": [
+    "trust_local"
+  ],
+  "intents": [
+    "neighbourhood_specialist"
+  ],
+  "version": 1,
+  "status": "new",
+  "source": "layout ref: portfolio.html",
+  "wave": 1,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

@@ -1,0 +1,64 @@
+{
+  "hero": {
+    "headline": "Power Problems? Fixed Fast.",
+    "subtext": "Emergency electricians on call across Kolkata. Wiring, repairs, installations — done right the first time.",
+    "cta_text": "Call Now",
+    "image": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1920&q=80"
+  },
+  "services": {
+    "section_title": "Our Services",
+    "items": [
+      {
+        "title": "Fault Finding",
+        "desc": "Tripping breakers, flickering lights — diagnosed and fixed fast.",
+        "image": "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Rewiring",
+        "desc": "Full or partial rewires to modern safety standards.",
+        "image": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Panel Upgrades",
+        "desc": "DB upgrades and surge protection for growing loads.",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "24/7 Emergency",
+        "desc": "Power out? We respond day or night.",
+        "image": "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "why_us": {
+    "section_title": "Why Us",
+    "points": [
+      "Average response under 45 minutes",
+      "Fixed-price quotes before we start",
+      "100% satisfaction guarantee"
+    ]
+  },
+  "testimonials": {
+    "section_title": "Real Reviews",
+    "items": [
+      {
+        "name": "Priya M.",
+        "quote": "They arrived within the hour and fixed a dangerous fault. Lifesavers.",
+        "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80"
+      },
+      {
+        "name": "Dev K.",
+        "quote": "No upselling, just honest work. Will use again.",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
+      }
+    ]
+  },
+  "cta_footer": {
+    "headline": "Don't wait on a power fault.",
+    "cta_text": "Get Help Now"
+  },
+  "seo": {
+    "title": "Sharma Electricals — 24/7 Electrician Kolkata",
+    "description": "Emergency electrician in Kolkata. Fast response, licensed team, upfront pricing."
+  }
+}

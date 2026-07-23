@@ -1,0 +1,30 @@
+{
+  "brand": {
+    "logo_url": null,
+    "logo_dark_url": null,
+    "favicon_url": null,
+    "palette_from_logo": [],
+    "primary": "#a9631b",
+    "accent": "#a9631b",
+    "neutral": "#2e1f13",
+    "bg": "#f3ebdf",
+    "surface": "#eadfcd"
+  },
+  "fontPair": "youngserif_karla",
+  "palettePreset": "espresso_rust",
+  "sectionOverrides": {},
+  "elementOverrides": {},
+  "sectionOrder": [
+    "hero",
+    "services",
+    "about",
+    "why_us",
+    "gallery",
+    "testimonials",
+    "pricing",
+    "faq",
+    "contact",
+    "cta_footer"
+  ],
+  "hiddenSections": []
+}

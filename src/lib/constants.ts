@@ -7,6 +7,8 @@ export const ROUTES = {
   dashboard: "/dashboard",
   callAgent: "/call-agent",
   webAgent: "/web-agent",
+  websitesNew: "/websites/new",
+  siteEditor: (siteId: string) => `/site-builder/${siteId}/edit`,
   newAgent: "/call-agent/agents/new",
   newCampaign: "/call-agent/campaigns/new",
   uploadLeads: "/call-agent/campaigns/upload-leads",

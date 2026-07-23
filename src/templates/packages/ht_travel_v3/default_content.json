@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Arrive with plans. Lose them by morning.",
+    "subtext": "The idea of this place",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "The Tide Line Suites",
+        "desc": "Built over the shallows on stilts of reclaimed teak. You fall asleep to water moving under the floor and wake to it",
+        "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "The Garden Pool Suites",
+        "desc": "Set back among frangipani and old mango trees, each with its own plunge pool warmed to skin temperature. Breakfast",
+        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "The Headland Residences",
+        "desc": "Two houses on the high point of the cove, each with a stone bath facing open water and a private chef on request. Salt",
+        "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Swim before the wind",
+        "desc": "The lagoon is glass until nine. A guide waits by the kayaks for anyone who wants the reef instead.",
+        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Lunch under the almond tree",
+        "desc": "Whatever the boats brought in at dawn, grilled whole, with limes from the garden. No menu, one question about allergies.",
+        "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "The spa pavilion",
+        "desc": "Two treatment rooms open to the sea breeze. The signature massage uses warmed coconut oil pressed on the island, ninety",
+        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About Horizon Trails",
+    "body": "Horizon Trails is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Trip Packages",
+    "items": [
+      {
+        "name": "Holiday Packages",
+        "price": "Quote on request",
+        "features": [
+          "Flights, stays and sights bundled.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Custom Itineraries",
+        "price": "Quote on request",
+        "features": [
+          "Built around your pace and taste.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Visa Assistance",
+        "price": "Quote on request",
+        "features": [
+          "Documents guided end to end.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Can you customise a trip itinerary?",
+        "a": "Yes — we build packages around your dates, budget and interests."
+      },
+      {
+        "q": "Do you handle visas and travel insurance?",
+        "a": "Visa guidance and insurance options are included in planning."
+      },
+      {
+        "q": "What is included in your package price?",
+        "a": "Flights, stays and listed activities — extras are quoted upfront."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Visit Us",
+    "address": "Main Road, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@horizontrails.example",
+    "hours": "Daily, 8:00–22:00"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "Horizon Trails — Travel & Tours",
+    "description": "The idea of this place"
+  }
+}

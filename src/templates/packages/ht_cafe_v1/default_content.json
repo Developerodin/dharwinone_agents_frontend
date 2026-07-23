@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Coffee for the hours nobody else keeps.",
+    "subtext": "Six till one, seven nights, candles lit at dusk",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Espresso, after dark",
+        "desc": "bitter chocolate, black fig, built for the last train home",
+        "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Slow bar",
+        "desc": "blackcurrant and long amber sugar, twenty minutes, worth it",
+        "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Night pours, no alcohol",
+        "desc": "steeped with orange peel and gentian, served over one clear cube",
+        "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "To eat, quietly",
+        "desc": "The ritual",
+        "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "No wifi after ten",
+        "desc": "Laptops sleep, people talk. The router does too.",
+        "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Decaf with dignity",
+        "desc": "Sugarcane process Colombian on its own grinder, pulled with the same care.",
+        "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About Amber Oven Cafe",
+    "body": "Amber Oven Cafe is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Menu Highlights & Catering",
+    "items": [
+      {
+        "name": "Signature Dishes",
+        "price": "Quote on request",
+        "features": [
+          "House favourites, made fresh daily.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Fresh Bakes",
+        "price": "Quote on request",
+        "features": [
+          "Breads and desserts from our oven.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Catering & Events",
+        "price": "Quote on request",
+        "features": [
+          "Your event, our kitchen.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Do you take reservations?",
+        "a": "Yes — call ahead or message us for groups."
+      },
+      {
+        "q": "Do you cater events?",
+        "a": "We cater office lunches and private gatherings."
+      },
+      {
+        "q": "What are your hours?",
+        "a": "Open daily — see contact section for today's hours."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Visit Us",
+    "address": "Main Road, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@amberovencafe.example",
+    "hours": "Daily, 8:00–22:00"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "Amber Oven Cafe — Café / Restaurant",
+    "description": "Six till one, seven nights, candles lit at dusk"
+  }
+}

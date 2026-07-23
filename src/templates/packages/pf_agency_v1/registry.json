@@ -1,0 +1,19 @@
+{
+  "id": "pf_agency_v1",
+  "displayName": "North Signal Studio",
+  "segment": "professional",
+  "segmentLabel": "Professional Services",
+  "subcategory": "agency_studio",
+  "subcategoryLabel": "Agency / Studio",
+  "family": "clean_pro",
+  "familyLabel": "Clean Pro",
+  "style_tags": [
+    "clean_pro"
+  ],
+  "version": 1,
+  "status": "convert",
+  "source": "agency-3.html",
+  "wave": 2,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

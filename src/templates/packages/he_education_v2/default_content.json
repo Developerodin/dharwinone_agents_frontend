@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Read deeply. Argue well. Leave better.",
+    "subtext": "Close reading across four literatures, a history sequence from antiquity to independence, and a senior thesis defended aloud.",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "B.A. (Hons) Literature and History",
+        "desc": "Close reading across four literatures, a history sequence from antiquity to independence, and a senior thesis defended",
+        "image": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "B.Sc. (Hons) Mathematics and Physics",
+        "desc": "Proof-first mathematics with a laboratory physics core. Every student completes a supervised research project by third",
+        "image": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "B.A. (Hons) Economics and Statistics",
+        "desc": "Theory taught against Indian data. Students run a field study in second year and publish it in the institute's working",
+        "image": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "A note on aid",
+        "desc": "Admission is need-blind. Last year, 61 of 144 entering students received scholarships covering half fees or more, and",
+        "image": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Exam Coaching",
+        "desc": "Syllabus covered, concepts cleared.",
+        "image": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Doubt Sessions",
+        "desc": "No question too small.",
+        "image": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About Summit Academy",
+    "body": "Summit Academy is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Programmes & Fees",
+    "items": [
+      {
+        "name": "Exam Coaching",
+        "price": "Quote on request",
+        "features": [
+          "Syllabus covered, concepts cleared.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Doubt Sessions",
+        "price": "Quote on request",
+        "features": [
+          "No question too small.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Mock Tests",
+        "price": "Quote on request",
+        "features": [
+          "Exam-pattern practice with analysis.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "How do I enrol in a batch?",
+        "a": "Call or visit — we place you by level after a short assessment."
+      },
+      {
+        "q": "Are study materials included?",
+        "a": "Yes — notes, practice sets and mock tests are part of the programme."
+      },
+      {
+        "q": "Do you offer one-on-one tutoring?",
+        "a": "Individual slots are available outside regular batch hours."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Visit or Call",
+    "address": "Ground Floor, Medical Plaza, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@summitacademy.example",
+    "hours": "Mon–Sat, 9:00–20:00 · Sun by appointment"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "Summit Academy — Coaching / Academy",
+    "description": "Close reading across four literatures, a history sequence from antiquity to independence, and a senior thesis defended aloud."
+  }
+}

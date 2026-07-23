@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Ship every release like it is boring.",
+    "subtext": "Progressive rollouts, automatic rollback, and one timeline for every deploy. Connect your repo in the morning, ship behind a flag by lunch.",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1562408590-e32931084e23?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Connect",
+        "desc": "Install the GitHub or GitLab app. {{BRAND}} maps services from your repo topology in under a minute.",
+        "image": "https://images.unsplash.com/photo-1562408590-e32931084e23?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Gate",
+        "desc": "Every merge lands behind a flag. Choose canary cohorts by region, plan tier, or a 1% random slice.",
+        "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Watch",
+        "desc": "Error rate, p95 latency, and your own Datadog monitors decide promotion. Humans approve, robots enforce.",
+        "image": "https://images.unsplash.com/photo-1562408590-e32931084e23?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Promote",
+        "desc": "Traffic steps 1% to 25% to 100% on your curve. Any breach reverts in under 30 seconds, then pings Slack.",
+        "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Free",
+        "desc": "Professional service, done right.",
+        "image": "https://images.unsplash.com/photo-1562408590-e32931084e23?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Team",
+        "desc": "FAQ",
+        "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About PressWorks Studio",
+    "body": "PressWorks Studio is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1562408590-e32931084e23?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1562408590-e32931084e23?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Products & Pricing",
+    "items": [
+      {
+        "name": "Visiting Cards",
+        "price": "Quote on request",
+        "features": [
+          "Premium stocks, same-week delivery.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Flex & Banners",
+        "price": "Quote on request",
+        "features": [
+          "Any size, weather-ready inks.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Brand Stationery",
+        "price": "Quote on request",
+        "features": [
+          "Letterheads, envelopes and more.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Do you offer home delivery?",
+        "a": "Yes — local delivery and pickup slots are available."
+      },
+      {
+        "q": "Can I return or exchange items?",
+        "a": "Unused items in original packaging can be exchanged within 7 days."
+      },
+      {
+        "q": "Do you take custom orders?",
+        "a": "Tell us what you need — we confirm availability and timing."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Visit the Store",
+    "address": "High Street, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@pressworksstudio.example",
+    "hours": "Daily, 10:00–21:00"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "PressWorks Studio — Visiting-Card / Printing",
+    "description": "Progressive rollouts, automatic rollback, and one timeline for every deploy. Connect your repo in the morning, ship behind a flag by lunch."
+  }
+}

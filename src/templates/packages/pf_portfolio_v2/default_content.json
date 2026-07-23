@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Pictures made slowly,in places that empty out at dusk.",
+    "subtext": "Scroll, the work speaks from here",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Grid at Rest",
+        "desc": "Shot in pairs on purpose. One frame for the place, one for the weather passing through it.",
+        "image": "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Two Hours Before Anyone",
+        "desc": "Shot in pairs on purpose. One frame for the place, one for the weather passing through it.",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Municipal",
+        "desc": "Professional service, done right.",
+        "image": "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "What the Cold Keeps",
+        "desc": "The Weekend Review, on Municipal",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "The Last Blue Hour",
+        "desc": "The Weekend Review, on Municipal",
+        "image": "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Study print",
+        "desc": "Professional service, done right.",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About Studio Kavir",
+    "body": "Studio Kavir is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Commission Packages",
+    "items": [
+      {
+        "name": "Commissions",
+        "price": "Quote on request",
+        "features": [
+          "Custom work to your brief.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Collaborations",
+        "price": "Quote on request",
+        "features": [
+          "Studios and brands welcome.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Prints & Licensing",
+        "price": "Quote on request",
+        "features": [
+          "Own a piece of the work.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Are you available for new commissions?",
+        "a": "Yes — share your brief and timeline for availability."
+      },
+      {
+        "q": "Do you license work for commercial use?",
+        "a": "Usage terms are agreed in writing before delivery."
+      },
+      {
+        "q": "What is your typical turnaround?",
+        "a": "Most commissions are delivered within 2–4 weeks."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Get in Touch",
+    "address": "Level 4, City Centre, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@studiokavir.example",
+    "hours": "Mon–Fri, 9:00–18:00 · By appointment"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "Studio Kavir — Portfolio / Freelancer",
+    "description": "Scroll, the work speaks from here"
+  }
+}

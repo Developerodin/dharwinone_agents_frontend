@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Plain scope. Fixed price. Dates we actually hit.",
+    "subtext": "This page reads like a spec sheet on purpose. If what we promise here is not what happens, you should not pay the invoice. That is the",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Sheet index",
+        "desc": "Section 01 / Capabilities",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "The core job",
+        "desc": "Name your main service the way a customer asks for it on the phone, not the way your industry labels it. One sentence",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "The follow-on work",
+        "desc": "The service customers add once the first job goes well. Explain why bundling it with the core job saves them a second",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "The odd request",
+        "desc": "The job most competitors decline. Be precise about what qualifies, because the customer who needs this has already been",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "You describe it",
+        "desc": "One call or one message. We ask the questions that change the price up front, so the quote is real.",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "We quote in writing",
+        "desc": "A one-page quote with the scope, the price, and the date. It is valid for 30 days and it does not creep.",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About Your Business",
+    "body": "Your Business is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Service Packages",
+    "items": [
+      {
+        "name": "Our Services",
+        "price": "Quote on request",
+        "features": [
+          "Everything we do, done well.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Consultation",
+        "price": "Quote on request",
+        "features": [
+          "Talk to us before you decide.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Support",
+        "price": "Quote on request",
+        "features": [
+          "We're here after the job too.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "How do I get started?",
+        "a": "Call or message us with a few details — we reply the same day."
+      },
+      {
+        "q": "Which areas do you serve?",
+        "a": "We serve the whole city and nearby areas."
+      },
+      {
+        "q": "Do you stand behind your work?",
+        "a": "Yes — if something isn't right, we make it right."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Contact Us",
+    "address": "Your address here",
+    "phone": "+91 00000 00000",
+    "email": "hello@yourbusiness.example",
+    "hours": "Mon–Sat, 9:00–19:00"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "Your Business — Local Business",
+    "description": "This page reads like a spec sheet on purpose. If what we promise here is not what happens, you should not pay the invoice. That is the"
+  }
+}

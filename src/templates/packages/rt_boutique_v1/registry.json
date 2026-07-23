@@ -1,0 +1,19 @@
+{
+  "id": "rt_boutique_v1",
+  "displayName": "Maison Iris",
+  "segment": "retail",
+  "segmentLabel": "Retail & Small Shops",
+  "subcategory": "boutique",
+  "subcategoryLabel": "Boutique",
+  "family": "premium_dark",
+  "familyLabel": "Premium Dark",
+  "style_tags": [
+    "premium_dark"
+  ],
+  "version": 1,
+  "status": "convert",
+  "source": "shop-2.html (restyled dark)",
+  "wave": 1,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

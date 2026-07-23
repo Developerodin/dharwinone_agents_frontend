@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "../templates/site-tokens.css";
 
 :root {
   /* Dharwin One brand — from logo-mark.svg */
@@ -1117,7 +1118,7 @@ body {
 }
 
 .wa-project-grid {
-  @apply grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3;
+  @apply mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-3;
 }
 
 .wa-project-card {
@@ -1183,6 +1184,120 @@ body {
 }
 .wa-project-link {
   @apply inline-flex items-center gap-1.5 text-xs font-medium text-emerald-600 hover:underline;
+}
+
+/* Project list selection */
+.wa-list-meta {
+  @apply mt-6 flex flex-wrap items-center justify-between gap-3;
+}
+
+.wa-list-meta-count {
+  @apply text-sm font-medium text-defaulttextcolor;
+}
+
+.wa-list-meta-hint {
+  @apply text-xs text-textmuted;
+}
+
+.wa-select-mode-btn {
+  @apply inline-flex min-h-11 items-center gap-2 rounded-xl border border-defaultborder/60 bg-white px-4 py-2 text-sm font-semibold text-defaulttextcolor shadow-sm transition-all duration-200;
+}
+.wa-select-mode-btn:hover {
+  @apply border-brand-green/30 bg-brand-green/[0.03] text-brand-green;
+}
+.wa-select-mode-btn--active {
+  @apply border-brand-green/40 bg-brand-green/8 text-brand-green;
+}
+
+.wa-bulk-toolbar {
+  @apply sticky top-0 z-30 mt-4 flex items-center justify-between gap-3 rounded-2xl border border-brand-green/25 px-3 py-2.5 shadow-sm;
+  background: color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter: saturate(1.4) blur(8px);
+  animation: wa-fade-up 0.22s ease-out both;
+}
+
+.wa-bulk-selectall {
+  @apply flex min-w-0 flex-1 items-center gap-1;
+}
+
+.wa-bulk-label {
+  @apply min-w-0 truncate text-sm font-semibold text-defaulttextcolor transition-colors;
+}
+.wa-bulk-label:hover:not(:disabled) {
+  @apply text-brand-green;
+}
+.wa-bulk-label:disabled {
+  @apply cursor-not-allowed;
+}
+
+.wa-bulk-toolbar-right {
+  @apply flex shrink-0 items-center gap-2;
+}
+
+.wa-select-checkbox {
+  @apply relative inline-flex min-h-11 min-w-11 cursor-pointer items-center justify-center rounded-xl transition-colors;
+}
+.wa-select-checkbox:hover {
+  @apply bg-brand-green/[0.06];
+}
+.wa-select-checkbox:focus-within {
+  @apply ring-2 ring-brand-green/25 ring-offset-2;
+}
+.wa-select-checkbox input {
+  @apply h-[1.125rem] w-[1.125rem] cursor-pointer rounded border-defaultborder/80 text-brand-green focus:ring-brand-green/30 disabled:cursor-not-allowed disabled:opacity-50;
+}
+
+.wa-project-card--selectable {
+  @apply relative;
+}
+.wa-project-card--selectable.wa-project-card--selected {
+  @apply border-brand-green/50 bg-brand-green/[0.03] shadow-md;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--brand-green) 35%, transparent),
+    0 8px 24px color-mix(in srgb, var(--brand-green) 12%, transparent);
+}
+.wa-project-card--selectable.wa-project-card--selected:hover {
+  @apply border-brand-green/60;
+}
+
+.wa-project-card-select {
+  @apply absolute left-3 top-3 z-20;
+}
+
+.wa-project-card-select .wa-select-checkbox {
+  @apply bg-white/95 shadow-sm ring-1 ring-defaultborder/50 backdrop-blur-sm;
+}
+.wa-project-card-select .wa-select-checkbox:hover {
+  @apply bg-white ring-brand-green/30;
+}
+
+.wa-btn-danger {
+  @apply inline-flex min-h-11 items-center gap-2 rounded-xl bg-red-600 px-4 py-2 text-sm font-semibold text-white transition-colors duration-200;
+}
+.wa-btn-danger:hover {
+  @apply bg-red-700;
+}
+.wa-btn-danger:disabled {
+  @apply cursor-not-allowed opacity-50;
+}
+
+.wa-btn-secondary {
+  @apply inline-flex min-h-11 items-center gap-2 rounded-xl border border-defaultborder/60 bg-white px-4 py-2 text-sm font-semibold text-defaulttextcolor transition-colors duration-200;
+}
+.wa-btn-secondary:hover {
+  @apply border-defaultborder bg-slate-50;
+}
+.wa-btn-secondary:disabled {
+  @apply cursor-not-allowed opacity-50;
+}
+
+.wa-project-card--deleting {
+  @apply pointer-events-none opacity-60;
+}
+
+.wa-project-card--deleting::after {
+  content: "";
+  @apply absolute inset-0 z-30 rounded-2xl bg-white/40;
 }
 
 /* Fullscreen chat */

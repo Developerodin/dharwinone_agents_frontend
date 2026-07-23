@@ -20,7 +20,7 @@ import {
   type WebProject,
   type WebsiteVersion,
 } from "@/lib/web-agent-data";
-import { isUnauthorizedError, listBuilderProjects } from "@/lib/builder-api";
+import { isUnauthorizedError, isNotFoundError, deleteBuilderProject, listBuilderProjects } from "@/lib/builder-api";
 import type { BuilderProject } from "@/lib/builder-types";
 import { getToken } from "@/lib/auth";
 
@@ -39,6 +39,7 @@ type WebAgentContextValue = {
   syncFromUrl: (projectId: string | null, view: string | null) => void;
   addProject: (project: WebProject) => void;
   updateProject: (project: WebProject) => void;
+  deleteProject: (id: string) => Promise<void>;
   addDeployment: (project: WebProject, version: WebsiteVersion) => void;
   myProjects: WebProject[];
   deployedProjects: WebProject[];
@@ -76,6 +77,7 @@ function mapBuilderProject(project: BuilderProject): WebProject {
     id: project.projectId,
     name: project.projectName,
     description: prompt ? prompt.slice(0, 120) : "Website project",
+    kind: "builder" as const,
     status,
     prompt,
     createdAt: secondsToIso(project.createdAt),
@@ -83,6 +85,27 @@ function mapBuilderProject(project: BuilderProject): WebProject {
     versions: [],
     chatHistory: [],
     uploadedAssets: [],
+  };
+}
+
+function mergeProjectFromApi(mapped: WebProject, existing: WebProject | undefined): WebProject {
+  if (!existing) return mapped;
+  return {
+    ...mapped,
+    kind: existing.kind === "site" ? "site" : mapped.kind ?? existing.kind ?? "builder",
+    siteId: existing.siteId ?? mapped.siteId,
+    subdomain: existing.subdomain ?? mapped.subdomain,
+    templateId: existing.templateId ?? mapped.templateId,
+    family: existing.family ?? mapped.family,
+    previewVersion: existing.previewVersion ?? mapped.previewVersion,
+    chatHistory: existing.chatHistory.length ? existing.chatHistory : mapped.chatHistory,
+    versions: existing.versions.length ? existing.versions : mapped.versions,
+    uploadedAssets: existing.uploadedAssets.length
+      ? existing.uploadedAssets
+      : mapped.uploadedAssets,
+    deployedUrl: existing.deployedUrl ?? mapped.deployedUrl,
+    prompt: existing.prompt || mapped.prompt,
+    description: existing.description || mapped.description,
   };
 }
 
@@ -160,8 +183,9 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const persisted = loadPersistedState();
-    if (Array.isArray(persisted?.projects)) setProjects(persisted.projects);
-    if (Array.isArray(persisted?.deployments)) setDeployments(persisted.deployments);
+    const hasAuth = Boolean(getToken());
+    if (!hasAuth && Array.isArray(persisted?.projects)) setProjects(persisted.projects);
+    if (!hasAuth && Array.isArray(persisted?.deployments)) setDeployments(persisted.deployments);
     if (
       typeof persisted?.activeProjectId === "string" ||
       persisted?.activeProjectId === null
@@ -202,27 +226,20 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
         const mapped = items.map(mapBuilderProject);
         setProjects((prev) => {
           const prevById = new Map(prev.map((p) => [p.id, p]));
-          const merged = mapped.map((project) => {
-            const existing = prevById.get(project.id);
-            if (!existing) return project;
-            return {
-              ...project,
-              chatHistory: existing.chatHistory.length
-                ? existing.chatHistory
-                : project.chatHistory,
-              versions: existing.versions.length ? existing.versions : project.versions,
-              uploadedAssets: existing.uploadedAssets.length
-                ? existing.uploadedAssets
-                : project.uploadedAssets,
-              deployedUrl: existing.deployedUrl ?? project.deployedUrl,
-              prompt: existing.prompt || project.prompt,
-              description: existing.description || project.description,
-            };
-          });
-          const seen = new Set(merged.map((p) => p.id));
-          const localOnly = prev.filter((p) => !seen.has(p.id));
-          return [...localOnly, ...merged];
+          return mapped.map((project) =>
+            mergeProjectFromApi(
+              { ...project, kind: project.kind ?? "builder" },
+              prevById.get(project.id),
+            ),
+          );
         });
+        setActiveProjectId((current) => {
+          if (!current) return current;
+          return items.some((item) => item.projectId === current) ? current : null;
+        });
+        setDeployments((prev) =>
+          prev.filter((deployment) => items.some((item) => item.projectId === deployment.projectId)),
+        );
       } catch (e) {
         if (cancelled || isUnauthorizedError(e)) return;
         console.warn("web-agent projects unavailable", e);
@@ -301,9 +318,31 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
     setPageView("workspace");
   }, []);
 
+  const deleteProject = useCallback(
+    async (id: string) => {
+      try {
+        await deleteBuilderProject(id);
+      } catch (err) {
+        if (!isNotFoundError(err)) throw err;
+      }
+      setProjects((prev) => prev.filter((p) => p.id !== id));
+      setDeployments((prev) => prev.filter((d) => d.projectId !== id));
+      setActiveProjectId((current) => {
+        if (current !== id) return current;
+        setPageView("my-projects");
+        setSplitView(false);
+        router.push(buildUrl(null, "my-projects"));
+        return null;
+      });
+    },
+    [router],
+  );
+
   const addDeployment = useCallback((project: WebProject, version: WebsiteVersion) => {
     const now = new Date().toISOString();
-    const url = `https://${project.name.toLowerCase().replace(/\s+/g, "-")}.dharwin.app`;
+    const url =
+      project.deployedUrl ??
+      `https://${project.name.toLowerCase().replace(/\s+/g, "-")}.dharwin.app`;
     setDeployments((prev) => [
       {
         id: `dep-${Date.now()}`,
@@ -340,6 +379,7 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
       syncFromUrl,
       addProject,
       updateProject,
+      deleteProject,
       addDeployment,
       myProjects,
       deployedProjects,
@@ -358,6 +398,7 @@ export function WebAgentProvider({ children }: { children: ReactNode }) {
       syncFromUrl,
       addProject,
       updateProject,
+      deleteProject,
       addDeployment,
       myProjects,
       deployedProjects,

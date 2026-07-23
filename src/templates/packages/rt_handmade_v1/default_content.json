@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Words,grids &stubborn ideas.",
+    "subtext": "+ 21 more rows in the full index, sent on request as a PDF that prints beautifully.",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Identity systems",
+        "desc": "Name, mark, voice, and the rulebook that keeps them honest for a decade. Eight to twelve weeks.",
+        "image": "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Editorial design",
+        "desc": "Books, journals, and annual reports with spines worth breaking. Grid first, decoration never.",
+        "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Custom lettering & type",
+        "desc": "Wordmarks and short alphabets drawn for one job and one job only. No font licenses, it is yours.",
+        "image": "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Handcrafted Decor",
+        "desc": "Quote on request",
+        "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Custom Orders",
+        "desc": "Quote on request",
+        "image": "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Gift Sets",
+        "desc": "Quote on request",
+        "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About Clay & Loom",
+    "body": "Clay & Loom is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1452860606245-08befc0ff44b?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Products & Pricing",
+    "items": [
+      {
+        "name": "Handcrafted Decor",
+        "price": "Quote on request",
+        "features": [
+          "Pieces that make a house a home.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Custom Orders",
+        "price": "Quote on request",
+        "features": [
+          "Tell us your idea; we'll craft it.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Gift Sets",
+        "price": "Quote on request",
+        "features": [
+          "Ready-to-give, beautifully packed.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Do you offer home delivery?",
+        "a": "Yes — local delivery and pickup slots are available."
+      },
+      {
+        "q": "Can I return or exchange items?",
+        "a": "Unused items in original packaging can be exchanged within 7 days."
+      },
+      {
+        "q": "Do you take custom orders?",
+        "a": "Tell us what you need — we confirm availability and timing."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Visit the Store",
+    "address": "High Street, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@clayloom.example",
+    "hours": "Daily, 10:00–21:00"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "Clay & Loom — Handmade Sellers",
+    "description": "+ 21 more rows in the full index, sent on request as a PDF that prints beautifully."
+  }
+}

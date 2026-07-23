@@ -1,0 +1,19 @@
+{
+  "id": "ls_plumbing_v1",
+  "displayName": "BlueDrop Plumbing",
+  "segment": "local_service",
+  "segmentLabel": "Blue-Collar / Local Services",
+  "subcategory": "plumbing",
+  "subcategoryLabel": "Plumbing",
+  "family": "trust_local",
+  "familyLabel": "Trust Local",
+  "style_tags": [
+    "trust_local"
+  ],
+  "version": 1,
+  "status": "convert",
+  "source": "construction.html",
+  "wave": 1,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

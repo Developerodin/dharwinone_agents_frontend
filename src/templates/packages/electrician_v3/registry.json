@@ -1,0 +1,19 @@
+{
+  "id": "electrician_v3",
+  "displayName": "Sharma Electricals",
+  "segment": "local_service",
+  "segmentLabel": "Blue-Collar / Local Services",
+  "subcategory": "electrician",
+  "subcategoryLabel": "Electrician",
+  "family": "trust_local",
+  "familyLabel": "Trust Local",
+  "style_tags": [
+    "trust_local"
+  ],
+  "version": 1,
+  "status": "example",
+  "source": "docs/superpowers/examples (legacy id)",
+  "wave": 1,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

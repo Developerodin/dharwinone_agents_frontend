@@ -1,0 +1,28 @@
+{
+  "brand": {
+    "logo_url": null,
+    "logo_dark_url": null,
+    "favicon_url": null,
+    "palette_from_logo": [],
+    "primary": "#1A1A1A",
+    "accent": "#E85D04",
+    "neutral": "#0F0F0F",
+    "bg": "#F5F5F4",
+    "surface": "#FFFFFF"
+  },
+  "fontPair": "anton_archivo",
+  "palettePreset": "ink_vermilion",
+  "sectionOverrides": {
+    "hero": { "bgColor": "#0F0F0F", "textColor": "#F5F5F4", "height": "tall", "align": "left", "padding": "spacious" },
+    "services": { "padding": "normal" },
+    "why_us": { "bgColor": "#1A1A1A", "textColor": "#F5F5F4", "padding": "compact" },
+    "testimonials": { "padding": "normal" },
+    "cta_footer": { "padding": "compact", "bgColor": "#E85D04", "textColor": "#0F0F0F" }
+  },
+  "elementOverrides": {
+    "hero.cta_button": { "bg": "#E85D04", "textColor": "#0F0F0F", "radius": "none", "size": "lg" },
+    "cta_footer.cta_button": { "bg": "#0F0F0F", "textColor": "#F5F5F4", "radius": "none", "size": "lg" }
+  },
+  "sectionOrder": ["hero", "services", "why_us", "testimonials", "cta_footer"],
+  "hiddenSections": []
+}

@@ -1,0 +1,132 @@
+{
+  "hero": {
+    "headline": "Your Neighbourhood Property Expert",
+    "subtext": "Personal guidance for buying and selling in your area.",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Home Buying Help",
+        "desc": "From shortlist to keys, one point of contact.",
+        "image": "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Property Valuation",
+        "desc": "Honest, market-based price opinions.",
+        "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Site Visits",
+        "desc": "Scheduled visits that respect your time.",
+        "image": "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About Verma Realty",
+    "body": "Verma Realty is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Agent Services & Fees",
+    "items": [
+      {
+        "name": "Home Buying Help",
+        "price": "Quote on request",
+        "features": [
+          "From shortlist to keys, one point of contact.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Property Valuation",
+        "price": "Quote on request",
+        "features": [
+          "Honest, market-based price opinions.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Site Visits",
+        "price": "Quote on request",
+        "features": [
+          "Scheduled visits that respect your time.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "How do I schedule a property viewing?",
+        "a": "Message or call — we confirm slots the same day when possible."
+      },
+      {
+        "q": "Do you help with home loans and documentation?",
+        "a": "We connect you with partner banks and guide paperwork end to end."
+      },
+      {
+        "q": "Which neighbourhoods do you specialise in?",
+        "a": "We focus on local pockets we know block by block."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Schedule a Consultation",
+    "address": "Office 204, Business District, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@vermarealty.example",
+    "hours": "Mon–Sat, 10:00–19:00 · Sun by appointment"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "Verma Realty — Independent Agent",
+    "description": "Personal guidance for buying and selling in your area."
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "brand": {
+    "logo_url": null,
+    "logo_dark_url": null,
+    "favicon_url": null,
+    "palette_from_logo": [],
+    "primary": "#ffd23f",
+    "accent": "#ffd23f",
+    "neutral": "#26130e",
+    "bg": "#f8f2e7",
+    "surface": "#e2d7c2"
+  },
+  "fontPair": "archivo",
+  "palettePreset": "dharwin_default",
+  "sectionOverrides": {},
+  "elementOverrides": {},
+  "sectionOrder": [
+    "hero",
+    "services",
+    "about",
+    "why_us",
+    "gallery",
+    "testimonials",
+    "pricing",
+    "faq",
+    "contact",
+    "cta_footer"
+  ],
+  "hiddenSections": []
+}

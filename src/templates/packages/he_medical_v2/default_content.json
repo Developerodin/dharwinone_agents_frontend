@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Nine departments. One standard of evidence.",
+    "subtext": "Department index",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Cardiology",
+        "desc": "Professional service, done right.",
+        "image": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Orthopaedics",
+        "desc": "Professional service, done right.",
+        "image": "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Neurology",
+        "desc": "Professional service, done right.",
+        "image": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Obstetrics and gynaecology",
+        "desc": "Professional service, done right.",
+        "image": "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Gastroenterology",
+        "desc": "Full directory of nine departments and 41 consultants available at the reception desk and on the appointment line.",
+        "image": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Paediatrics",
+        "desc": "Full directory of nine departments and 41 consultants available at the reception desk and on the appointment line.",
+        "image": "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About CarePoint Clinic",
+    "body": "CarePoint Clinic is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1538108149393-fbbd81895907?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Consultation & Care Plans",
+    "items": [
+      {
+        "name": "General Consultation",
+        "price": "Quote on request",
+        "features": [
+          "Walk-in and appointment slots daily.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Diagnostics",
+        "price": "Quote on request",
+        "features": [
+          "Lab work with same-day reports.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Preventive Checkups",
+        "price": "Quote on request",
+        "features": [
+          "Annual packages for the family.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "How do I book an appointment?",
+        "a": "Call us or walk in during clinic hours."
+      },
+      {
+        "q": "Do you accept insurance?",
+        "a": "We work with major insurers — bring your card on visit."
+      },
+      {
+        "q": "What are your hours?",
+        "a": "Mon–Sat, 9:00–20:00. Emergency line after hours."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Visit or Call the Clinic",
+    "address": "Ground Floor, Medical Plaza, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@carepointclinic.example",
+    "hours": "Mon–Sat, 9:00–20:00 · Sun by appointment"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "CarePoint Clinic — Clinic / Medical",
+    "description": "Department index"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "re_luxury_v1",
+  "displayName": "Crown Estates",
+  "segment": "real_estate",
+  "segmentLabel": "Real Estate",
+  "subcategory": "luxury",
+  "subcategoryLabel": "Luxury Specialist",
+  "family": "premium_dark",
+  "familyLabel": "Premium Dark",
+  "style_tags": [
+    "premium_dark"
+  ],
+  "intents": [
+    "luxury",
+    "listing_showcase"
+  ],
+  "version": 1,
+  "status": "new",
+  "source": "imagery ref: travel.html",
+  "wave": 1,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

@@ -1,0 +1,132 @@
+{
+  "hero": {
+    "headline": "Rentals Managed End to End",
+    "subtext": "Tenants found, agreements done, rent on time.",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Tenant Search",
+        "desc": "Verified tenants for your property, fast.",
+        "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Rent Agreements",
+        "desc": "Paperwork drafted and registered for you.",
+        "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Property Management",
+        "desc": "Maintenance and rent collection handled.",
+        "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About NestKey Consultants",
+    "body": "NestKey Consultants is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Rental & Management Plans",
+    "items": [
+      {
+        "name": "Tenant Search",
+        "price": "Quote on request",
+        "features": [
+          "Verified tenants for your property, fast.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Rent Agreements",
+        "price": "Quote on request",
+        "features": [
+          "Paperwork drafted and registered for you.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Property Management",
+        "price": "Quote on request",
+        "features": [
+          "Maintenance and rent collection handled.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "How quickly can you find a tenant?",
+        "a": "Most listings get shortlisted tenants within two weeks."
+      },
+      {
+        "q": "Do you draft and register rent agreements?",
+        "a": "Yes — paperwork is prepared and registered for both parties."
+      },
+      {
+        "q": "Can you manage rent collection and maintenance?",
+        "a": "Full property management includes rent reminders and vendor coordination."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Schedule a Consultation",
+    "address": "Office 204, Business District, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@nestkeyconsultants.example",
+    "hours": "Mon–Sat, 10:00–19:00 · Sun by appointment"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "NestKey Consultants — Rental / Property Consultant",
+    "description": "Tenants found, agreements done, rent on time."
+  }
+}

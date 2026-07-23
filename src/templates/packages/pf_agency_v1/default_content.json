@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Loud work for quiet brands.",
+    "subtext": "We take companies that mumble and give them a voice you can hear across the street. Identity, campaigns, and websites, made by a team of",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Harbor Coffee Roasters",
+        "desc": "A family roastery that whispered for thirty years. New wordmark, crate-paper packaging, and a paint-loud van. Wholesale",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "City Cycling Week",
+        "desc": "430 posters, one typeface, zero photos of smiling cyclists. Ridership during the week rose 18 percent, and the city",
+        "image": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Atelier Nord Furniture",
+        "desc": "An e-commerce site that reads like a lookbook and loads in under a second. Cart conversion up 41 percent against the",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "The interrogation",
+        "desc": "Two days in a room with your founders. No slides allowed. We leave with the one true thing, written as a single",
+        "image": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Three directions",
+        "desc": "Three genuinely different routes, presented as printed posters on a wall, never as a PDF. You pick one. Picking pieces",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "The build",
+        "desc": "Identity system, templates, site, packaging dielines. Weekly working sessions with the two designers doing the work",
+        "image": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About North Signal Studio",
+    "body": "North Signal Studio is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Engagement Options",
+    "items": [
+      {
+        "name": "Brand Strategy",
+        "price": "Quote on request",
+        "features": [
+          "Positioning that sets you apart.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Campaigns",
+        "price": "Quote on request",
+        "features": [
+          "Launches planned and executed.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Content & Design",
+        "price": "Quote on request",
+        "features": [
+          "Words and visuals in one voice.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "How does the first consultation work?",
+        "a": "A 45-minute call to understand scope — no obligation."
+      },
+      {
+        "q": "Do you work on fixed-fee engagements?",
+        "a": "Every project starts with a written scope and fee."
+      },
+      {
+        "q": "Which industries do you serve?",
+        "a": "We work with founders, family businesses and regional brands."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Get in Touch",
+    "address": "Level 4, City Centre, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@northsignalstudio.example",
+    "hours": "Mon–Fri, 9:00–18:00 · By appointment"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "North Signal Studio — Agency / Studio",
+    "description": "We take companies that mumble and give them a voice you can hear across the street. Identity, campaigns, and websites, made by a team of"
+  }
+}

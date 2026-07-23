@@ -1,0 +1,19 @@
+{
+  "id": "gn_generic_v2",
+  "displayName": "Your Business",
+  "segment": null,
+  "segmentLabel": "Generic",
+  "subcategory": null,
+  "subcategoryLabel": "Fallback",
+  "family": "generic",
+  "familyLabel": "Generic",
+  "style_tags": [
+    "generic"
+  ],
+  "version": 1,
+  "status": "fallback",
+  "source": "generic-2.html",
+  "wave": 1,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

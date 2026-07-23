@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Buy it once. Use it hard. Repair it free.",
+    "subtext": "Nothing enters the catalog until it passes all four benches. Most prototypes fail twice before batch one.",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Field Rucksack",
+        "desc": "Professional service, done right.",
+        "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Crew Flask, 1 L",
+        "desc": "Professional service, done right.",
+        "image": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Shop Apron",
+        "desc": "Professional service, done right.",
+        "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Pocket Tool No. 3",
+        "desc": "Professional service, done right.",
+        "image": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Depot Blanket",
+        "desc": "House standards",
+        "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Task Lamp, Clamp",
+        "desc": "House standards",
+        "image": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About Urban Thread",
+    "body": "Urban Thread is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Collections & Pricing",
+    "items": [
+      {
+        "name": "Menswear",
+        "price": "Quote on request",
+        "features": [
+          "Casuals to formals, all sizes.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Womenswear",
+        "price": "Quote on request",
+        "features": [
+          "Daily wear to festive picks.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Kids Wear",
+        "price": "Quote on request",
+        "features": [
+          "Comfortable, durable, adorable.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Do you offer home delivery?",
+        "a": "Yes — local delivery and pickup slots are available."
+      },
+      {
+        "q": "Can I return or exchange items?",
+        "a": "Unused items in original packaging can be exchanged within 7 days."
+      },
+      {
+        "q": "Do you take custom orders?",
+        "a": "Tell us what you need — we confirm availability and timing."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Visit the Store",
+    "address": "High Street, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@urbanthread.example",
+    "hours": "Daily, 10:00–21:00"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "Urban Thread — Clothing Store",
+    "description": "Nothing enters the catalog until it passes all four benches. Most prototypes fail twice before batch one."
+  }
+}

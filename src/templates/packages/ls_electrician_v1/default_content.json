@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "We build from the drawing, not around it.",
+    "subtext": "Raft to roof with pour cards, rebar checklists and post-tension stressing records filed per element.",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "RCC and PT structures",
+        "desc": "Raft to roof with pour cards, rebar checklists and post-tension stressing records filed per element.",
+        "image": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Structural steel and PEB",
+        "desc": "Shop drawings, weld procedure specs and bolt torque registers, so erection matches fabrication exactly.",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Heavy foundations",
+        "desc": "Machine beds, crane rails and press pits cast to millimetre datums with vibration isolation detailing.",
+        "image": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "House Wiring",
+        "desc": "Safe, standards-compliant wiring and rewiring.",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "AC Installation & Repair",
+        "desc": "Install, service and gas top-up.",
+        "image": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Emergency Callout",
+        "desc": "24/7 response for electrical faults.",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About Sharma Electricals",
+    "body": "Sharma Electricals is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Electrical Service Packages",
+    "items": [
+      {
+        "name": "House Wiring",
+        "price": "Quote on request",
+        "features": [
+          "Safe, standards-compliant wiring and rewiring.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "AC Installation & Repair",
+        "price": "Quote on request",
+        "features": [
+          "Install, service and gas top-up.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Emergency Callout",
+        "price": "Quote on request",
+        "features": [
+          "24/7 response for electrical faults.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Are your electricians licensed?",
+        "a": "Yes — all work meets local safety standards."
+      },
+      {
+        "q": "Do you offer emergency callouts?",
+        "a": "24/7 response for power faults and safety issues."
+      },
+      {
+        "q": "Can you provide a written quote?",
+        "a": "Every job gets a clear estimate before work starts."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Request an Electrician",
+    "address": "Unit 4, Trade Park, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@sharmaelectricals.example",
+    "hours": "Mon–Sat, 9:00–19:00 · Emergency 24/7"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "Sharma Electricals — Electrician",
+    "description": "Raft to roof with pour cards, rebar checklists and post-tension stressing records filed per element."
+  }
+}

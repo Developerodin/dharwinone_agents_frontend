@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Every supplier decision, documented like it will be audited.",
+    "subtext": "Because one day it will be. {{BRAND}} keeps contracts, risk reviews, renewals, and spend in a single ledger your auditors, your CFO, and",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Contract register",
+        "desc": "Every agreement with its owner, renewal date, notice period, and negotiated terms. Renewal alerts go out at 120, 90",
+        "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Risk register",
+        "desc": "Vendor security reviews on a fixed cadence, scored against your own framework. Expired attestations block new spend",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Spend register",
+        "desc": "Committed spend against actual invoices, per vendor and per cost centre, reconciled nightly from your ERP. Variances",
+        "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Decision register",
+        "desc": "Who approved what, when, and on what evidence. Every approval carries its supporting documents, so an audit request is",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Import",
+        "desc": "Historical contracts, owners, and renewal dates loaded from your existing spreadsheets and drives. We have imported",
+        "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Reconcile",
+        "desc": "ERP connection goes live and the spend register reconciles against your last two closed quarters until the variances",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About Loopdesk",
+    "body": "Loopdesk is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Plans & Pricing",
+    "items": [
+      {
+        "name": "Product Demo",
+        "price": "Quote on request",
+        "features": [
+          "See it working on your data.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Onboarding",
+        "price": "Quote on request",
+        "features": [
+          "Guided setup with your team.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Support Plans",
+        "price": "Quote on request",
+        "features": [
+          "Real humans, fast answers.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Is there a free trial?",
+        "a": "Yes — start free and upgrade when your team is ready."
+      },
+      {
+        "q": "How long does onboarding take?",
+        "a": "Most teams connect their first repo in under an hour."
+      },
+      {
+        "q": "Do you offer annual billing?",
+        "a": "Annual plans include two months free — ask on signup."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Get in Touch",
+    "address": "Level 4, City Centre, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@loopdesk.example",
+    "hours": "Mon–Fri, 9:00–18:00 · By appointment"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "Loopdesk — SaaS / Startup",
+    "description": "Because one day it will be. {{BRAND}} keeps contracts, risk reviews, renewals, and spend in a single ledger your auditors, your CFO, and"
+  }
+}

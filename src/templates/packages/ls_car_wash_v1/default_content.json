@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Show up.Lift heavy.Leave taller.",
+    "subtext": "Coached classes from 6:00 to 20:00, six days a week. No mirrors on the lifting floor, no lock-in contracts, chalk included.",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Iron Hour",
+        "desc": "Barbell strength in 8-week waves: squat, press, deadlift. Percentages on the whiteboard, a coach on your rack, video",
+        "image": "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Engine Room",
+        "desc": "Forty minutes of intervals on sleds, rowers, and bikes. Heart-rate zones, not heroics: you finish tired, not broken",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Box Fundamentals",
+        "desc": "Footwork, guard, and combinations on pads and bags. No sparring until Coach Cole says your jab has earned it, usually",
+        "image": "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Dana Reyes",
+        "desc": "Twelve years coaching barbells, from first-timers to a national masters medalist. Runs Iron Hour and writes every",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Marcus Cole",
+        "desc": "Cornered 200+ amateur bouts before hanging up the towel to teach. Runs Box Fundamentals and the Engine Room, and will",
+        "image": "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Off-Peak",
+        "desc": "Professional service, done right.",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About TorqueShine Detailing",
+    "body": "TorqueShine Detailing is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1601362840469-51e4d8d58785?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Wash & Detailing Packages",
+    "items": [
+      {
+        "name": "Foam Wash",
+        "price": "Quote on request",
+        "features": [
+          "Deep clean without a single swirl mark.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Ceramic Coating",
+        "price": "Quote on request",
+        "features": [
+          "Months of gloss and protection.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Interior Detailing",
+        "price": "Quote on request",
+        "features": [
+          "Seats, carpets and vents like new.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Do you handle emergencies?",
+        "a": "Yes — same-day callouts when urgency demands it."
+      },
+      {
+        "q": "Are estimates free?",
+        "a": "Quotes are free within our service area."
+      },
+      {
+        "q": "Which areas do you cover?",
+        "a": "We cover the city and nearby neighbourhoods."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Book a Service Call",
+    "address": "Shop 12, Industrial Area, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@torqueshinedetaili.example",
+    "hours": "Mon–Sat, 8:00–20:00 · Emergency line 24/7"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "TorqueShine Detailing — Car Wash / Detailing",
+    "description": "Coached classes from 6:00 to 20:00, six days a week. No mirrors on the lifting floor, no lock-in contracts, chalk included."
+  }
+}

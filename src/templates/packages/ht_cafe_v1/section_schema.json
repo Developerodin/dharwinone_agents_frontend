@@ -1,0 +1,292 @@
+{
+  "template_id": "ht_cafe_v1",
+  "template_version": 1,
+  "sections": [
+    "hero",
+    "services",
+    "about",
+    "why_us",
+    "gallery",
+    "testimonials",
+    "pricing",
+    "faq",
+    "contact",
+    "cta_footer"
+  ],
+  "image_slots": {
+    "hero.background": {
+      "role": "background",
+      "aspect": "16:9",
+      "minPx": {
+        "w": 1920,
+        "h": 1080
+      },
+      "displayPx": {
+        "w": 1920,
+        "h": 1080
+      },
+      "safeZone": "center",
+      "label": "Hero background",
+      "required": false
+    },
+    "about.image": {
+      "role": "side_image",
+      "aspect": "4:5",
+      "minPx": {
+        "w": 800,
+        "h": 1000
+      },
+      "displayPx": {
+        "w": 600,
+        "h": 750
+      },
+      "safeZone": "center",
+      "label": "About photo",
+      "required": false
+    },
+    "services.items[].image": {
+      "role": "card_thumb",
+      "aspect": "4:3",
+      "minPx": {
+        "w": 800,
+        "h": 600
+      },
+      "displayPx": {
+        "w": 400,
+        "h": 300
+      },
+      "maxCount": 8,
+      "label": "Service photo",
+      "required": false
+    },
+    "gallery.items[].image": {
+      "role": "gallery_tile",
+      "aspect": "1:1",
+      "minPx": {
+        "w": 800,
+        "h": 800
+      },
+      "displayPx": {
+        "w": 400,
+        "h": 400
+      },
+      "maxCount": 12,
+      "label": "Gallery photo",
+      "required": false
+    },
+    "testimonials.items[].avatar": {
+      "role": "avatar",
+      "aspect": "1:1",
+      "minPx": {
+        "w": 200,
+        "h": 200
+      },
+      "displayPx": {
+        "w": 80,
+        "h": 80
+      },
+      "safeZone": "face-center",
+      "label": "Customer photo",
+      "required": false
+    },
+    "why_us.background": {
+      "role": "background",
+      "aspect": "16:9",
+      "minPx": {
+        "w": 1920,
+        "h": 1080
+      },
+      "displayPx": {
+        "w": 1920,
+        "h": 600
+      },
+      "safeZone": "center",
+      "label": "Why-us background",
+      "required": false
+    },
+    "contact.background": {
+      "role": "background",
+      "aspect": "16:9",
+      "minPx": {
+        "w": 1920,
+        "h": 1080
+      },
+      "displayPx": {
+        "w": 1920,
+        "h": 800
+      },
+      "safeZone": "center",
+      "label": "Contact background",
+      "required": false
+    }
+  },
+  "schema": {
+    "hero": {
+      "headline": {
+        "type": "string",
+        "maxLength": 60
+      },
+      "subtext": {
+        "type": "string",
+        "maxLength": 140
+      },
+      "cta_text": {
+        "type": "string",
+        "maxLength": 25
+      }
+    },
+    "services": {
+      "section_title": {
+        "type": "string",
+        "maxLength": 40
+      },
+      "items": {
+        "maxItems": 8,
+        "item": {
+          "title": {
+            "type": "string",
+            "maxLength": 40
+          },
+          "desc": {
+            "type": "string",
+            "maxLength": 120
+          }
+        }
+      }
+    },
+    "about": {
+      "section_title": {
+        "type": "string",
+        "maxLength": 40
+      },
+      "body": {
+        "type": "string",
+        "maxLength": 600
+      }
+    },
+    "why_us": {
+      "section_title": {
+        "type": "string",
+        "maxLength": 40
+      },
+      "points": {
+        "maxItems": 5,
+        "item": {
+          "type": "string",
+          "maxLength": 80
+        }
+      }
+    },
+    "gallery": {
+      "section_title": {
+        "type": "string",
+        "maxLength": 40
+      },
+      "items": {
+        "maxItems": 12,
+        "item": {
+          "caption": {
+            "type": "string",
+            "maxLength": 60
+          }
+        }
+      }
+    },
+    "testimonials": {
+      "section_title": {
+        "type": "string",
+        "maxLength": 40
+      },
+      "items": {
+        "maxItems": 6,
+        "item": {
+          "name": {
+            "type": "string",
+            "maxLength": 30
+          },
+          "quote": {
+            "type": "string",
+            "maxLength": 160
+          }
+        }
+      }
+    },
+    "pricing": {
+      "section_title": {
+        "type": "string",
+        "maxLength": 40
+      },
+      "items": {
+        "maxItems": 4,
+        "item": {
+          "name": {
+            "type": "string",
+            "maxLength": 30
+          },
+          "price": {
+            "type": "string",
+            "maxLength": 20
+          },
+          "features": {
+            "maxItems": 6,
+            "item": {
+              "type": "string",
+              "maxLength": 60
+            }
+          }
+        }
+      }
+    },
+    "faq": {
+      "section_title": {
+        "type": "string",
+        "maxLength": 40
+      },
+      "items": {
+        "maxItems": 8,
+        "item": {
+          "q": {
+            "type": "string",
+            "maxLength": 90
+          },
+          "a": {
+            "type": "string",
+            "maxLength": 300
+          }
+        }
+      }
+    },
+    "contact": {
+      "section_title": {
+        "type": "string",
+        "maxLength": 40
+      },
+      "address": {
+        "type": "string",
+        "maxLength": 160
+      },
+      "phone": {
+        "type": "string",
+        "maxLength": 20
+      },
+      "email": {
+        "type": "string",
+        "maxLength": 60
+      },
+      "hours": {
+        "type": "string",
+        "maxLength": 80
+      }
+    },
+    "cta_footer": {
+      "headline": {
+        "type": "string",
+        "maxLength": 70
+      },
+      "cta_text": {
+        "type": "string",
+        "maxLength": 25
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "brand": {
+    "logo_url": null,
+    "logo_dark_url": null,
+    "favicon_url": null,
+    "palette_from_logo": [],
+    "primary": "#23425F",
+    "accent": "#D9821B",
+    "neutral": "#2A2620",
+    "bg": "#EFECE3",
+    "surface": "#E7E2D6"
+  },
+  "fontPair": "archivo",
+  "palettePreset": "paper_navy_amber",
+  "sectionOverrides": {
+    "hero": { "padding": "spacious" },
+    "services": { "padding": "spacious" },
+    "why_us": { "padding": "normal" },
+    "testimonials": { "padding": "normal" },
+    "cta_footer": { "padding": "compact", "bgColor": "#23425F", "textColor": "#EFECE3" }
+  },
+  "elementOverrides": {
+    "hero.cta_button": { "radius": "full", "size": "lg" },
+    "cta_footer.cta_button": { "bg": "#D9821B", "textColor": "#2A2620", "radius": "full", "size": "lg" }
+  },
+  "sectionOrder": ["hero", "services", "why_us", "testimonials", "cta_footer"],
+  "hiddenSections": []
+}

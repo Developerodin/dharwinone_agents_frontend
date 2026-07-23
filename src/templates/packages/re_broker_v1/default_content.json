@@ -1,0 +1,132 @@
+{
+  "hero": {
+    "headline": "Find the Right Property, Faster",
+    "subtext": "A trusted brokerage guiding buyers and sellers end to end.",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Property Sales",
+        "desc": "Residential and commercial sales, handled end to end.",
+        "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Rentals & Leasing",
+        "desc": "Verified tenants and smooth agreements.",
+        "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Investment Advisory",
+        "desc": "Data-backed guidance on where to buy next.",
+        "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About Meridian Realty",
+    "body": "Meridian Realty is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Brokerage Services & Fees",
+    "items": [
+      {
+        "name": "Property Sales",
+        "price": "Quote on request",
+        "features": [
+          "Residential and commercial sales, handled end to end.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Rentals & Leasing",
+        "price": "Quote on request",
+        "features": [
+          "Verified tenants and smooth agreements.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Investment Advisory",
+        "price": "Quote on request",
+        "features": [
+          "Data-backed guidance on where to buy next.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "How do I list my property with you?",
+        "a": "Call or visit — we schedule a valuation within 48 hours."
+      },
+      {
+        "q": "Do you handle RERA registration and paperwork?",
+        "a": "Yes — agreements, compliance filings and escrow are managed by our desk."
+      },
+      {
+        "q": "Which areas and property types do you cover?",
+        "a": "Residential and commercial across the city and surrounding corridors."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Schedule a Consultation",
+    "address": "Office 204, Business District, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@meridianrealty.example",
+    "hours": "Mon–Sat, 10:00–19:00 · Sun by appointment"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "Meridian Realty — Brokerage / Broker",
+    "description": "A trusted brokerage guiding buyers and sellers end to end."
+  }
+}

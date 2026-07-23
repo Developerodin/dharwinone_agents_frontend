@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Preview databases for every branch, from one command.",
+    "subtext": "Fork production-parity Postgres in seconds, seed it from a snapshot, and tear it down when the branch merges. Your CI never shares a",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "fork in seconds, not hours",
+        "desc": "Copy-on-write branching means a 400 GB production snapshot forks in under 3 seconds and costs storage only for changed",
+        "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "diff before you migrate",
+        "desc": "Schema and row-level diffs against any branch. Destructive changes are flagged in CI before a human ever approves the",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "ttl so nothing leaks",
+        "desc": "Every branch carries a time-to-live. Merged or abandoned branches are reaped automatically, with a 7-day undo window.",
+        "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Masked seed data",
+        "desc": "Column-level masking rules run at fork time. Engineers get realistic data shape without ever holding real customer PII.",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "CI-native by default",
+        "desc": "First-class GitHub Actions and GitLab CI steps. One line gives every pipeline job its own isolated database.",
+        "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Self-host or cloud",
+        "desc": "Run the control plane in our cloud or your VPC. The data plane always stays inside your network boundary.",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About Loopdesk",
+    "body": "Loopdesk is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Plans & Pricing",
+    "items": [
+      {
+        "name": "Product Demo",
+        "price": "Quote on request",
+        "features": [
+          "See it working on your data.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Onboarding",
+        "price": "Quote on request",
+        "features": [
+          "Guided setup with your team.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Support Plans",
+        "price": "Quote on request",
+        "features": [
+          "Real humans, fast answers.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Is there a free trial?",
+        "a": "Yes — start free and upgrade when your team is ready."
+      },
+      {
+        "q": "How long does onboarding take?",
+        "a": "Most teams connect their first repo in under an hour."
+      },
+      {
+        "q": "Do you offer annual billing?",
+        "a": "Annual plans include two months free — ask on signup."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Get in Touch",
+    "address": "Level 4, City Centre, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@loopdesk.example",
+    "hours": "Mon–Fri, 9:00–18:00 · By appointment"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "Loopdesk — SaaS / Startup",
+    "description": "Fork production-parity Postgres in seconds, seed it from a snapshot, and tear it down when the branch merges. Your CI never shares a"
+  }
+}

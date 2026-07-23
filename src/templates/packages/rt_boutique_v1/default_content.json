@@ -1,0 +1,142 @@
+{
+  "hero": {
+    "headline": "Clothes cut for long light and longer dinners.",
+    "subtext": "Twelve pieces. One atelier. No restocks.",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Provenance printed inside",
+        "desc": "Every garment carries its mill, cutter and sewing date on the inner label. Ask us anything about any seam.",
+        "image": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Delivery, wrapped in paper",
+        "desc": "Dispatched within two days in tissue and twine, never plastic. Carriage is $9 flat, free over $300.",
+        "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Returns, without a sigh",
+        "desc": "Thirty days, worn indoors is fine. If the fit is close, book the atelier and we will alter it instead.",
+        "image": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Visit",
+        "desc": "High Street, Your CityDaily, 10:00–21:00",
+        "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Reach us",
+        "desc": "+91 00000 00000hello@shop2.example",
+        "image": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About Maison Iris",
+    "body": "Maison Iris is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Bespoke Services & Pricing",
+    "items": [
+      {
+        "name": "Custom Tailoring",
+        "price": "Quote on request",
+        "features": [
+          "Fits perfected over a fitting or two.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Bridal Couture",
+        "price": "Quote on request",
+        "features": [
+          "Your day, your design.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Designer Wear",
+        "price": "Quote on request",
+        "features": [
+          "Limited pieces you won't see twice.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Do you offer home delivery?",
+        "a": "Yes — local delivery and pickup slots are available."
+      },
+      {
+        "q": "Can I return or exchange items?",
+        "a": "Unused items in original packaging can be exchanged within 7 days."
+      },
+      {
+        "q": "Do you take custom orders?",
+        "a": "Tell us what you need — we confirm availability and timing."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Visit the Store",
+    "address": "High Street, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@maisoniris.example",
+    "hours": "Daily, 10:00–21:00"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "Maison Iris — Boutique",
+    "description": "Twelve pieces. One atelier. No restocks."
+  }
+}

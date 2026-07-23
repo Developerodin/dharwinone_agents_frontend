@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "We only publish work we can put a number on.",
+    "subtext": "No capability decks, no trophy logos. {{BRAND}} keeps a public ledger of engagements: the problem as the client stated it, what we actually",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "A number must be at stake",
+        "desc": "If the problem cannot be stated as a metric someone is accountable for, we decline. Vague mandates produce vague",
+        "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "We measure before we touch anything",
+        "desc": "Two weeks of baseline instrumentation comes first, every time. Otherwise the after has nothing honest to be compared",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Your team does the work with us",
+        "desc": "Maximum two of us on site. We build the fix with the people who will own it, so the result survives our departure.",
+        "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "The result gets written down, either way",
+        "desc": "Every engagement ends with a signed results memo, including the ones that missed. Three of the forty-one entries in our",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Fulfilment backlog at a specialty grocer",
+        "desc": "Online orders promised in 2 days were shipping in 6.5 on average. Refund requests tied to lateness had reached 11",
+        "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Claims cycle time at a regional insurer",
+        "desc": "Simple motor claims took 23 days to settle against a regulator expectation of 10. Adjusters spent an audited 40 percent",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About SafeArc Insurance",
+    "body": "SafeArc Insurance is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Insurance Plans",
+    "items": [
+      {
+        "name": "Health Insurance",
+        "price": "Quote on request",
+        "features": [
+          "Plans compared across leading insurers.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Life Insurance",
+        "price": "Quote on request",
+        "features": [
+          "Protection matched to your family's needs.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Claim Support",
+        "price": "Quote on request",
+        "features": [
+          "Help with paperwork when it matters most.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Do you handle emergencies?",
+        "a": "Yes — same-day callouts when urgency demands it."
+      },
+      {
+        "q": "Are estimates free?",
+        "a": "Quotes are free within our service area."
+      },
+      {
+        "q": "Which areas do you cover?",
+        "a": "We cover the city and nearby neighbourhoods."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Book a Service Call",
+    "address": "Shop 12, Industrial Area, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@safearcinsurance.example",
+    "hours": "Mon–Sat, 8:00–20:00 · Emergency line 24/7"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "SafeArc Insurance — Insurance Agent",
+    "description": "No capability decks, no trophy logos. {{BRAND}} keeps a public ledger of engagements: the problem as the client stated it, what we actually"
+  }
+}

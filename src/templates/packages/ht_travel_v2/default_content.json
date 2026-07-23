@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "headline": "Go where the map creases.",
+    "subtext": "Signature route, Patagonia",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Puerto Natales, boots and pisco",
+        "desc": "Land by 14:00, gear check with Elena at the lodge, then king crab at Cangrejo Rojo while she walks you through the wind",
+        "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Into the park, Lago Grey shoreline",
+        "desc": "Two hour transfer at dawn, then a 11 km shoreline walk to the glacier viewpoint. Icebergs the size of houses, lunch on",
+        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "The towers, the whole reason",
+        "desc": "Alpine start at 5:30. Eight hours round trip to the base of the granite towers. Elena times the last climb so you",
+        "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Horses with the Baqueano family",
+        "desc": "Recovery day in the saddle. Ride estancia land with third generation gauchos, lamb asado at their homestead, no other",
+        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Slow morning, fly out",
+        "desc": "Late breakfast, a last mate by the lake, transfer to the airstrip by noon. You will book the return flight before you",
+        "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Sacred Valley and the quiet route to",
+        "desc": "9 days · Cusco to Aguas Calientes · from 3,450 · departs May, September",
+        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About Horizon Trails",
+    "body": "Horizon Trails is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Trip Packages",
+    "items": [
+      {
+        "name": "Holiday Packages",
+        "price": "Quote on request",
+        "features": [
+          "Flights, stays and sights bundled.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Custom Itineraries",
+        "price": "Quote on request",
+        "features": [
+          "Built around your pace and taste.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Visa Assistance",
+        "price": "Quote on request",
+        "features": [
+          "Documents guided end to end.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Can you customise a trip itinerary?",
+        "a": "Yes — we build packages around your dates, budget and interests."
+      },
+      {
+        "q": "Do you handle visas and travel insurance?",
+        "a": "Visa guidance and insurance options are included in planning."
+      },
+      {
+        "q": "What is included in your package price?",
+        "a": "Flights, stays and listed activities — extras are quoted upfront."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Visit Us",
+    "address": "Main Road, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@horizontrails.example",
+    "hours": "Daily, 8:00–22:00"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "Horizon Trails — Travel & Tours",
+    "description": "Signature route, Patagonia"
+  }
+}

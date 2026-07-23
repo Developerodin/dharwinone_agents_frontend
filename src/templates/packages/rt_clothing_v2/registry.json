@@ -1,0 +1,19 @@
+{
+  "id": "rt_clothing_v2",
+  "displayName": "Urban Thread",
+  "segment": "retail",
+  "segmentLabel": "Retail & Small Shops",
+  "subcategory": "clothing",
+  "subcategoryLabel": "Clothing Store",
+  "family": "fresh_retail",
+  "familyLabel": "Fresh Retail",
+  "style_tags": [
+    "fresh_retail"
+  ],
+  "version": 1,
+  "status": "convert",
+  "source": "shop-3.html",
+  "wave": 1,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

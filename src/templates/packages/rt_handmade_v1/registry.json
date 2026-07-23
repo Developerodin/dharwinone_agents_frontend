@@ -1,0 +1,19 @@
+{
+  "id": "rt_handmade_v1",
+  "displayName": "Clay & Loom",
+  "segment": "retail",
+  "segmentLabel": "Retail & Small Shops",
+  "subcategory": "handmade",
+  "subcategoryLabel": "Handmade Sellers",
+  "family": "warm_craft",
+  "familyLabel": "Warm Craft",
+  "style_tags": [
+    "warm_craft"
+  ],
+  "version": 1,
+  "status": "convert",
+  "source": "portfolio-2.html",
+  "wave": 1,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

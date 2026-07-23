@@ -1,0 +1,19 @@
+{
+  "id": "rt_gift_shop_v1",
+  "displayName": "Willow & Wick",
+  "segment": "retail",
+  "segmentLabel": "Retail & Small Shops",
+  "subcategory": "gift_shop",
+  "subcategoryLabel": "Gift Shop",
+  "family": "warm_craft",
+  "familyLabel": "Warm Craft",
+  "style_tags": [
+    "warm_craft"
+  ],
+  "version": 1,
+  "status": "convert",
+  "source": "cafe.html",
+  "wave": 1,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

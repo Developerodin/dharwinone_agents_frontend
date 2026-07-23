@@ -1,0 +1,22 @@
+{
+  "id": "re_rental_v1",
+  "displayName": "NestKey Consultants",
+  "segment": "real_estate",
+  "segmentLabel": "Real Estate",
+  "subcategory": "rental_consultant",
+  "subcategoryLabel": "Rental / Property Consultant",
+  "family": "clean_pro",
+  "familyLabel": "Clean Pro",
+  "style_tags": [
+    "clean_pro"
+  ],
+  "intents": [
+    "rental",
+    "listing_showcase"
+  ],
+  "version": 1,
+  "status": "new",
+  "wave": 1,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

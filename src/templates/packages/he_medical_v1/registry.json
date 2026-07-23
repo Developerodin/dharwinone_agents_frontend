@@ -1,0 +1,19 @@
+{
+  "id": "he_medical_v1",
+  "displayName": "CarePoint Clinic",
+  "segment": "health_education",
+  "segmentLabel": "Health & Education",
+  "subcategory": "clinic_medical",
+  "subcategoryLabel": "Clinic / Medical",
+  "family": "clean_pro",
+  "familyLabel": "Clean Pro",
+  "style_tags": [
+    "clean_pro"
+  ],
+  "version": 1,
+  "status": "convert",
+  "source": "medical-2.html",
+  "wave": 2,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

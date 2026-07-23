@@ -1,0 +1,19 @@
+{
+  "id": "ls_insurance_v1",
+  "displayName": "SafeArc Insurance",
+  "segment": "local_service",
+  "segmentLabel": "Blue-Collar / Local Services",
+  "subcategory": "insurance_agent",
+  "subcategoryLabel": "Insurance Agent",
+  "family": "clean_pro",
+  "familyLabel": "Clean Pro",
+  "style_tags": [
+    "clean_pro"
+  ],
+  "version": 1,
+  "status": "convert",
+  "source": "agency-2.html",
+  "wave": 1,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

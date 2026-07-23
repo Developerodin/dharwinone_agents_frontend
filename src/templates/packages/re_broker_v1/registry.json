@@ -1,0 +1,22 @@
+{
+  "id": "re_broker_v1",
+  "displayName": "Meridian Realty",
+  "segment": "real_estate",
+  "segmentLabel": "Real Estate",
+  "subcategory": "broker",
+  "subcategoryLabel": "Brokerage / Broker",
+  "family": "clean_pro",
+  "familyLabel": "Clean Pro",
+  "style_tags": [
+    "clean_pro"
+  ],
+  "intents": [
+    "broker_profile"
+  ],
+  "version": 1,
+  "status": "new",
+  "source": "layout ref: agency.html",
+  "wave": 1,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

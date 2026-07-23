@@ -1,0 +1,59 @@
+{
+  "hero": {
+    "headline": "Kolkata's Trusted Electrician, Available 24/7",
+    "subtext": "Fast, reliable wiring and repair across Kolkata & Howrah. Licensed team, transparent pricing.",
+    "cta_text": "Book on WhatsApp",
+    "image": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=1920&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "House Wiring",
+        "desc": "Safe, standards-compliant wiring and rewiring for homes and offices.",
+        "image": "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "AC Installation",
+        "desc": "Install, service and gas top-up with neat concealed wiring.",
+        "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Emergency Callout",
+        "desc": "24/7 response for power faults and safety issues.",
+        "image": "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Licensed & insured electricians",
+      "Upfront quotes — no surprises",
+      "Same-day slots when available"
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised.",
+        "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80"
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice.",
+        "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80"
+      }
+    ]
+  },
+  "cta_footer": {
+    "headline": "Need an electrician today?",
+    "cta_text": "WhatsApp Us Now"
+  },
+  "seo": {
+    "title": "Sharma Electricals — Electrician in Kolkata",
+    "description": "24/7 electrician in Kolkata for wiring, AC repair and emergency callouts."
+  }
+}

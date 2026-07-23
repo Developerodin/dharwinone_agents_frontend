@@ -17,7 +17,6 @@ import { WorkspacePanel } from "./workspace-panel";
 import { ProjectListView } from "./views/project-list-view";
 import { useGenerationEngine } from "./hooks/use-generation-engine";
 import {
-  createBuilderProject,
   editBuilderProject,
   getBuilderProjectContext,
   getBuilderWorkingHtml,
@@ -28,6 +27,10 @@ import {
   sendBuilderChat,
 } from "@/lib/builder-api";
 import { getToken } from "@/lib/auth";
+import { listCategories, SitesApiError } from "@/lib/sites-api";
+import { generationErrorMessage } from "@/components/web-agent/sites/GenerationErrorBubble";
+import { type SiteChatState } from "@/components/web-agent/sites/siteChatMachine";
+import { runSiteChatTurn } from "@/components/web-agent/sites/siteChatOrchestrator";
 import type {
   BuilderChatTurn,
   BuilderEditRecord,
@@ -160,6 +163,7 @@ function hydrateProjectFromContext(
     id: ctx.project.projectId,
     name: ctx.project.projectName,
     description: (ctx.project.initialPrompt || "Website project").slice(0, 120),
+    kind: current?.kind ?? "builder",
     status: versions.length ? "generated" : "draft",
     prompt,
     createdAt: tsIso(ctx.project.createdAt),
@@ -193,6 +197,7 @@ function WebAgentWorkspaceInner() {
   const hydratingRef = useRef<string | null>(null);
   const generationRecoveryRef = useRef(new Set<string>());
   const editRecoveryRef = useRef(new Set<string>());
+  const siteChatStateRef = useRef(new Map<string, SiteChatState>());
   const { state: generation, start, stop, resume, reset } = useGenerationEngine();
 
   useEffect(() => {
@@ -205,6 +210,7 @@ function WebAgentWorkspaceInner() {
 
   useEffect(() => {
     if (!activeProjectId) return;
+    if (activeProject?.kind === "site") return;
     if (hydratingRef.current === activeProjectId) return;
     let cancelled = false;
     hydratingRef.current = activeProjectId;
@@ -226,7 +232,44 @@ function WebAgentWorkspaceInner() {
     return () => {
       cancelled = true;
     };
-  }, [activeProjectId, updateProject]);
+  }, [activeProjectId, activeProject?.kind, updateProject]);
+
+  const runSiteProjectTurn = useCallback(
+    async (project: WebProject, cleanPrompt: string) => {
+      const categories = await listCategories().catch(() => []);
+      const result = await runSiteChatTurn({
+        project,
+        state: siteChatStateRef.current.get(project.id) ?? null,
+        userMessage: cleanPrompt,
+        categories,
+      });
+      siteChatStateRef.current.set(project.id, result.state);
+
+      const now = new Date().toISOString();
+      const assistantMessages: ChatMessage[] = result.assistantMessages.map((content, idx) => ({
+        id: `msg-${Date.now()}-site-a-${idx}`,
+        role: "assistant",
+        content,
+        timestamp: now,
+      }));
+
+      const updated: WebProject = {
+        ...result.project,
+        chatHistory: [...project.chatHistory, ...assistantMessages],
+        updatedAt: now,
+        status:
+          result.project.siteId && result.project.status !== "deployed"
+            ? "generated"
+            : result.project.status,
+      };
+      updateProject(updated);
+      activeProjectRef.current = updated;
+      if (assistantMessages.length) {
+        setTypingMessageId(assistantMessages[assistantMessages.length - 1].id);
+      }
+    },
+    [updateProject],
+  );
 
   const applyTemplateGeneration = useCallback(
     async (project: WebProject, prompt: string, force = false) => {
@@ -400,18 +443,19 @@ function WebAgentWorkspaceInner() {
           }
 
           if (!project) {
-            const created = await createBuilderProject({
-              projectName: generateProjectName(cleanPrompt),
-              initialPrompt: cleanPrompt,
-            });
+            const localId =
+              typeof crypto !== "undefined" && "randomUUID" in crypto
+                ? `site-${crypto.randomUUID()}`
+                : `site-${Date.now()}`;
             project = {
-              id: created.projectId,
-              name: created.projectName,
+              id: localId,
+              name: generateProjectName(cleanPrompt),
               description: cleanPrompt.slice(0, 120),
+              kind: "site",
               status: "draft",
               prompt: cleanPrompt,
-              createdAt: tsIso(created.createdAt),
-              updatedAt: tsIso(created.updatedAt),
+              createdAt: now,
+              updatedAt: now,
               versions: [],
               chatHistory: [userMsg],
               uploadedAssets: attachments.map((a) => a.name),
@@ -432,23 +476,44 @@ function WebAgentWorkspaceInner() {
             updateProject(updated);
             project = updated;
             activeProjectRef.current = updated;
+          }
 
-            // Hydration is async, so local state can still show zero versions for a
-            // project the backend already built. Ask the server before routing, or an
-            // edit gets sent down the generate path and rebuilds the site.
-            if (!project.versions.length) {
-              const working = await getBuilderWorkingHtml(project.id).catch(() => null);
-              const html = working?.html?.trim();
-              if (html) {
-                project = {
-                  ...project,
-                  status: "generated",
-                  versions: [asVersion(html, project.prompt || cleanPrompt, 1)],
-                  updatedAt: new Date().toISOString(),
-                };
-                updateProject(project);
-                activeProjectRef.current = project;
-              }
+          if (project.kind === "site") {
+            try {
+              await runSiteProjectTurn(project, cleanPrompt);
+            } catch (e) {
+              const assistantMsg: ChatMessage = {
+                id: `msg-${Date.now()}-err`,
+                role: "assistant",
+                content:
+                  e instanceof SitesApiError
+                    ? generationErrorMessage(e)
+                    : extractApiDetail(String(e)) ||
+                      "I couldn't reach the sites engine. Please try again.",
+                timestamp: new Date().toISOString(),
+              };
+              updateProject({
+                ...project,
+                chatHistory: [...project.chatHistory, assistantMsg],
+                updatedAt: new Date().toISOString(),
+              });
+              setTypingMessageId(assistantMsg.id);
+            }
+            return;
+          }
+
+          if (!project.versions.length) {
+            const working = await getBuilderWorkingHtml(project.id).catch(() => null);
+            const html = working?.html?.trim();
+            if (html) {
+              project = {
+                ...project,
+                status: "generated",
+                versions: [asVersion(html, project.prompt || cleanPrompt, 1)],
+                updatedAt: new Date().toISOString(),
+              };
+              updateProject(project);
+              activeProjectRef.current = project;
             }
           }
 
@@ -479,8 +544,8 @@ function WebAgentWorkspaceInner() {
               const trimmed = (html || "").trim();
               if (!trimmed || trimmed === lastStreamedHtml) return false;
               lastStreamedHtml = trimmed;
-              const current =
-                activeProjectRef.current?.id === project.id ? activeProjectRef.current : project;
+              const ref = activeProjectRef.current;
+              const current = ref?.id === projectApplying.id ? ref : projectApplying;
               const draft = asVersion(trimmed, cleanPrompt, Math.max(1, current.versions.length));
               const liveVersion = {
                 ...draft,
@@ -656,7 +721,8 @@ function WebAgentWorkspaceInner() {
         } catch (e) {
           const project = activeProjectRef.current;
           const message = String(e);
-          const detail = extractApiDetail(message);
+          const detail =
+            e instanceof SitesApiError ? e.message : extractApiDetail(message);
           const assistantMsg: ChatMessage = {
             id: `msg-${Date.now()}-err`,
             role: "assistant",
@@ -689,7 +755,7 @@ function WebAgentWorkspaceInner() {
         }
       })();
     },
-    [addProject, router, setSplitView, start, updateProject, reset, applyTemplateGeneration]
+    [addProject, router, setSplitView, start, updateProject, reset, applyTemplateGeneration, runSiteProjectTurn]
   );
 
   const handleRegenerate = useCallback(() => {
@@ -750,6 +816,7 @@ function WebAgentWorkspaceInner() {
               name: "New project",
               description: "Awaiting backend response",
               status: "draft",
+              kind: "site",
               prompt: pendingThread[0]?.content ?? "",
               createdAt: new Date().toISOString(),
               updatedAt: new Date().toISOString(),

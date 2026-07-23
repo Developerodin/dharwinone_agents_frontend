@@ -1,0 +1,19 @@
+{
+  "id": "ls_car_wash_v1",
+  "displayName": "TorqueShine Detailing",
+  "segment": "local_service",
+  "segmentLabel": "Blue-Collar / Local Services",
+  "subcategory": "car_wash",
+  "subcategoryLabel": "Car Wash / Detailing",
+  "family": "bold_convert",
+  "familyLabel": "Bold Convert",
+  "style_tags": [
+    "bold_convert"
+  ],
+  "version": 1,
+  "status": "convert",
+  "source": "fitness.html",
+  "wave": 1,
+  "preview_desktop_url": null,
+  "preview_mobile_url": null
+}

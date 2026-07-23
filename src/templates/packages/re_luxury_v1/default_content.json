@@ -1,0 +1,132 @@
+{
+  "hero": {
+    "headline": "Exceptional Homes, Discreet Service",
+    "subtext": "Curated luxury properties with private, personal attention.",
+    "cta_text": "Get in Touch",
+    "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=80"
+  },
+  "services": {
+    "section_title": "What We Do",
+    "items": [
+      {
+        "title": "Luxury Sales",
+        "desc": "A hand-picked portfolio of premier homes.",
+        "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Private Viewings",
+        "desc": "Appointments arranged around your schedule.",
+        "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "title": "Portfolio Advisory",
+        "desc": "Long-term guidance for property portfolios.",
+        "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80"
+      }
+    ]
+  },
+  "about": {
+    "section_title": "About Crown Estates",
+    "body": "Crown Estates is a local business built on quality work and word-of-mouth. We keep it simple: show up on time, do it properly, charge fairly. Most of our customers come back — and bring their friends.",
+    "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80"
+  },
+  "why_us": {
+    "section_title": "Why Choose Us",
+    "points": [
+      "Experienced, verified team",
+      "Transparent pricing — no surprises",
+      "On-time, every time"
+    ]
+  },
+  "gallery": {
+    "section_title": "Our Work",
+    "items": [
+      {
+        "caption": "Recent work",
+        "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "On the job",
+        "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "caption": "Happy customers",
+        "image": "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=640&q=80"
+      }
+    ]
+  },
+  "testimonials": {
+    "section_title": "What Customers Say",
+    "items": [
+      {
+        "name": "R. Sharma",
+        "quote": "Professional from start to finish. Exactly what was promised, when it was promised."
+      },
+      {
+        "name": "A. Fernandes",
+        "quote": "Fair price, quality work. Already recommended them twice."
+      }
+    ]
+  },
+  "pricing": {
+    "section_title": "Luxury Advisory Packages",
+    "items": [
+      {
+        "name": "Luxury Sales",
+        "price": "Quote on request",
+        "features": [
+          "A hand-picked portfolio of premier homes.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Private Viewings",
+        "price": "Quote on request",
+        "features": [
+          "Appointments arranged around your schedule.",
+          "Clear estimate before work starts"
+        ]
+      },
+      {
+        "name": "Portfolio Advisory",
+        "price": "Quote on request",
+        "features": [
+          "Long-term guidance for property portfolios.",
+          "Clear estimate before work starts"
+        ]
+      }
+    ]
+  },
+  "faq": {
+    "section_title": "Common Questions",
+    "items": [
+      {
+        "q": "Are viewings private and confidential?",
+        "a": "Yes — appointments are arranged discreetly around your schedule."
+      },
+      {
+        "q": "Do you work with NRI and overseas buyers?",
+        "a": "We handle virtual tours, legal review and closing remotely."
+      },
+      {
+        "q": "Which luxury segments do you cover?",
+        "a": "Premium apartments, villas and penthouses in select corridors."
+      }
+    ]
+  },
+  "contact": {
+    "section_title": "Schedule a Consultation",
+    "address": "Office 204, Business District, Your City",
+    "phone": "+91 00000 00000",
+    "email": "hello@crownestates.example",
+    "hours": "Mon–Sat, 10:00–19:00 · Sun by appointment"
+  },
+  "cta_footer": {
+    "headline": "Ready to get started?",
+    "cta_text": "Contact Us"
+  },
+  "seo": {
+    "title": "Crown Estates — Luxury Specialist",
+    "description": "Curated luxury properties with private, personal attention."
+  }
+}
