@@ -3,12 +3,16 @@ import type { LaunchTemplateRegistryEntry, SectionSchemaDocument } from "../syst
 import type { SiteContent, SiteTheme } from "../system/types";
 import { ElectricianBoldTemplate } from "./electrician_bold_v1/ElectricianBoldTemplate";
 import { ElectricianTrustTemplate } from "./electrician_trust_v1/ElectricianTrustTemplate";
+import { CafeWarmTemplate } from "./ht_cafe_v1/CafeWarmTemplate";
 import boldContent from "./electrician_bold_v1/default_content.json";
 import boldTheme from "./electrician_bold_v1/default_theme.json";
 import boldSchema from "./electrician_bold_v1/section_schema.json";
 import trustContent from "./electrician_trust_v1/default_content.json";
 import trustTheme from "./electrician_trust_v1/default_theme.json";
 import trustSchema from "./electrician_trust_v1/section_schema.json";
+import cafeContent from "../packages/ht_cafe_v1/default_content.json";
+import cafeTheme from "../packages/ht_cafe_v1/default_theme.json";
+import cafeSchema from "../packages/ht_cafe_v1/section_schema.json";
 
 export interface LaunchTemplateProps {
   content?: SiteContent;
@@ -26,6 +30,7 @@ export interface LaunchTemplateDefinition {
 
 const trustSchemaDoc = trustSchema as unknown as SectionSchemaDocument;
 const boldSchemaDoc = boldSchema as unknown as SectionSchemaDocument;
+const cafeSchemaDoc = cafeSchema as unknown as SectionSchemaDocument;
 
 export const LAUNCH_TEMPLATES = {
   electrician_trust_v1: {
@@ -61,6 +66,23 @@ export const LAUNCH_TEMPLATES = {
     default_content: boldContent as unknown as SiteContent,
     default_theme: boldTheme as SiteTheme,
     Component: ElectricianBoldTemplate,
+  },
+  ht_cafe_v1: {
+    registry: {
+      id: "ht_cafe_v1",
+      category: "hospitality_travel",
+      subcategory: "cafe_restaurant",
+      style_tags: ["warm_craft"],
+      version: 1,
+      status: "active",
+      preview_desktop_url: null,
+      preview_mobile_url: null,
+      section_schema: cafeSchemaDoc,
+    },
+    section_schema: cafeSchemaDoc,
+    default_content: cafeContent as unknown as SiteContent,
+    default_theme: cafeTheme as unknown as SiteTheme,
+    Component: CafeWarmTemplate,
   },
 } as const satisfies Record<string, LaunchTemplateDefinition>;
 
