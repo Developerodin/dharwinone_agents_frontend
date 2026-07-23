@@ -30,7 +30,63 @@ const DEFAULT_SECTION_ORDER: SectionKey[] = [
   "cta_footer",
 ];
 
-function asSiteContent(raw: Record<string, unknown>, fallback: SiteContent): SiteContent {
+/** Relative luminance test for a #rrggbb hex — true if the colour reads "light". */
+function isLightHex(hex: string): boolean {
+  const m = /^#?([0-9a-f]{6})$/i.exec((hex ?? "").trim());
+  if (!m) return false;
+  const n = parseInt(m[1], 16);
+  return 0.2126 * ((n >> 16) & 255) + 0.7152 * ((n >> 8) & 255) + 0.0722 * (n & 255) > 150;
+}
+
+type RawSection = Record<string, unknown> & { items?: Record<string, unknown>[] };
+
+/**
+ * The backend content generator uses different field names than the render
+ * contract (SiteContent): faq question/answer, pricing title/desc, cta_footer
+ * text. Map those aliases onto the canonical keys so the bespoke templates
+ * (and BaseTemplate) render them. Canonical keys already present always win.
+ */
+function normalizeContentAliases(raw: Record<string, unknown>): Record<string, unknown> {
+  const out: Record<string, unknown> = { ...raw };
+
+  const faq = raw.faq as RawSection | undefined;
+  if (faq?.items) {
+    out.faq = {
+      ...faq,
+      items: faq.items.map((it) => ({ ...it, q: it.q ?? it.question, a: it.a ?? it.answer })),
+    };
+  }
+
+  const pricing = raw.pricing as RawSection | undefined;
+  if (pricing?.items) {
+    out.pricing = {
+      ...pricing,
+      items: pricing.items.map((it) => ({
+        ...it,
+        name: it.name ?? it.title,
+        features: it.features ?? (it.desc != null ? [it.desc] : undefined),
+      })),
+    };
+  }
+
+  const cta = raw.cta_footer as Record<string, unknown> | undefined;
+  if (cta && cta.headline == null && cta.text != null) {
+    out.cta_footer = { ...cta, headline: cta.text };
+  }
+
+  const testimonials = raw.testimonials as RawSection | undefined;
+  if (testimonials?.items) {
+    out.testimonials = {
+      ...testimonials,
+      items: testimonials.items.map((it) => ({ ...it, avatar: it.avatar ?? it.image })),
+    };
+  }
+
+  return out;
+}
+
+function asSiteContent(rawInput: Record<string, unknown>, fallback: SiteContent): SiteContent {
+  const raw = normalizeContentAliases(rawInput);
   // ponytail: merge each section one level deep so a partial persisted section
   // (e.g. gallery with a renamed title but no items) keeps the fallback's items
   // instead of clobbering the whole section. Sub-objects/arrays inside a section
@@ -64,6 +120,19 @@ function asSiteTheme(raw: Record<string, unknown>, fallback: SiteTheme): SiteThe
     bg: (brandRaw.bg as string) ?? preset?.bg ?? fallbackBrand.bg,
     surface: (brandRaw.surface as string) ?? preset?.surface ?? fallbackBrand.surface,
   };
+
+  // --site-ink = brand.neutral. Older generated themes stored a light paper tone
+  // there, so ink ended up the same lightness as the page bg (invisible text).
+  // If ink and bg don't contrast, fall back to the dark brand colour, else a safe ink.
+  if (isLightHex(brand.neutral) === isLightHex(brand.bg)) {
+    brand.neutral = isLightHex(brand.bg)
+      ? isLightHex(brand.primary)
+        ? "#181613"
+        : brand.primary
+      : isLightHex(brand.primary)
+        ? brand.primary
+        : "#f7f5f0";
+  }
 
   return {
     brand,

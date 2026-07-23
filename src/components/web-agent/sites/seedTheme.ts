@@ -53,6 +53,14 @@ export function familyFromTemplateMeta(
   return "trust_local";
 }
 
+/** Relative luminance test for a #rrggbb hex — true if the colour reads "light". */
+function isLight(hex: string): boolean {
+  const m = /^#?([0-9a-f]{6})$/i.exec(hex.trim());
+  if (!m) return false;
+  const n = parseInt(m[1], 16);
+  return 0.2126 * ((n >> 16) & 255) + 0.7152 * ((n >> 8) & 255) + 0.0722 * (n & 255) > 150;
+}
+
 export function seedThemeJson(args: {
   family: FamilyId;
   brandPrimary?: string;
@@ -61,12 +69,19 @@ export function seedThemeJson(args: {
 }): Record<string, unknown> {
   const palette = FAMILY_PALETTES[args.family];
   const accent = args.brandPrimary?.trim() || palette.accent;
+  // The render contract reads --site-ink from brand.neutral (must be the dark tone)
+  // and --site-bg from brand.bg (the light tone). Pick by luminance — the palette
+  // table isn't consistent about which field holds which.
+  const ink = isLight(palette.primary) ? palette.neutral : palette.primary;
+  const paper = isLight(palette.primary) ? palette.primary : palette.neutral;
 
   return {
     brand: {
-      primary: palette.primary,
+      primary: ink,
       accent,
-      neutral: palette.neutral,
+      neutral: ink,
+      bg: paper,
+      surface: paper,
       ...(args.logoUrl ? { logoUrl: args.logoUrl } : {}),
     },
     fontPair: FAMILY_FONT_PAIRS[args.family],

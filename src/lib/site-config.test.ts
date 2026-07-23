@@ -3,7 +3,10 @@ import { PACKAGES } from "@/templates/packages";
 import type { SiteRecord } from "@/lib/site-types";
 import { isLaunchTemplateId, resolveTemplateId, siteRecordToConfig } from "./site-config";
 
-function record(contentJson: Record<string, unknown>): SiteRecord {
+function record(
+  contentJson: Record<string, unknown>,
+  themeJson: Record<string, unknown> = {},
+): SiteRecord {
   return {
     siteId: "s1",
     userId: "u1",
@@ -11,7 +14,7 @@ function record(contentJson: Record<string, unknown>): SiteRecord {
     templateVersion: null,
     businessProfileJson: {},
     contentJson,
-    themeJson: {},
+    themeJson,
     status: "draft",
     subdomain: null,
     customDomain: null,
@@ -63,5 +66,50 @@ describe("siteRecordToConfig backfills partial sections", () => {
     );
     expect(config.content.gallery.items).toHaveLength(1);
     expect(config.content.gallery.items[0].caption).toBe("Only one");
+  });
+});
+
+describe("siteRecordToConfig normalizes backend content field aliases", () => {
+  it("maps faq question/answer to q/a", () => {
+    const config = siteRecordToConfig(
+      record({ faq: { section_title: "FAQ", items: [{ question: "Open?", answer: "Daily" }] } }),
+    );
+    expect(config.content.faq.items[0].q).toBe("Open?");
+    expect(config.content.faq.items[0].a).toBe("Daily");
+  });
+
+  it("maps pricing title/desc to name/features", () => {
+    const config = siteRecordToConfig(
+      record({
+        pricing: { section_title: "Menu", items: [{ title: "Coffee", desc: "Fresh brew", price: "₹50" }] },
+      }),
+    );
+    const item = config.content.pricing.items[0];
+    expect(item.name).toBe("Coffee");
+    expect(item.price).toBe("₹50");
+    expect(item.features).toContain("Fresh brew");
+  });
+
+  it("maps cta_footer text to headline", () => {
+    const config = siteRecordToConfig(record({ cta_footer: { text: "Visit us today", cta_text: "Book" } }));
+    expect(config.content.cta_footer.headline).toBe("Visit us today");
+    expect(config.content.cta_footer.cta_text).toBe("Book");
+  });
+});
+
+describe("asSiteTheme guarantees readable ink contrast", () => {
+  it("replaces a light ink on a light background with the dark brand color", () => {
+    // Reproduces the old seedTheme output: neutral (ink) is a light paper tone.
+    const config = siteRecordToConfig(
+      record({}, { brand: { primary: "#2e1f13", accent: "#a9631b", neutral: "#f3ebdf", bg: "#f2e8d8" } }),
+    );
+    expect(config.theme.brand.neutral.toLowerCase()).toBe("#2e1f13");
+  });
+
+  it("leaves a correct dark-ink / light-bg theme untouched", () => {
+    const config = siteRecordToConfig(
+      record({}, { brand: { primary: "#e2a655", accent: "#e2a655", neutral: "#161009", bg: "#f2e8d8" } }),
+    );
+    expect(config.theme.brand.neutral.toLowerCase()).toBe("#161009");
   });
 });
