@@ -197,7 +197,7 @@ function WebAgentWorkspaceInner() {
   const hydratingRef = useRef<string | null>(null);
   const generationRecoveryRef = useRef(new Set<string>());
   const editRecoveryRef = useRef(new Set<string>());
-  const siteChatStateRef = useRef(new Map<string, SiteChatState>());
+  const siteChatStateRef = useRef(new Map<string, SiteChatState | null>());
   const { state: generation, start, stop, resume, reset } = useGenerationEngine();
 
   useEffect(() => {

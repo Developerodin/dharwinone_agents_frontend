@@ -156,7 +156,7 @@ export function TextLogo({ name }: { name: string }) {
   return (
     <span
       data-element-key="brand.name"
-      className="truncate font-heading text-[1.1rem] font-extrabold tracking-tight text-ink"
+      className="truncate font-body text-[1.1rem] font-extrabold tracking-tight text-ink"
     >
       {name}
     </span>

@@ -146,6 +146,30 @@ export function mergeContactFromProfile(
   return { ...content, contact };
 }
 
+/** Map a rendered image slot (the `data-image-slot` value SlotImage emits) to its
+ *  editable content path, or null for design furniture (clock/coaches) that has no
+ *  content field. Used by the editor to make preview images swappable in place. */
+export function imageSlotToContentPath(slot: string): string | null {
+  if (slot === "hero.background" || slot === "hero.image") return "hero.image";
+  if (slot === "about.image") return "about.image";
+  if (/^services\.items\[\d+\]\.image$/.test(slot)) return slot;
+  if (/^gallery\.items\[\d+\]\.image$/.test(slot)) return slot;
+  if (/^testimonials\.items\[\d+\]\.avatar$/.test(slot)) return slot;
+  return null;
+}
+
+/** Read the string value at a dotted/bracketed content path (e.g. the current
+ *  image URL for a slot). Returns "" when unset. */
+export function contentValueAt(content: unknown, path: string): string {
+  const segs = path.replace(/\[(\d+)\]/g, ".$1").split(".").filter(Boolean);
+  let cur: unknown = content;
+  for (const s of segs) {
+    if (cur && typeof cur === "object") cur = (cur as Record<string, unknown>)[s];
+    else return "";
+  }
+  return typeof cur === "string" ? cur : "";
+}
+
 /** Build a wa.me link from a display or raw phone string. */
 export function phoneToWhatsAppHref(phone: string): string | null {
   const digits = phone.replace(/\D/g, "");

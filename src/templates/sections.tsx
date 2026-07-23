@@ -123,7 +123,7 @@ export function Header({ brand, cta, theme, visibleSections }: { brand: string; 
   return (
     <header style={{ borderBottom: "1px solid var(--site-line)", padding: "0.6rem 1.25rem" }}>
       <div style={{ ...wrap, display: "flex", alignItems: "center", gap: "1rem", minWidth: 0 }}>
-        <span data-element-key="brand.name" style={{ fontFamily: "var(--site-font-heading)", fontWeight: 800, fontSize: "1.15rem", letterSpacing: "-0.01em", marginRight: "auto", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        <span data-element-key="brand.name" style={{ fontFamily: "var(--site-font-body)", fontWeight: 800, fontSize: "1.15rem", letterSpacing: "-0.01em", marginRight: "auto", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
           {brand}
         </span>
         {links.length > 0 && (
@@ -779,7 +779,7 @@ export function Footer({ brand, phone, email }: { brand: string; phone?: string;
   return (
     <footer style={{ backgroundColor: "var(--site-ink)", color: "var(--site-bg)", padding: "1.5rem 1.25rem", borderTop: "1px solid color-mix(in srgb, var(--site-bg) 15%, transparent)" }}>
       <div style={{ ...wrap, display: "flex", flexWrap: "wrap", gap: "1rem 2.5rem", alignItems: "center", fontSize: "0.85rem", opacity: 0.85 }}>
-        <span style={{ fontFamily: "var(--site-font-heading)", fontWeight: 800 }}>{brand}</span>
+        <span style={{ fontFamily: "var(--site-font-body)", fontWeight: 800 }}>{brand}</span>
         {phone && <span>{phone}</span>}
         {email && <span>{email}</span>}
         <span style={{ marginLeft: "auto" }}>© {brand}. All rights reserved.</span>

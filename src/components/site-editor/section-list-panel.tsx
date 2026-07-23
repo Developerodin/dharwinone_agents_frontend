@@ -3,6 +3,7 @@
 import { useCallback, useRef, useState } from "react";
 import type { SectionKey } from "@/templates/system/types";
 import { SECTION_LABELS } from "@/components/site-editor/section-panels";
+import { getRenderedSectionKeys } from "@/templates/launch/registry";
 import { useSiteEditorStore } from "@/store/site-editor-store";
 
 export function SectionListPanel() {
@@ -41,11 +42,16 @@ export function SectionListPanel() {
 
   if (!config) return null;
   const hidden = new Set(config.theme.hiddenSections);
+  // Only list sections the template actually renders (null = unknown template → show all).
+  const rendered = getRenderedSectionKeys(config.templateId);
+  const sectionKeys = rendered
+    ? config.theme.sectionOrder.filter((k) => rendered.includes(k))
+    : config.theme.sectionOrder;
 
   return (
     <div className="space-y-1">
       <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-textmuted">Sections</h3>
-      {config.theme.sectionOrder.map((key) => {
+      {sectionKeys.map((key) => {
         const isHidden = hidden.has(key);
         const active = selectedSection === key;
         return (

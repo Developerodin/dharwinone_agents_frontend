@@ -234,6 +234,58 @@ export async function patchSite(
   });
 }
 
+/** Upload an image to the site's real asset store: presign → PUT to S3 → confirm.
+ *  Returns the public URL to store in the site config (replaces inline base64).
+ *  `assetType` must be one of the backend's allowed types (logo/brand/service/
+ *  team/product); `slotKey` traces the upload to the content slot it fills. */
+export async function uploadSiteImage(
+  siteId: string,
+  file: File,
+  opts: { assetType: string; slotKey?: string },
+): Promise<string> {
+  const base = `/api/sites/${encodeURIComponent(siteId)}/assets`;
+  const presign = await sitesFetch<{
+    assetId: string;
+    s3Key: string;
+    uploadUrl: string;
+    method: string;
+    headers: Record<string, string>;
+  }>(`${base}/presign`, {
+    method: "POST",
+    body: JSON.stringify({
+      filename: file.name,
+      contentType: file.type,
+      assetType: opts.assetType,
+      slotKey: opts.slotKey,
+    }),
+  });
+
+  // Direct-to-S3 PUT — raw fetch, not sitesFetch (no auth header, and the
+  // Content-Type must exactly match what the URL was signed with).
+  const put = await fetch(presign.uploadUrl, {
+    method: presign.method || "PUT",
+    headers: presign.headers,
+    body: file,
+  });
+  if (!put.ok) throw new SitesApiError(put.status, `image upload failed (${put.status})`);
+
+  const confirmed = await sitesFetch<{ publicUrl?: string }>(`${base}/confirm`, {
+    method: "POST",
+    body: JSON.stringify({
+      assetId: presign.assetId,
+      s3Key: presign.s3Key,
+      contentType: file.type,
+      sizeBytes: file.size,
+      slotKey: opts.slotKey,
+      assetType: opts.assetType,
+    }),
+  });
+  if (!confirmed.publicUrl) {
+    throw new SitesApiError(500, "upload confirmed but no public URL was returned");
+  }
+  return confirmed.publicUrl;
+}
+
 export async function publishSite(siteId: string): Promise<PublishResult> {
   return sitesFetch(`/api/sites/${encodeURIComponent(siteId)}/publish`, {
     method: "POST",

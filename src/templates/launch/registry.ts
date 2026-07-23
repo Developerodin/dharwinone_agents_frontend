@@ -1,6 +1,6 @@
 import type { ComponentType } from "react";
 import type { LaunchTemplateRegistryEntry, SectionSchemaDocument } from "../system/schema";
-import type { FamilyId, SiteContent, SiteTheme } from "../system/types";
+import type { FamilyId, SectionKey, SiteContent, SiteTheme } from "../system/types";
 import { PACKAGES } from "../packages";
 import { composeLaunchTemplate } from "./shared/composeLaunchTemplate";
 import { FAMILY_PRESETS } from "./shared/familyPresets";
@@ -29,6 +29,10 @@ export interface LaunchTemplateDefinition {
   default_content: SiteContent;
   default_theme: SiteTheme;
   Component: ComponentType<LaunchTemplateProps>;
+  /** Section keys this template actually renders. Drives the editor's section
+   *  list so it never shows sections the template has no renderer for. Bespoke
+   *  templates list them explicitly; compose templates derive from the preset. */
+  renders: SectionKey[];
 }
 
 const trustSchemaDoc = trustSchema as unknown as SectionSchemaDocument;
@@ -55,6 +59,8 @@ const BESPOKE: Record<string, LaunchTemplateDefinition> = {
     default_content: gymContent as unknown as SiteContent,
     default_theme: gymTheme as SiteTheme,
     Component: GymNightShiftTemplate,
+    // Gym renders gallery as its 24h clock rail; no about/why_us/testimonials.
+    renders: ["hero", "services", "gallery", "pricing", "faq", "contact", "cta_footer"],
   },
   electrician_trust_v1: {
     registry: {
@@ -72,6 +78,7 @@ const BESPOKE: Record<string, LaunchTemplateDefinition> = {
     default_content: trustContent as unknown as SiteContent,
     default_theme: trustTheme as SiteTheme,
     Component: ElectricianTrustTemplate,
+    renders: ["hero", "services", "why_us", "testimonials", "cta_footer"],
   },
   electrician_bold_v1: {
     registry: {
@@ -89,6 +96,7 @@ const BESPOKE: Record<string, LaunchTemplateDefinition> = {
     default_content: boldContent as unknown as SiteContent,
     default_theme: boldTheme as SiteTheme,
     Component: ElectricianBoldTemplate,
+    renders: ["hero", "services", "why_us", "testimonials", "cta_footer"],
   },
 };
 
@@ -108,6 +116,7 @@ const GENERATED: Record<string, LaunchTemplateDefinition> = Object.fromEntries(
     const presetFor = FAMILY_PRESETS[family] ?? FAMILY_PRESETS.generic;
     const eyebrow = reg.subcategoryLabel ?? reg.subcategory ?? "Local Business";
     const schemaDoc = pkg.schema as unknown as SectionSchemaDocument;
+    const preset = presetFor(eyebrow);
     const def: LaunchTemplateDefinition = {
       registry: {
         id,
@@ -123,7 +132,8 @@ const GENERATED: Record<string, LaunchTemplateDefinition> = Object.fromEntries(
       section_schema: schemaDoc,
       default_content: pkg.content as unknown as SiteContent,
       default_theme: pkg.theme as unknown as SiteTheme,
-      Component: composeLaunchTemplate(id, presetFor(eyebrow)),
+      Component: composeLaunchTemplate(id, preset),
+      renders: Object.keys(preset.sections) as SectionKey[],
     };
     return [id, def];
   }),
@@ -141,6 +151,12 @@ export type LaunchTemplateId =
 
 export function getLaunchTemplate(id: string): LaunchTemplateDefinition | undefined {
   return LAUNCH_TEMPLATES[id];
+}
+
+/** Section keys the given template renders, or null for unknown (non-launch)
+ *  templates — callers should show all sections in that case. */
+export function getRenderedSectionKeys(id: string): SectionKey[] | null {
+  return LAUNCH_TEMPLATES[id]?.renders ?? null;
 }
 
 export function listLaunchTemplates(category?: string, subcategory?: string) {

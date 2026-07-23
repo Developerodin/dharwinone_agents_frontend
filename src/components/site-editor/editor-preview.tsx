@@ -6,7 +6,7 @@ import type { SectionKey } from "@/templates/system/types";
 import { BaseTemplate } from "@/templates/BaseTemplate";
 import { SiteRenderer, type LaunchTemplateId } from "@/templates/launch/SiteRenderer";
 import type { TemplateId } from "@/templates/packages";
-import { brandNameFromConfig, isLaunchTemplateId } from "@/lib/site-config";
+import { brandNameFromConfig, isLaunchTemplateId, imageSlotToContentPath } from "@/lib/site-config";
 import { contentPathToPatch } from "@/lib/json-patch";
 import { useSiteEditorStore } from "@/store/site-editor-store";
 
@@ -49,8 +49,11 @@ export function EditorPreview() {
   const aiProposal = useSiteEditorStore((s) => s.aiProposal);
   const selectedSection = useSiteEditorStore((s) => s.selectedSection);
   const selectedElementKey = useSiteEditorStore((s) => s.selectedElementKey);
+  const selectedImageSlot = useSiteEditorStore((s) => s.selectedImageSlot);
   const setSelectedSection = useSiteEditorStore((s) => s.setSelectedSection);
   const setSelectedElement = useSiteEditorStore((s) => s.setSelectedElement);
+  const setSelectedImageSlot = useSiteEditorStore((s) => s.setSelectedImageSlot);
+  const setPreviewCaps = useSiteEditorStore((s) => s.setPreviewCaps);
   const dispatch = useSiteEditorStore((s) => s.dispatch);
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -65,13 +68,41 @@ export function EditorPreview() {
           sectionEl.getAttribute("data-section-key") ?? sectionEl.getAttribute("data-section");
         if (key) setSelectedSection(key as SectionKey);
       }
+      // Image slots win over text-element selection so clicking a photo opens
+      // the image swapper. Only editable slots (mapped to a content path) qualify;
+      // design furniture (clock/coaches) is ignored and falls through.
+      const slotEl = target.closest("[data-image-slot]") as HTMLElement | null;
+      const slot = slotEl?.getAttribute("data-image-slot") ?? null;
+      if (slot && imageSlotToContentPath(slot)) {
+        setSelectedImageSlot(slot);
+        return;
+      }
       const elementEl = target.closest("[data-element-key]") as HTMLElement | null;
       if (elementEl) {
         setSelectedElement(elementEl.getAttribute("data-element-key"));
       }
     },
-    [setSelectedSection, setSelectedElement],
+    [setSelectedSection, setSelectedElement, setSelectedImageSlot],
   );
+
+  // Probe what the rendered template actually supports so the sidebar can hide
+  // dead controls. Runs on config change (not selection) since capabilities are
+  // a property of the template, not the selection. A launch <section data-section>
+  // that carries inline sectionStyle padding honors the frame controls; a bespoke
+  // hardcoded one (className only) does not. Gallery is editable only when it
+  // renders real gallery.items image slots.
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    const galleryImages = root.querySelector('[data-image-slot^="gallery.items"]') !== null;
+    const frameFixedSections: string[] = [];
+    root.querySelectorAll("section[data-section]").forEach((node) => {
+      const el = node as HTMLElement;
+      const key = el.getAttribute("data-section");
+      if (key && !el.style.padding) frameFixedSections.push(key);
+    });
+    setPreviewCaps({ galleryImages, frameFixedSections });
+  }, [config, setPreviewCaps]);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -114,7 +145,17 @@ export function EditorPreview() {
       el.style.outline = selected ? "2px solid #41a454" : "";
       el.style.outlineOffset = selected ? "2px" : "";
     });
-  }, [config, selectedElementKey, selectedSection]);
+    // Image slots: outline the selected one, and show a pointer on editable slots.
+    root.querySelectorAll("[data-image-slot]").forEach((node) => {
+      const el = node as HTMLElement;
+      const slot = el.getAttribute("data-image-slot");
+      const editable = !!slot && imageSlotToContentPath(slot) !== null;
+      el.style.cursor = editable ? "pointer" : "";
+      const selected = slot === selectedImageSlot;
+      el.style.outline = selected ? "2px dashed #41a454" : editable ? "" : el.style.outline;
+      el.style.outlineOffset = selected ? "2px" : el.style.outlineOffset;
+    });
+  }, [config, selectedElementKey, selectedSection, selectedImageSlot]);
 
   if (!config) return null;
 

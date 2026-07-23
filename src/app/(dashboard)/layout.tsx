@@ -49,6 +49,7 @@ export default function DashboardLayout({
         <Header
           sidebarCollapsed={sidebarCollapsed}
           onMobileMenuOpen={() => setMobileOpen(true)}
+          onSignOut={handleSignOut}
         />
         <main
           className={`pt-[64px] min-h-screen transition-[margin] duration-300 ${

@@ -50,22 +50,23 @@ export function BrandColorsPanel() {
   const dispatch = useSiteEditorStore((s) => s.dispatch);
   if (!config) return null;
 
-  const fields: { key: keyof typeof config.theme.brand; label: string }[] = [
-    { key: "primary", label: "Primary" },
-    { key: "accent", label: "Accent" },
-    { key: "neutral", label: "Text / ink" },
-    { key: "bg", label: "Page background" },
-    { key: "surface", label: "Surface" },
+  const fields: { key: keyof typeof config.theme.brand; label: string; hint: string }[] = [
+    { key: "primary", label: "Primary", hint: "Buttons, links & main call-to-action" },
+    { key: "accent", label: "Accent", hint: "Highlights, badges & hover states" },
+    { key: "neutral", label: "Text / ink", hint: "Body text and headings" },
+    { key: "bg", label: "Page background", hint: "The page behind every section" },
+    { key: "surface", label: "Surface", hint: "Cards, panels & input fields" },
   ];
 
   return (
     <div className="space-y-3">
       <h3 className="text-xs font-semibold uppercase tracking-wide text-textmuted">Brand colors</h3>
-      {fields.map(({ key, label }) => {
+      {fields.map(({ key, label, hint }) => {
         const value = config.theme.brand[key] as string;
         return (
           <label key={key} className="block">
-            <span className="mb-1 block text-xs font-medium text-defaulttextcolor">{label}</span>
+            <span className="block text-xs font-semibold text-defaulttextcolor">{label}</span>
+            <span className="mb-1 block text-[11px] leading-tight text-textmuted">{hint}</span>
             <div className="flex items-center gap-2">
               <input
                 type="color"

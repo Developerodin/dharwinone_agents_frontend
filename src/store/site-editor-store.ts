@@ -13,15 +13,29 @@ interface HistoryEntry {
   label?: string;
 }
 
+/** What the live preview actually supports editing for the current template.
+ *  Probed from the rendered DOM because capability is per-(template, section):
+ *  bespoke launch templates hardcode sections and ignore sectionStyle / gallery
+ *  content, so the generic controls must hide rather than sit there dead. */
+interface PreviewCaps {
+  /** Gallery renders editable `gallery.items[*].image` slots (vs a fixed layout). */
+  galleryImages: boolean;
+  /** Section keys whose frame (bg/text/padding/align) is fixed by the template. */
+  frameFixedSections: string[];
+}
+
 interface SiteEditorState {
   config: SiteConfig | null;
   selectedSection: SectionKey | null;
   selectedElementKey: string | null;
+  selectedImageSlot: string | null;
   device: PreviewDevice;
   saveStatus: SaveStatus;
   past: HistoryEntry[];
   future: HistoryEntry[];
   aiProposal: { sectionKey: SectionKey; content: Record<string, unknown> } | null;
+  previewCaps: PreviewCaps;
+  setPreviewCaps: (caps: PreviewCaps) => void;
 
   loadConfig: (config: SiteConfig) => void;
   dispatch: (patch: JsonPatchOp[], label?: string) => void;
@@ -32,6 +46,7 @@ interface SiteEditorState {
   canRedo: () => boolean;
   setSelectedSection: (key: SectionKey | null) => void;
   setSelectedElement: (key: string | null) => void;
+  setSelectedImageSlot: (slot: string | null) => void;
   setDevice: (device: PreviewDevice) => void;
   setSaveStatus: (status: SaveStatus) => void;
   setAiProposal: (proposal: SiteEditorState["aiProposal"]) => void;
@@ -45,11 +60,24 @@ export const useSiteEditorStore = create<SiteEditorState>((set, get) => ({
   config: null,
   selectedSection: null,
   selectedElementKey: null,
+  selectedImageSlot: null,
   device: "desktop",
   saveStatus: "idle",
   past: [],
   future: [],
   aiProposal: null,
+  previewCaps: { galleryImages: false, frameFixedSections: [] },
+
+  // Guard against no-op updates: the probe runs on every config render, and a new
+  // object ref would re-render every panel even when capabilities are unchanged.
+  setPreviewCaps: (caps) => {
+    const prev = get().previewCaps;
+    const same =
+      prev.galleryImages === caps.galleryImages &&
+      prev.frameFixedSections.length === caps.frameFixedSections.length &&
+      prev.frameFixedSections.every((k, i) => k === caps.frameFixedSections[i]);
+    if (!same) set({ previewCaps: caps });
+  },
 
   loadConfig: (config) =>
     set({
@@ -59,6 +87,7 @@ export const useSiteEditorStore = create<SiteEditorState>((set, get) => ({
       saveStatus: "idle",
       selectedSection: null,
       selectedElementKey: null,
+      selectedImageSlot: null,
       aiProposal: null,
     }),
 
@@ -124,8 +153,10 @@ export const useSiteEditorStore = create<SiteEditorState>((set, get) => ({
   canUndo: () => get().past.length > 0,
   canRedo: () => get().future.length > 0,
 
-  setSelectedSection: (key) => set({ selectedSection: key, selectedElementKey: null }),
-  setSelectedElement: (key) => set({ selectedElementKey: key }),
+  setSelectedSection: (key) =>
+    set({ selectedSection: key, selectedElementKey: null, selectedImageSlot: null }),
+  setSelectedElement: (key) => set({ selectedElementKey: key, selectedImageSlot: null }),
+  setSelectedImageSlot: (slot) => set({ selectedImageSlot: slot, selectedElementKey: null }),
   setDevice: (device) => set({ device }),
   setSaveStatus: (saveStatus) => set({ saveStatus }),
 

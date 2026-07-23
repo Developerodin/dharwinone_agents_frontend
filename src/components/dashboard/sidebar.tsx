@@ -6,7 +6,7 @@ import { ROUTES } from "@/lib/constants";
 import { BrandLogo } from "@/components/brand/brand-logo";
 import { WebAgentSidebarNav } from "@/components/web-agent/web-agent-sidebar-nav";
 import { SidebarTooltip } from "@/components/web-agent/ui/sidebar-tooltip";
-import { PhoneCallIcon, ChevronLeftIcon, LogOutIcon, SparklesIcon } from "@/components/icons";
+import { PhoneCallIcon, ChevronLeftIcon, LogOutIcon } from "@/components/icons";
 import { getUser } from "@/lib/auth";
 
 type SidebarProps = {
@@ -26,7 +26,6 @@ export function Sidebar({
 }: SidebarProps) {
   const pathname = usePathname();
   const isCallAgentActive = pathname.startsWith(ROUTES.callAgent);
-  const isWebsiteBuilderActive = pathname.startsWith("/websites");
   const user = getUser();
   const userName = user?.name?.trim() || "User";
   const userSubtitle = user?.email?.trim() || "Account";
@@ -131,30 +130,7 @@ export function Sidebar({
                 <span className="sidebar-nav-badge">3</span>
               </Link>
             )}
-            {collapsed ? (
-              <SidebarTooltip label="Website Builder">
-                <Link
-                  href={ROUTES.websitesNew}
-                  onClick={onMobileClose}
-                  aria-current={isWebsiteBuilderActive ? "page" : undefined}
-                  className={`sidebar-icon-btn ${isWebsiteBuilderActive ? "sidebar-icon-btn-active" : ""}`}
-                >
-                  <SparklesIcon className="sidebar-nav-icon" />
-                </Link>
-              </SidebarTooltip>
-            ) : (
-              <Link
-                href={ROUTES.websitesNew}
-                onClick={onMobileClose}
-                aria-current={isWebsiteBuilderActive ? "page" : undefined}
-                className={`sidebar-nav-item sidebar-nav-item-expanded ${
-                  isWebsiteBuilderActive ? "sidebar-nav-item-active" : "sidebar-nav-item-inactive"
-                }`}
-              >
-                <SparklesIcon className="sidebar-nav-icon" />
-                <span className="truncate">Website Builder</span>
-              </Link>
-            )}
+            {/* ponytail: Website Builder nav hidden until it ships. Restore this block to re-enable. */}
             <WebAgentSidebarNav collapsed={collapsed} onMobileClose={onMobileClose} />
           </div>
 

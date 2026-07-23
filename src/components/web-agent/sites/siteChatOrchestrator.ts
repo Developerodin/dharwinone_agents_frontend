@@ -34,7 +34,7 @@ import type { SiteTheme } from "@/templates/system/types";
 
 export type SiteChatTurnResult = {
   project: WebProject;
-  state: SiteChatState;
+  state: SiteChatState | null;
   assistantMessages: string[];
   previewBump: boolean;
   usedFallback?: boolean;
@@ -324,6 +324,18 @@ export async function runSiteChatTurn(params: {
 
   if (!state) {
     const inferred = await inferCategory(params.userMessage, params.categories);
+    // ponytail: only fitness ships for now. Gate every other category behind a
+    // "coming soon" reply until their generators are ready. Remove this block to re-enable all.
+    if (inferred.subcategoryId !== "fitness_gym") {
+      return {
+        project,
+        state,
+        assistantMessages: [
+          "This category is still in development and will be available soon. Right now I can build fitness & gym websites — try describing a gym, studio, or fitness brand.",
+        ],
+        previewBump: false,
+      };
+    }
     const categoryId =
       inferred.categoryId ??
       params.categories[0]?.categoryId ??

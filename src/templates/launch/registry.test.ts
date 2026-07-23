@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { PACKAGES } from "../packages";
-import { getLaunchTemplate, LAUNCH_TEMPLATES } from "./registry";
+import { getLaunchTemplate, getRenderedSectionKeys, LAUNCH_TEMPLATES } from "./registry";
 
 describe("launch registry", () => {
   it("keeps existing electrician templates registered", () => {
@@ -27,6 +27,19 @@ describe("every package is a launch template", () => {
   it("assigns ht_cafe_v1 the warm_craft family and cafe subcategory", () => {
     expect(LAUNCH_TEMPLATES.ht_cafe_v1.registry.style_tags).toContain("warm_craft");
     expect(LAUNCH_TEMPLATES.ht_cafe_v1.registry.subcategory).toBe("cafe");
+  });
+
+  it("reports rendered sections: gym omits about/why_us/testimonials, compose renders all", () => {
+    const gym = getRenderedSectionKeys("he_fitness_v1")!;
+    expect(gym).toContain("gallery");
+    expect(gym).not.toContain("about");
+    expect(gym).not.toContain("why_us");
+    expect(gym).not.toContain("testimonials");
+    // Compose templates render the full section set.
+    const cafe = getRenderedSectionKeys("ht_cafe_v1")!;
+    expect(cafe).toEqual(expect.arrayContaining(["about", "why_us", "testimonials", "gallery"]));
+    // Unknown template → null (caller shows all).
+    expect(getRenderedSectionKeys("nope_v9")).toBeNull();
   });
 
   it("registers ht_restaurant_v1 as a premium_dark restaurant template", () => {

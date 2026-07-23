@@ -53,7 +53,9 @@ export function AiActionPanel() {
       <h3 className="text-xs font-semibold uppercase tracking-wide text-textmuted">AI (metered)</h3>
       <p className="text-xs text-textmuted">
         Section: <strong>{SECTION_LABELS[section]}</strong>
-        {balance !== null && <span className="ml-2">Balance: {balance} tokens</span>}
+        {balance !== null && (
+          <span className="ml-2">Balance: {balance.toLocaleString()} tokens</span>
+        )}
       </p>
       <textarea
         value={instruction}

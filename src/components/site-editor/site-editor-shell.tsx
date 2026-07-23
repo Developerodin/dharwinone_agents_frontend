@@ -5,7 +5,12 @@ import { DevicePreviewFrame, DeviceToggle } from "@/components/site-editor/devic
 import { EditorPreview } from "@/components/site-editor/editor-preview";
 import { SectionListPanel } from "@/components/site-editor/section-list-panel";
 import { PalettePanel, BrandColorsPanel } from "@/components/site-editor/style-panels";
-import { SectionStylePanel, ElementOverridePanel } from "@/components/site-editor/section-panels";
+import {
+  SectionStylePanel,
+  ElementOverridePanel,
+  GalleryImagesPanel,
+  ImageSlotPanel,
+} from "@/components/site-editor/section-panels";
 import { AiActionPanel } from "@/components/site-editor/ai-action-panel";
 import { useSiteEditorStore } from "@/store/site-editor-store";
 import { brandNameFromConfig } from "@/lib/site-config";
@@ -68,6 +73,8 @@ export function SiteEditorShell() {
           <BrandColorsPanel />
           <div className="my-4 border-t border-defaultborder" />
           <SectionStylePanel />
+          <GalleryImagesPanel />
+          <ImageSlotPanel />
           <div className="my-4 border-t border-defaultborder" />
           <ElementOverridePanel />
           <AiActionPanel />
